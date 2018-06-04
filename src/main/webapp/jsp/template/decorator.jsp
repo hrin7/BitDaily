@@ -6,11 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title><decorator:title default="BIT DAILY" /></title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/slider/common.css">
 <link href="${pageContext.request.contextPath}/slider/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style type="text/css">
 </style>
+<decorator:head />
 </head>
 <body>
   
