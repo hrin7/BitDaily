@@ -11,27 +11,27 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item" id="nav-diary">
-              <a class="nav-link" href="/bitdaily/jsp/diary/fooddiary.jsp">다이어리
+              <a class="nav-link" href="<c:url value="/jsp/diary/fooddiary.jsp"/>">다이어리
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item" id="nav-report">
-              <a class="nav-link" href="/bitdaily/jsp/stat/report.jsp">리포트</a>
+              <a class="nav-link" href="<c:url value="/jsp/diary/report.jsp"/>">리포트</a>
             </li>
             <li class="nav-item" id="nav-weight">
-              <a class="nav-link" href="/bitdaily/jsp/stat/weightrecord.jsp">체중기록</a>
+              <a class="nav-link" href="<c:url value="/jsp/diary/weightrecord.jsp"/>">체중기록</a>
             </li>
             <li class="nav-item" id="nav-recipe">
-              <a class="nav-link" href="/bitdaily/jsp/recipe/recipeList.jsp">레시피</a>
+              <a class="nav-link" href="<c:url value="/jsp/diary/recipeList.jsp"/>">레시피</a>
             </li>
             <li class="nav-item">
-              <a href="/bitdaily/jsp/stat/rank.jsp" style="text-decoration: none">　<img src="/bitdaily/images/icon/trophy.png" width="31px" height="31px"></a>
+              <a href="<c:url value="/jsp/stat/rank.jsp"/> style="text-decoration: none">　<img src="/bitdaily/images/icon/trophy.png" width="31px" height="31px"></a>
             </li>
             <li class="nav-item">
-              <a href="/bitdaily/jsp/login/userinfo.jsp" style="text-decoration: none">　<img src="/bitdaily/images/icon/user.png" width="31px" height="31px" onmouseover="this.src='/bitdaily/images/icon/user2.png'" onmouseout="this.src='/bitdaily/images/icon/user.png'" ></a>
+              <a href="<c:url value="/jsp/login/userinfo.jsp"/> style="text-decoration: none">　<img src="/bitdaily/images/icon/user.png" width="31px" height="31px" onmouseover="this.src='/bitdaily/images/icon/user2.png'" onmouseout="this.src='/bitdaily/images/icon/user.png'" ></a>
             </li>
             <li class="nav-item">
-              <a href="#" style="text-decoration: none">　<img src="/bitdaily/images/icon/logout.png" width="37px" height="33px"></a>
+              <a href="#" style="text-decoration: none">　<img src="<c:url value="/images/icon/logout.png"/>" width="37px" height="33px"></a>
             </li>
           </ul>
         </div>

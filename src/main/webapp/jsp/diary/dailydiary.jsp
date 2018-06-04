@@ -11,37 +11,37 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<link rel="stylesheet" href="/bitdaily/css/diary/commondiary.css" >
-<link rel="stylesheet" href="/bitdaily/css/diary/dailydiary.css" >
+<link rel="stylesheet" href="<c:url value="/css/diary/commondiary.css" />" >
+<link rel="stylesheet" href="<c:url value="/css/diary/dailydiary.css" />" >
 </head>
 <body>
 
 <c:set var="today" value="<%=new java.util.Date()%>" />
 <div class="date">
-<a href="#"><img src="/bitdaily/images/icon/before.png" width="30px" height="30px"></a>
+<a href="#"><img src="<c:url value="/images/icon/before.png" />" width="30px" height="30px"></a>
 <fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />
 <a href="#"><img src="/bitdaily/images/icon/next.png" width="30px" height="30px"></a>
-<div class="calorie">목표칼로리 <img src="/bitdaily/images/icon/fork.png" width="35px" height="35px"> 1200 kcal</div>
+<div class="calorie">목표칼로리 <img src="<c:url value="/images/icon/fork.png"/>" width="35px" height="35px"> 1200 kcal</div>
 </div><!-- end .date -->
 
 <div class="diary">
 	
 	<div class="subMenu">
 		<ul>
-			<li><a href="/bitdaily/jsp/diary/fooddiary.jsp">식단</a></li>
-			<li><a href="/bitdaily/jsp/diary/exercisediary.jsp" >운동</a></li>
+			<li><a href="/spring-bitdiary/jsp/diary/fooddiary.jsp">식단</a></li>
+			<li><a href="/spring-bitdiary/jsp/diary/exercisediary.jsp" >운동</a></li>
 			<li><a href="#" class="sub_active">일기</a></li>
 		</ul>
 	</div>
 	
 	<div class="mainMenu">
-		<p><img src="${pageContext.request.contextPath}/images/icon/diary.png"/> 오늘의 일기</p>
+		<p><img src="<c:url value="/images/icon/diary.png"/>"> 오늘의 일기</p>
 		<div id="content">
-			<div id="titleregist"><input type="text" name="title" id="title" placeholder="제목을 입력하세요"></div>
+			<div id="titleRegist"><input type="text" name="title" id="title" placeholder="제목을 입력하세요"></div>
 			<form id="note">
 				<div id="summernote"></div>
 			</form>
-			<div id="noteregist"><input><button>등록</button></div>
+			<div id="noteRegist"><input readonly="readonly"><button id="regist">등록</button></div>
 		</div>
 		
 		
@@ -61,8 +61,33 @@
 	<canvas id="pieCanvas" width="20%" height="20%"></canvas>
 </div>
 
-<script src="/bitdaily/js/diary/summernote.js"></script>
-<script src="/bitdaily/js/diary/mini.js"></script>
-<script src="/bitdaily/js/diary/diaryActive.js"></script>
+<script src="<c:url value="/js/diary/summernote.js"/> "></script>
+<script src="<c:url value="/js/diary/mini.js"/>"></script>
+<script src="<c:url value="/js/diary/diaryActive.js" />"></script>
+<script>
+	$("#regist").click(function(){
+		console.log($("#title").val());
+		if($("#title").val() == ""){
+			alert("제목을 등록하세요.");
+			return;
+		} 
+		console.log($(".note-editable p").text());
+		if($(".note-editable p").text() == ""){
+			alert("내용을 입력하세요");
+			return;
+		}
+		$.ajax({
+			url : "<c:out value""/>",
+			data : { 
+				title : $("#title").val() ,
+				content : $(".note-editable p").text()
+			},
+			data-Type: "json",
+			success : function(data){
+				alert(data);
+			}
+		})
+	})
+</script>
 </body>
 </html>

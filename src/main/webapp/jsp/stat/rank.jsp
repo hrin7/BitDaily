@@ -16,7 +16,7 @@
 		<a href="#"><img src="<c:url value="/images/icon/next.png" />" width="30px" height="30px"></a>
 	</div>
 	<div id="calorie">
-		<h3>주간 칼로리</h3>
+		<h4>주간 칼로리</h4>
 		<ul>
 			<li class="lines first"><p class="box rankdeco firstcolor">1</p><p class="box namedeco">홍길동</p></li>
 			<li class="lines second"><p class="box rankdeco secondcolor">2</p><p class="box namedeco">홍길동</p></li>
@@ -28,7 +28,7 @@
 	</div>
 	
 	<div id="workout">
-		<h3>주간 운동</h3>
+		<h4>주간 운동</h4>
 		<ul>
 			<li class="lines first"><p class="box rankdeco firstcolor">1</p><p class="box namedeco">홍길동</p></li>
 			<li class="lines second"><p class="box rankdeco secondcolor">2</p><p class="box namedeco">홍길동</p></li>
@@ -40,7 +40,7 @@
 	</div>
 	
 	<div id="weight">
-		<h3>주간 몸무게</h3>
+		<h4>주간 몸무게</h4>
 		<ul>
 			<li class="lines first"><p class="box rankdeco firstcolor">1</p><p class="box namedeco">홍길동</p></li>
 			<li class="lines second"><p class="box rankdeco secondcolor">2</p><p class="box namedeco">홍길동</p></li>
@@ -52,6 +52,29 @@
 	</div>
 	<div id="clear"></div>
 </div>
-
+<script>
+	function setRank(){
+		$.ajax({
+			url : "<c:url value=""/>"
+		}).done(setRank)
+	}
+	function setRank(data){
+		if(data.calorie){
+			$("#calorie > ul > li").each(function(index){
+				$(this).text(data.calorie[index])
+			});
+		}
+		if(data.workout){
+			$("#workout > ul > li").each(function(index){
+				$(this).text(data.workout[index])
+			});
+		}
+		if(data.weight){
+			$("#weight > ul > li").each(function(index){
+				$(this).text(data.weight[index])
+			})
+		}
+	}
+</script>
 </body>
 </html>

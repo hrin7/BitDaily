@@ -3,7 +3,6 @@
  */
 // 	일일통계 pie차트
 var img = new Image();
-img.src = 'https://example.com/my_image.png';
 
 	var ctx = document.getElementById("pieCanvas").getContext('2d');
 	var fillPattern = ctx.createPattern(img, 'repeat');
