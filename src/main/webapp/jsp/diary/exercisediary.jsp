@@ -17,19 +17,19 @@
 
 <c:set var="today" value="<%=new java.util.Date()%>" />
 <div class="date">
-<a href="#"><img src="/bitdaily/images/icon/before.png" width="30px" height="30px"></a>
+<a href="#"><img src="<c:url value='/images/icon/before.png'/>" width="30px" height="30px"></a>
 <fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />
-<a href="#"><img src="/bitdaily/images/icon/next.png" width="30px" height="30px"></a>
-<div class="calorie">목표칼로리 <img src="/bitdaily/images/icon/fork.png" width="35px" height="35px"> 1200 kcal</div>
+<a href="#"><img src="<c:url value='/images/icon/next.png'/>" width="30px" height="30px"></a>
+<div class="calorie">목표칼로리 <img src="<c:url value='/images/icon/fork.png'/>" width="35px" height="35px"> 1200 kcal</div>
 </div><!-- end .date -->
 
 
 <div class="diary">
 	<div class="subMenu">
 	<ul>
-	<li><a href="/bitdaily/jsp/diary/fooddiary.jsp">식단</a></li>
+	<li><a href="<c:url value='/jsp/diary/fooddiary.jsp'/>">식단</a></li>
 	<li><a href="#" class="sub_active">운동</a></li>
-	<li><a href="/bitdaily/jsp/diary/dailydiary.jsp">일기</a></li>
+	<li><a href="<c:url value='/jsp/diary/dailydiary.jsp'/>">일기</a></li>
 	</ul>
 	</div>
 	

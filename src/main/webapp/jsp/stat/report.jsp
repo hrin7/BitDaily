@@ -12,9 +12,9 @@
 <body>
 <br><br>
 <div id="outer">
-	<a href="#"><img src="/bitdaily/images/icon/before.png" width="30px" height="30px"></a>
+	<a href="#"><img src="<c:url value='/images/icon/before.png'/> " width="30px" height="30px"></a>
 	<span id="date">2018-05-21 ~ 2018-05-27</span>
-	<a href="#"><img src="/bitdaily/images/icon/next.png" width="30px" height="30px"></a><br><br>
+	<a href="#"><img src="<c:url value='/images/icon/next.png'/> " width="30px" height="30px"></a><br><br>
 	<div class="content_box">
 		<div id="statistics">
 			<div class="graphBox">
@@ -37,7 +37,7 @@
 	</div>
 </div>
 
-<script src="<c:url value='/js/stat/report.js'/>"></script>
+<script src="<c:url value='/js/stat/report.js'/> "></script>
 
 </body>
 </html>
