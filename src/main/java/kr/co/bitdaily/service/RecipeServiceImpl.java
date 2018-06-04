@@ -16,7 +16,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> retrieveListBoard(int pageNo) {
-		return null;
+		return mapper.selectRecipe();
 	}
 	
 }

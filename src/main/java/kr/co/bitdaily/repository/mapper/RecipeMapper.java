@@ -1,5 +1,9 @@
 package kr.co.bitdaily.repository.mapper;
 
-public class RecipeMapper {
+import java.util.List;
 
+import kr.co.bitdaily.repository.vo.Recipe;
+
+public interface RecipeMapper {
+	List<Recipe> selectRecipe();
 }

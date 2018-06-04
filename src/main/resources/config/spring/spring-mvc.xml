@@ -52,6 +52,6 @@
 	</mvc:view-resolvers>
 
 	<!-- 컨트롤러 없이 페이지 매핑 -->
-	<mvc:view-controller path="/file/uploadForm.do" view-name="file/fileUploadForm" />
+	<mvc:view-controller path="/main/main.do" view-name="main/main" />
 
 </beans>

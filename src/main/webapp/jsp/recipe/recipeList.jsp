@@ -22,49 +22,18 @@
 	<div id="clear"></div>
 </div>
 <div id="outer">
-	<div class="content-box">
-		<div class="imgDiv">
-		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
+	<c:forEach var="recipe" items="${list}">
+		<div class="content-box">
+			<div class="imgDiv">
+			  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
+			</div>
+			 <h4>${recipe.title}</h4>
+			 글쓴이 hrin 조회수 ${recipe.viewCount}
 		</div>
-		 <h4>제목[4]</h4>
-		 글쓴이 hrin 조회수 10
-	</div>
-	<div class="content-box">
-		<div class="imgDiv">
-		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/banana.jpg'/>" class="img"/></a>
-		</div>
-		 <h4>제목[4]</h4>
-		 글쓴이 hrin 조회수 10
-	</div>
-	<div class="content-box">
-		<div class="imgDiv">
-		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/yogurt.jpg'/> " class="img"/></a>
-		</div>
-		 <h4>제목[4]</h4>
-		 글쓴이 hrin 조회수 10
-	</div>
-	<div id="clear"></div>
-	<div class="content-box">
-		<div class="imgDiv">
-		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/vegetables.jpg'/> " class="img"/></a>
-		</div>
-		 <h4>제목[4]</h4>
-		 글쓴이 hrin 조회수 10
-	</div>
-	<div class="content-box">
-		<div class="imgDiv">
-		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
-		</div>
-		 <h4>제목[4]</h4>
-		 글쓴이 hrin 조회수 10
-	</div>
-	<div class="content-box">
-		<div class="imgDiv">
-		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
-		</div>
-		 <h4>제목[4]</h4>
-		 글쓴이 hrin 조회수 10
-	</div>
+	</c:forEach>
+	<c:if test="${empty list}">
+		입력된 게시물이 없습니다.
+	</c:if>
 	<div id="clear"></div>
 </div>
 <div id="write" style="text-align: right;">

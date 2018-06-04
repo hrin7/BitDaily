@@ -22,7 +22,7 @@
               <a class="nav-link" href="${pageContext.request.contextPath}/jsp/stat/weightrecord.jsp">체중기록</a>
             </li>
             <li class="nav-item" id="nav-recipe">
-              <a class="nav-link" href="${pageContext.request.contextPath}/jsp/recipe/recipeList.jsp">레시피</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/recipe/list.do">레시피</a>
             </li>
             <li class="nav-item">
               <a href="${pageContext.request.contextPath}/jsp/stat/rank.jsp" style="text-decoration: none">　<img src="${pageContext.request.contextPath}/images/icon/trophy.png" width="31px" height="31px"></a>

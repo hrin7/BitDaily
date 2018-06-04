@@ -15,9 +15,10 @@
     <select id="selectRecipe" resultMap="recipeMap">
 	    select *
 	      from tb_recipe
-	     order by no desc 
+	     order by recipe_seq desc 
     </select>
     	
+    <!-- 
     <select id="selectBoardByNo" parameterType="int" resultMap="boardMap">
     	select *
     	  from tb_board
@@ -91,7 +92,8 @@
 	     where comment_no = #{commentNo}
 	</update>   
 	
-	<!-- 첨부파일 파트 시작 -->
+     -->	
+	<!-- 첨부파일 파트 시작
 	
 	<insert id="insertBoardFile" parameterType="boardFile">
 		insert into tb_board_file (
@@ -115,6 +117,7 @@
 		  from tb_board_file
 		 where no = #{no} 
 	</select>
+	 -->
 </mapper>
 
 
