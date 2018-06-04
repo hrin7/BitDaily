@@ -17,9 +17,9 @@
 
 <div class="content_box">
 <div id="scale">
-<img src="/bitdaily/images/icon/thescale.png" width="100px" height="100px"><br>
+<img src="${pageContext.request.contextPath}/images/icon/thescale.png" width="100px" height="100px"><br>
 <h3>45kg</h3><br>　50%<br>
-<img src="/bitdaily/images/icon/runner.png" width="50px" height="50px"><br>
+<img src="${pageContext.request.contextPath}/images/icon/runner.png" width="50px" height="50px"><br>
 50kg__________________________________________40kg
 </div>
 <div id="weight_statistics">
@@ -30,8 +30,8 @@
 </div>
 
 <div id="side">
-<h2><img src="/bitdaily/images/icon/ruler.png" width="50px" height="50px"> 체중기록</h2><hr>
-	<div class="but">　 <a href="#" id="weight"><img src="/bitdaily/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a></div>
+<h2><img src="${pageContext.request.contextPath}/images/icon/ruler.png" width="50px" height="50px"> 체중기록</h2><hr>
+	<div class="but">　 <a href="#" id="weight"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a></div>
 	<hr>
 	2018.05.23.　45kg
 	<hr>
