@@ -27,7 +27,7 @@
 	</bean>
 
 	<!-- 빈 객체를 자동 등록 처리 -->
-	<context:component-scan base-package="kr.co.mlec" />
+	<context:component-scan base-package="kr.co.bitdaily" />
 
 	<!-- mvc 관련 객체 등록 작업 진행 : @RequestMapping 어노테이션을 처리 등.. -->
 	<mvc:annotation-driven>

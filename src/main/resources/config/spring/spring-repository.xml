@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="euc-kr"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"	    
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+	<!-- mybatis 객체 준비 -->
+	<context:property-placeholder location="classpath:config/mybatis/db.properties"/>
+	
+	<!-- DB 연결 -->
+	<!-- DriverManager 사용
+	<bean id="dataSource" 
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+      	  p:driverClassName="${jdbc.oracle.driver}"
+          p:url="${jdbc.oracle.url}"
+          p:username="${jdbc.oracle.username}" 
+          p:password="${jdbc.oracle.password}" />
+	-->
+
+	<!-- DB 연결 : 커넥션풀 관리가 자동으로 된다. -->
+	<!-- DBCP 사용
+	 -->	
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close"
+      	p:driverClassName="${jdbc.oracle.driver}"
+        p:url="${jdbc.oracle.url}"
+        p:username="${jdbc.oracle.username}" 
+        p:password="${jdbc.oracle.password}" />
+	
+	<!-- spring에서 sqlSession 얻는 과정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- sqlMapConfig에서 aliase 설정을 자동화 -->
+		<property name="typeAliasesPackage" value="kr.co.bitdaily.repository.vo" />			
+		<!-- sqlMapConfig에서 mapper 연결 설정을 자동화 -->
+		<property name="mapperLocations" value="classpath:config/sqlmap/oracle/*.xml" />
+		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />		
+	</bean>
+	
+	<!-- mapper interface 개념을 사용하려면 꼭 필요하다. -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="kr.co.bitdaily.repository.mapper" />
+	</bean>
+	
+	<!-- 트랜잭션 처리
+	 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	    	<!-- retrieve로 시작하는 것은 select문이니까 읽기만해도 된다는 뜻(트랜잭션 제외) -->
+		    <!-- rollback-for를 주지않으면 기본적으로 sqlException만 트랜잭션 처리가 됨 -->
+	<!-- 
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	    <tx:attributes>
+		    <tx:method name="retrieve*" read-only="true" />
+		    <tx:method name="*" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="tranMethod"
+		              expression="execution(public * db.member.service.*Impl.*(..)) "/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="tranMethod" />
+	</aop:config>
+	-->
+	
+	<!-- 
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	 -->
+	
+</beans>
