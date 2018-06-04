@@ -18,10 +18,10 @@
 <body>
 <c:set var="today" value="<%=new java.util.Date()%>" />
 <div class="date">
-<a href="#"><img src="/bitdaily/images/icon/before.png" width="30px" height="30px"></a>
+<a href="#"><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
 <fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />
-<a href="#"><img src="/bitdaily/images/icon/next.png" width="30px" height="30px"></a>
-<div class="calorie">목표칼로리 <img src="/bitdaily/images/icon/fork.png" width="35px" height="35px"> 1200 kcal</div>
+<a href="#"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
+<div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px"> 1200 kcal</div>
 </div><!-- end .date -->
 
 
@@ -30,8 +30,8 @@
 	<div class="subMenu">
 	<ul>
 	<li><a href="#" class="sub_active">식단</a></li>
-	<li><a href="/bitdaily/jsp/diary/exercisediary.jsp">운동</a></li>
-	<li><a href="/bitdaily/jsp/diary/dailydiary.jsp">일기</a></li>
+	<li><a href="${pageContext.request.contextPath}/jsp/diary/exercisediary.jsp">운동</a></li>
+	<li><a href="${pageContext.request.contextPath}/jsp/diary/dailydiary.jsp">일기</a></li>
 	</ul>
 	</div>
 	
@@ -40,7 +40,7 @@
 	<div id="morning">
 	<div class="icon">아침</div>
 	<div>
-	<div class="add">　　 <a href="#" class="foodAdd"><img src="/bitdaily/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
+	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
 	</div>
 	
@@ -48,7 +48,7 @@
 	<div id="lunch">
 	<div class="icon">점심</div>
 	<div>
-	<div class="add">　　 <a href="#" class="foodAdd"><img src="/bitdaily/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
+	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
 	</div>
 
@@ -56,7 +56,7 @@
 	<div class="icon">저녁</div>
 	<div>
 <!-- 	<div class="result"></div> -->
-	<div class="add">　　 <a href="#" class="foodAdd"><img src="/bitdaily/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
+	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
 	</div>
 
@@ -68,7 +68,7 @@
 	
 	<div class="result_area">
 	<div class="result_pic">
-	<img class="result_img" src="/bitdaily/images/yogurt.jpg" width="182px" height="182px">
+	<img class="result_img" src="${pageContext.request.contextPath}/images/yogurt.jpg" width="182px" height="182px">
 	</div>
 	<div class="result_content">
 	<strong>요거트</strong><br>
@@ -78,7 +78,7 @@
 	
 	<div class="result_area">
 	<div class="result_pic">
-	<img  class="result_img"  src="/bitdaily/images/yogurt.jpg" width="182px" height="182px">
+	<img  class="result_img"  src="${pageContext.request.contextPath}/images/yogurt.jpg" width="182px" height="182px">
 	</div>
 	<div class="result_content">
 	<strong>요거트</strong><br>
@@ -88,7 +88,7 @@
 	
 	<div class="result_area">
 	<div class="result_pic">
-	<img  class="result_img"  src="/bitdaily/images/yogurt.jpg" width="182px" height="182px">
+	<img  class="result_img"  src="${pageContext.request.contextPath}/images/yogurt.jpg" width="182px" height="182px">
 	</div>
 	<div class="result_content">
 	<strong>요거트</strong><br>
@@ -98,7 +98,7 @@
 	
 	</div> <!-- end .result -->
 	
-	<div class="add">　　 <a href="#" class="foodAdd"><img src="/bitdaily/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
+	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
 	</div>
 	</div>
@@ -131,7 +131,7 @@
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" style="text-align: center">
-          <img src="/bitdaily/images/icon/image.png" width="150px" height="150px"><br>
+          <img src="${pageContext.request.contextPath}/images/icon/image.png" width="150px" height="150px"><br>
           <input type="file">
         
         </div>

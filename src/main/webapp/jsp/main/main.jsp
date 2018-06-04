@@ -32,21 +32,21 @@
           <div class="carousel-item active" style="background-image: url('${pageContext.request.contextPath}/images/banana.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>식단 기록</h3><br>
-              <p><button onclick="location.href='/bitdaily/jsp/diary/fooddiary.jsp'">ViewMore</button></p>
+              <p><button onclick="location.href='${pageContext.request.contextPath}/jsp/diary/fooddiary.jsp'">ViewMore</button></p>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('${pageContext.request.contextPath}/images/bicycle.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>운동 기록</h3><br>
-              <p><button onclick="location.href='/bitdaily/jsp/diary/exercisediary.jsp'">ViewMore</button></p>
+              <p><button onclick="location.href='${pageContext.request.contextPath}/jsp/diary/exercisediary.jsp'">ViewMore</button></p>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('${pageContext.request.contextPath}/images/pencil.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>다이어트 일기</h3><br>
-              <p><button onclick="location.href='/bitdaily/jsp/diary/dailydiary.jsp'">ViewMore</button></p>
+              <p><button onclick="location.href='${pageContext.request.contextPath}/jsp/diary/dailydiary.jsp'">ViewMore</button></p>
             </div>
           </div>
         </div>

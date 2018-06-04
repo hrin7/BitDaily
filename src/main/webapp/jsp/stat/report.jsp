@@ -37,7 +37,7 @@
 	</div>
 </div>
 
-<script src="<c:url value='/js/stat/report.js'/>"></script>
+<script src="<c:url value='/js/stat/report.js'/> "></script>
 
 </body>
 </html>

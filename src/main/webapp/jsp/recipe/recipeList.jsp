@@ -13,32 +13,32 @@
 <body>
 <br><br>
 <div>
-	<img style="margin-left: 36px;" src="/bitdaily/images/icon/groceries.png">
+	<img style="margin-left: 36px;" src="<c:url value='/images/icon/groceries.png'/> ">
 	<span id="title">Diet Recipe</span>
 	<form class="search-container">
 	    <input type="text" id="search-bar" placeholder="레시피 검색">
-	    <a href="#"><img class="search-icon" src="/bitdaily/images/icon/search2.png"></a>
+	    <a href="#"><img class="search-icon" src="<c:url value='/images/icon/search2.png'/> "></a>
 	</form>
 	<div id="clear"></div>
 </div>
 <div id="outer">
 	<div class="content-box">
 		<div class="imgDiv">
-		  <a href="/bitdaily/jsp/recipe/recipeDetail.jsp"><img src="/bitdaily/images/salad.jpg" class="img"/></a>
+		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
 		</div>
 		 <h4>제목[4]</h4>
 		 글쓴이 hrin 조회수 10
 	</div>
 	<div class="content-box">
 		<div class="imgDiv">
-		  <a href="/bitdaily/jsp/recipe/recipeDetail.jsp"><img src="/bitdaily/images/banana.jpg" class="img"/></a>
+		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/banana.jpg'/>" class="img"/></a>
 		</div>
 		 <h4>제목[4]</h4>
 		 글쓴이 hrin 조회수 10
 	</div>
 	<div class="content-box">
 		<div class="imgDiv">
-		  <a href="/bitdaily/jsp/recipe/recipeDetail.jsp"><img src="/bitdaily/images/yogurt.jpg" class="img"/></a>
+		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/yogurt.jpg'/> " class="img"/></a>
 		</div>
 		 <h4>제목[4]</h4>
 		 글쓴이 hrin 조회수 10
@@ -46,21 +46,21 @@
 	<div id="clear"></div>
 	<div class="content-box">
 		<div class="imgDiv">
-		  <a href="/bitdaily/jsp/recipe/recipeDetail.jsp"><img src="/bitdaily/images/vegetables.jpg" class="img"/></a>
+		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/vegetables.jpg'/> " class="img"/></a>
 		</div>
 		 <h4>제목[4]</h4>
 		 글쓴이 hrin 조회수 10
 	</div>
 	<div class="content-box">
 		<div class="imgDiv">
-		  <a href="/bitdaily/jsp/recipe/recipeDetail.jsp"><img src="/bitdaily/images/salad.jpg" class="img"/></a>
+		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
 		</div>
 		 <h4>제목[4]</h4>
 		 글쓴이 hrin 조회수 10
 	</div>
 	<div class="content-box">
 		<div class="imgDiv">
-		  <a href="/bitdaily/jsp/recipe/recipeDetail.jsp"><img src="/bitdaily/images/salad.jpg" class="img"/></a>
+		  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
 		</div>
 		 <h4>제목[4]</h4>
 		 글쓴이 hrin 조회수 10
@@ -74,6 +74,6 @@
 <div id="pageing">[1][2][3][4][5]</div>
 <br>
 
-<script src="<c:url value='/js/recipe/recipeList.js'/>"></script>
+<script src="<c:url value='/js/recipe/recipeList.js'/> "></script>
 </body>
 </html>

@@ -17,9 +17,9 @@
 
 <div class="content_box">
 <div id="scale">
-<img src="/bitdaily/images/icon/thescale.png" width="100px" height="100px"><br>
+<img src="${pageContext.request.contextPath}/images/icon/thescale.png" width="100px" height="100px"><br>
 <h3>45kg</h3><br>　50%<br>
-<img src="/bitdaily/images/icon/runner.png" width="50px" height="50px"><br>
+<img src="${pageContext.request.contextPath}/images/icon/runner.png" width="50px" height="50px"><br>
 50kg__________________________________________40kg
 </div>
 <div id="weight_statistics">
