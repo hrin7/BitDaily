@@ -7,10 +7,7 @@
 	<properties resource="config/mybatis/db.properties" />
 	
 	<typeAliases>
-		<typeAlias alias="board" type="kr.co.mlec.repository.domain.Board" />
-		<typeAlias alias="comment" type="kr.co.mlec.repository.domain.Comment" />
-		<typeAlias alias="boardFile" type="kr.co.mlec.repository.domain.BoardFile" />
-		<typeAlias alias="login" type="kr.co.mlec.repository.domain.Login" />
+		<typeAlias alias="recipe" type="kr.co.bitdaily.repository.vo.Recipe" />
 	</typeAliases>
 	
 	<environments default="development">
@@ -29,8 +26,7 @@
 		개별적으로 작성한 mapper.xml(SQL)의 위치를 알려준다.
 	 -->
 	<mappers>
-		<mapper resource="config/sqlmap/oracle/board.xml"/>
-		<mapper resource="config/sqlmap/oracle/login.xml"/>
+		<mapper resource="config/sqlmap/oracle/recipe.xml"/>
 	</mappers>
 </configuration>
 
