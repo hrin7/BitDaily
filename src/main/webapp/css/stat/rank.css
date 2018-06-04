@@ -1,0 +1,99 @@
+body {
+	background-color:  #e2dedb;
+}
+
+#outer { 
+	width: 90%;
+	margin: 0 auto;
+	height : 700px;
+}
+
+#calorie, #workout , #weight {
+	width : 29%;
+	margin : 30px 18px;
+	height : 400px;
+	float: left;
+}
+#calorie > ul , #workout > ul , #weight > ul {
+	list-style: none;
+}
+
+
+#clear {
+	clear:both;
+}
+
+h4 {
+	margin: 50px auto;
+	text-align: center;
+}
+#date {
+	width : 100%;
+	margin : 0 370px;
+	font-size: 1.5em;
+}
+
+.box {
+	display: inline-block;
+}
+
+.lines {
+	margin-top : 10px;
+	margin-bottom: 10px;
+	height: 70px;
+}
+
+.first {
+	background-color: rgba(255, 99, 132);
+	
+}
+.firstcolor {
+	color: rgba(255, 99, 132);
+}
+.second {
+	background-color: rgba(255, 159, 64);
+}
+.secondcolor {
+	color: rgba(255, 159, 64);
+}
+.third {
+	background-color: rgba(255, 205, 86);
+}
+.thirdcolor {
+	color: rgba(255, 205, 86);
+}
+.forth {
+	background-color: rgba(75, 192, 192);
+}
+.forthcolor {
+	color: rgba(75, 192, 192);
+}
+.fifth {
+	background-color: rgba(54, 162, 235);
+}
+.fifthcolor {
+	color: rgba(54, 162, 235);
+}
+.rankdeco {
+	box-sizing:content-box;
+	font-size: 2em;
+	text-align: center;
+	line-height: 70px;
+	margin-left: 20px;
+	width: 20%;
+	height : 70px;
+	background-color: white;
+	box-sizing:content-box;
+	margin-top: 0;
+}
+.namedeco {
+	color: white;
+	font-size: 2em;
+	text-align: center;
+	line-height: 70px;
+	margin-left: 50px;
+	width: 100px;
+	height : 70px;
+	box-sizing:content-box;
+	margin-top: 0;
+}

@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/* 웹폰트 */
+@import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/NanumSquare.css');
+
+	* {
+	    font-family: 'NanumSquare', 'Sans-serif';
+		margin:0px;
+		padding:0px;
+		border:0px;
+		font-size:100%;
+		vertical-align:baseline;
+		background:transparent;
+		list-style: none;
+		text-decoration: none;
+	   }
+		
+	footer {
+		color: #aaa;
+		display: inline-block;
+		width: 100%;
+		float: left;
+		height: 50px;
+		text-align: center;
+		}  
+
+	.content {
+		width : 73%;
+		margin: 80px auto 0; 
+ 		height: auto;  
+	}

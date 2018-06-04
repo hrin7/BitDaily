@@ -1,0 +1,47 @@
+#noteregist > input , #titleregist > input {
+	width : 90%;
+	margin-right: 10px;
+}
+#titleregist > input:focus {
+	outline: #aaa;
+	border: 1px solid #aaa;
+}
+
+#noteregist > input {
+	visibility: hidden;
+}
+
+#todaydiary , #noteregist , #titleregist, #note {
+	margin-top : 40px;
+	margin-left: 30px;
+	margin-bottom: 10px;
+}
+
+#desc {
+	margin-left: 20px;
+	font-size: 0.8em;
+}	
+#noteregist > button , #titleregist > button {
+	border: 1px solid #062859;
+	border-radius: 8px;
+	width: 50px; height: 25px;
+	color: #062859;
+	font-size: 13px;
+}
+
+
+#noteregist > button:hover , #titleregist > button:hover {
+	cursor: pointer;
+	
+}
+#noteregist > button:focus , #titleregist > button:focus {
+	outline: none;
+}
+#noteregist > button:active , #titleregist > button:active {
+	background-color: rgb(6,40,89,0.2)
+}
+.mainMenu > p { 
+	font-size: 25px;
+    padding: 20px;
+    margin: 10px 32px; 
+}

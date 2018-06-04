@@ -1,0 +1,11 @@
+@charset "UTF-8";
+button {
+	border: 1px solid #062859;
+	border-radius: 8px;
+	width: 50px; height: 25px;
+	color: #062859;
+	font-size: 13px;
+}
+button:hover { cursor: pointer; }
+button:focus { outline: none; }
+button:active { background-color: rgb(6,40,89,0.2) }

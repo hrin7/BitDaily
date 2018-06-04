@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+.food_record {
+	width: 90%;
+}
+table {
+	margin: 20px auto;
+	padding: 10px;
+}
+.icon {
+	color: #062859;
+	font-weight: bold;
+	font-size: large;
+	width: 40px;
+	height: 40px;
+	padding: 1px 1px;
+	text-shadow: 1px 1px 1px #c6d5f2;
+	
+}
+.add {
+	margin-left:30px;
+	margin-top: 3px;
+	border: 1px dashed #133668;
+	width: 600px;
+	height: 30px;
+	border-radius: 20px;
+	display: inline-block;
+}
+.select {
+	margin-left:30px;
+	border: 1px dashed #133668;
+	width: 600px;
+	height: 280px;
+	border-radius: 20px;
+		display: inline-block;
+		padding : 20px 0;
+}
+.result {
+	margin-left:30px;
+	border: 1px solid #133668;
+	width: 600px;
+	height: 300px;
+	border-radius: 20px;
+	display: inline-block;
+}
+.result_area {
+	float: left;
+	margin: 10px auto;
+}
+.result_pic {
+	margin: 8px 8px;
+}
+.result_content {
+	width: 185px;
+	height: 185px;
+	text-align: center;
+	padding: 4px 4px;
+	margin: 7px 7px;
+}
+.searchBox {
+	margin-left: 30px;
+	width: 460px;
+	border: 1px solid #aaa;
+}
+#search_list {
+	margin: 10px 50px;
+}
+.input_gram {
+	width: 80px;
+	float: right;
+	border: 1px solid #aaa;
+}
+#buttons {
+	text-align: right;
+}
+
+.buts {
+	border: 1px solid #00AFFF;
+	border-radius: 8px;
+	width: 50px; height: 25px;
+	color: #00AFFF;
+	font-size: 13px;
+}
+.buts:hover { cursor: pointer; }
+.buts:focus { outline: none; }
+.buts:active { background-color: rgba(0,50,200,0.1) }
+
+#morning, #lunch, #dinner, #snack {
+	width: 100%;
+	height: auto;
+	margin: 50px;
+	box-sizing: border-box;
+}
+
+.result_img {
+	border-radius: 20px;
+}
+
+a, a:hover {
+text-decoration: none;
+color : black;
+}
+#title { font-size: 25px;
+    padding: 20px;
+    margin: 10px 32px; }

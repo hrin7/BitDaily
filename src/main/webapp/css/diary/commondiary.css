@@ -1,0 +1,93 @@
+.diary {
+display: inline-block;
+margin: 5px;
+width : 70%;
+height: auto;
+}
+.date {
+font-size: x-large;
+width: 100%;
+margin: 5px;
+text-align: center;
+}
+.calorie {
+font-size: medium;
+}
+.subMenu > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(6,40,89,0.4);
+}
+
+.subMenu > ul > li {
+    float: left;
+    width: 33.33333%;
+    border: 1px solid white;
+}
+
+.subMenu > ul > li a {
+    display: block;
+    color: white;
+    font-weight: bold; 
+    font-size: large;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.subMenu >  ul > li a:hover {
+    background-color: #062859;
+}
+
+.sub_active {
+    background-color: #062859;
+}
+
+.mainMenu { 
+	width: 100%; 
+	height: auto;
+	border: 1px dashed silver;
+	border-radius: 30px;
+	margin: 10px 0px 0px 0px;
+	position: relative;
+}
+
+
+/* 옆에 붙는... 일일 통계  css 밑에   .writeStatis > p  까지 */
+.dailyStatistics{
+	margin: 5px;
+	padding: 30px;
+	display: inline-block; 
+	width: 28%;
+	height: 700px;
+	border: 1px dotted #aaa;
+	border-radius: 20px;
+	float: right;
+}
+.writeStatis{
+	border: 1px solid gray;
+	width: 100%;
+	height: 45%;
+	margin: auto;
+	border-radius: 20px;
+	padding-top: 30px;
+}
+
+.dailyStatistics > p {
+	font-size: 20px;
+	margin-left: 20%;
+	font-weight: bold;
+	color: #062859;
+}
+
+.writeStatis > p {
+	font-size: 16px;
+	margin-left: 10%;
+	font-weight: bold;
+	color: black;
+	margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+}
