@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +9,7 @@
     <meta name="author" content="">
     <title>Bit Daily</title>
 <!--     Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/slider/full-slider.css" rel="stylesheet">
+    <link href="<c:url value='/slider/full-slider.css'/>" rel="stylesheet">
     <style>
     .carousel-item{ 
        height: 610px;  
@@ -31,21 +32,21 @@
           <div class="carousel-item active" style="background-image: url('${pageContext.request.contextPath}/images/banana.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>식단 기록</h3><br>
-              <p><button onclick="location.href='/bitdaily/jsp/diary/fooddiary.jsp'">ViewMore</button></p>
+              <p><button onclick="location.href='${pageContext.request.contextPath}/jsp/diary/fooddiary.jsp'">ViewMore</button></p>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('${pageContext.request.contextPath}/images/bicycle.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>운동 기록</h3><br>
-              <p><button onclick="location.href='/bitdaily/jsp/diary/exercisediary.jsp'">ViewMore</button></p>
+              <p><button onclick="location.href='${pageContext.request.contextPath}/jsp/diary/exercisediary.jsp'">ViewMore</button></p>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('${pageContext.request.contextPath}/images/pencil.jpg')">
             <div class="carousel-caption d-none d-md-block">
               <h3>다이어트 일기</h3><br>
-              <p><button onclick="location.href='/bitdaily/jsp/diary/dailydiary.jsp'">ViewMore</button></p>
+              <p><button onclick="location.href='${pageContext.request.contextPath}/jsp/diary/dailydiary.jsp'">ViewMore</button></p>
             </div>
           </div>
         </div>
