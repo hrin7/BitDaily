@@ -137,6 +137,14 @@
 
 </dependencies>	
 
+<repositories>
+	<repository>
+		<id>oracle</id>
+		<name>ORACLE JDBC Repository</name>
+		<url>https://maven.atlassian.com/3rdparty/</url>
+	</repository>
+</repositories>
+
   <build>
       <plugins>
       <plugin>
