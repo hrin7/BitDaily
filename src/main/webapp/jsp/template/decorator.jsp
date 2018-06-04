@@ -1,15 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><sitemesh:write property="title" /></title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/slider/common.css">
 <link href="${pageContext.request.contextPath}/slider/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<sitemesh:write property="head" /> 
 <style type="text/css">
 </style>
 </head>
@@ -20,7 +19,7 @@
 	</div>	
 	
 	<div class="content">
-	  <sitemesh:write property="body" /> 
+	  <decorator:body />
 	</div>	
 	
 	<div class="footer">
