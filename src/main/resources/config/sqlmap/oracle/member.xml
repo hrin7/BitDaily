@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.bitdaily.repository.mapper.MemberMapper">
+   
+    <resultMap id="memberMap" type="member">
+        <result column = "id" property = "id" />
+        <result column = "name" property = "name" />
+        <result column = "pass" property = "pass" />
+        <result column = "email" property = "email" />
+        <result column = "age" property = "age" />
+        <result column = "user_height" property = "userHeight" />
+        <result column = "user_weight" property = "userWeight" />
+        <result column = "gender" property = "gender" />
+        <result column = "goal_weight" property = "goalWeight" />
+        <result column = "goal_calorie" property = "goalCalorie" />
+        <result column = "current_weight" property = "currentWeight" />
+    </resultMap>
+   
+   
+    <select id="selectMemberById" parameterType="string" resultMap="memberMap">
+    	select *
+    	  from tb_user
+    	 where id = #{id}
+    </select>
+</mapper>

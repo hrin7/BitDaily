@@ -37,19 +37,19 @@
         </div>
       </div>
       <div class="col_half last">
-        <form>
+        <form  action="${pageContext.request.contextPath}/login.do" method="POST">
           <div class="input_field"><span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-            <input type="ID" name="ID" placeholder="ID" required=""/>
+            <input type="text" name="id" placeholder="ID" />
           </div>
           <div class="input_field"><span><i class="fa fa-lock" aria-hidden="true"></i></span>
-            <input type="password" name="phone" placeholder="Password" required=""/>
+            <input type="text" name="pass" placeholder="Password" />
           </div>
           <input class="button" type="submit" value="Sign in"/>
+        </form>
           <div class="row clearfix bottom_row">
             <div class="col_half searchPass"><input class="searchPass" id="searchPass" value="Forgot Password?" type="submit" ></div>
             <div class="col_half searchPass"><input class="searchId" id="searchId" value="Forgot ID?" type="submit" ></div>
           </div>
-        </form>
       </div>
     </div>
   </div>
