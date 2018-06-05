@@ -18,21 +18,23 @@ import kr.co.bitdaily.repository.vo.Food;
 import kr.co.bitdaily.util.DiaryCalendar;
 
 @Controller
-@RequestMapping("/meal")
+@RequestMapping("/diary")
 public class MealController {
 	
 	@Autowired
 	private MealService mealService;
 	
-	@RequestMapping(value="/mealList.do", method=RequestMethod.GET)
-	public ModelAndView mealList() {
+	@RequestMapping("/fooddiary.do")
+	public void foodList() {
+		/*
 		ModelAndView mav = new ModelAndView("diary/fooddiary");
 		DiaryCalendar cal = new DiaryCalendar();
 		mav.addObject("date", cal.getTodayDate());
 		return mav;
+		*/
 	}
 	
-	@RequestMapping("/mealList.json")
+	@RequestMapping("/fooddiary.json")
 	@ResponseBody
 	public Date mealListMove(@RequestParam String bntId, Date currentDate) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

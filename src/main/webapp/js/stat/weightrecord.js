@@ -9,7 +9,7 @@
 	$(document).on("click", ".buts", function() {
 		$.ajax({
 			type : "POST",
-			url : "/spring-bitdiary/weight/record.json",
+			url : "/spring-bitdiary/stat/weightupdate.json",
 			data : {
 				weight : $("#weightToday").val()
 			},

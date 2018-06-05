@@ -10,15 +10,19 @@ import kr.co.bitdaily.repository.vo.Weight;
 import kr.co.bitdaily.weight.service.WeightService;
 
 @Controller
-@RequestMapping("/weight")
+@RequestMapping("/stat")
 public class WeightController {
 	
 	@Autowired
 	private WeightService weightService;
 	
-	@RequestMapping("/record.json")
+	@RequestMapping("/weightrecord.do")
+	public void weightRecord() {
+	}
+	
+	@RequestMapping("/weightupdate.json")
 	@ResponseBody
-	public void weightRecord(@RequestParam String weight) {
+	public void weightUpdate(@RequestParam String weight) {
 
 		//세션에서 userSeq꺼내오기
 		int userSeq = 23452;

@@ -34,7 +34,7 @@
 	$(document).on("click", "#search", function() {
 		$.ajax({
 			type : "POST",
-			url : "/spring-bitdiary/meal/foodSearch.json",
+			url : "/spring-bitdiary/diary/foodSearch.json",
 			data : {
 				keyword : $("#searchBox").val()
 			},
@@ -71,7 +71,7 @@
 	$(document).on("click", "#preDate", function() {
 		$.ajax({
 			type : "POST",
-			url : "/spring-bitdiary/meal/mealList.json",
+			url : "/spring-bitdiary/diary/fooddiary.json",
 			data : { 
 				"currentDate" : new Date($("#curDate").text()),
 				//이 currentDate로 select mealSeq
@@ -97,7 +97,7 @@
 		
 		$.ajax({
 			type : "POST",
-			url : "/spring-bitdiary/meal/mealList.json",
+			url : "/spring-bitdiary/diary/fooddiary.json",
 			data : { 
 				"currentDate" : new Date($("#curDate").text()),
 				"bntId" : "nextDate"
