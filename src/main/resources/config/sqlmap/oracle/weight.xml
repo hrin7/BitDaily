@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.bitdaily.repository.mapper.WeightMapper">
+	<resultMap id="weightMap" type="weight">
+		<result column="user_seq" property="userSeq" />
+		<result column="record_date" property="recordDate" />
+		<result column="record_weight" property="recordWeight" />
+	</resultMap>
+
+	<insert id="insertWeight" parameterType="weight">
+	insert into tb_weight_record (user_seq, record_weight)
+	values (#{userSeq}, #{recordWeight})
+	</insert>
+
+</mapper>

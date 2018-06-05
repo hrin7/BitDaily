@@ -30,8 +30,8 @@
 </div>
 
 <div id="side">
-<h2><img src="/bitdaily/images/icon/ruler.png" width="50px" height="50px"> 체중기록</h2><hr>
-	<div class="but">　 <a href="#" id="weight"><img src="/bitdaily/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a></div>
+<h2><img src="${pageContext.request.contextPath}/images/icon/ruler.png" width="50px" height="50px"> 체중기록</h2><hr>
+	<div class="but">　 <a href="#" id="weight"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a></div>
 	<hr>
 	2018.05.23.　45kg
 	<hr>

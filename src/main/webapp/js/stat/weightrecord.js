@@ -2,7 +2,25 @@
 	$("#nav-weight").addClass("active");
 	
 	$("#weight").click(function () {
-		$(".but").html("<input type='text' name='weightToday' id='weightToday'>　<button class='buts'>등록</button>");
+		$(".but").html("<input type='text' name='weightToday' id='weightToday'>　<button type='button' class='buts' id='registWeight'>등록</button>");
+	});
+	
+	
+	$(document).on("click", ".buts", function() {
+		$.ajax({
+			type : "POST",
+			url : "/spring-bitdiary/weight/record.json",
+			data : {
+				weight : $("#weightToday").val()
+			},
+			success : function() {
+				alert("체중업데이트가 완료되었습니다.");
+				$(".but").html("　 <a href='#' id='weight'><img src='/spring-bitdiary/images/icon/plus.png' width='20px' height='20px'> 오늘체중기록</a>");
+			},
+			error:function(request,status,error){
+		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+		});
 	});
 	
 	var data = {
