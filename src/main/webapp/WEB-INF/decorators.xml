@@ -2,7 +2,7 @@
 
 <!-- default directory 설정 -->
 
-<decorators defaultdir="/jsp">
+<decorators defaultdir="/WEB-INF/jsp">
 	<decorator name="decorator" page="template/decorator.jsp">
 		<pattern>/*</pattern>
 	</decorator>
