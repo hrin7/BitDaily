@@ -1,4 +1,4 @@
-package kr.co.bitdaily.service;
+package kr.co.bitdaily.login.service;
 
 import kr.co.bitdaily.repository.vo.Member;
 

@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="col_half last">
-        <form  action="${pageContext.request.contextPath}/login.do" method="POST">
+        <form  action="${pageContext.request.contextPath}/login/login.do" method="POST">
           <div class="input_field"><span><i class="fa fa-envelope" aria-hidden="true"></i></span>
             <input type="text" name="id" placeholder="ID" />
           </div>

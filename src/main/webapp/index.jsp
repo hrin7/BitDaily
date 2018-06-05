@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:redirect url="main/main.do" />
+<%-- 	<c:redirect url="main/main.do" /> --%>
+<%-- 	<c:redirect url="login/loginForm.do" /> --%>
+<a href="${pageContext.request.contextPath}/login/loginForm.do">다이어리</a>
 </body>
 </html>
 

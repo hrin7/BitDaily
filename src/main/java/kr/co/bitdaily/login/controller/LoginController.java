@@ -1,26 +1,28 @@
-package kr.co.bitdaily.controller;
+package kr.co.bitdaily.login.controller;
 
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.co.bitdaily.login.service.LoginService;
 import kr.co.bitdaily.repository.vo.Member;
-import kr.co.bitdaily.service.LoginService;
 
 
 @Controller 
-//@RequestMapping("/login")
+@RequestMapping("/login")
 public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
 	
-//	@RequestMapping("/loginForm.do") 
-//	public String joinForm() { 
-//		return "login/joinForm"; 
-//	} 
+	@RequestMapping("/loginForm.do") 
+	public String joinForm() { 
+		System.out.println("로그인 폼 들어옴");
+		return "login/loginForm";
+	} 
 	
 	@RequestMapping("/login.do")
 	public String login(Member member, HttpSession session) throws Exception{
@@ -30,10 +32,10 @@ public class LoginController {
 		if(member.getPass().equals(loginmember.getPass())) {
 			System.out.println("로그인 성공");
 			session.setAttribute("member", member);
-			return "redirect:main/main.do"; //로그인 후 이동 페이지
+			return "redirect:/main/main.do"; //로그인 후 이동 페이지
 		}else {
 			
-			return "redirect:login.do";
+			return "redirect:loginForm.do";
 		}
 	}
 	
