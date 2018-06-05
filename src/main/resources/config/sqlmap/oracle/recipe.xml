@@ -19,7 +19,7 @@
     </select>
     	
     <select id="selectRecipeByNo" parameterType="int" resultMap="recipeMap">
-    	select *
+    	select user_seq, recipe_seq, title, content, recipe_date, view_count, file_seq
     	  from tb_recipe
     	 where recipe_seq = #{recipeSeq} 
     </select>	

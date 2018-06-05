@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,8 +37,9 @@
 				</c:choose>
 				</div>
 			</a>
-			<h4>${recipe.title}</h4>
-			글쓴이 hrin 조회수 ${recipe.viewCount}
+			<h5>${recipe.title}</h5>
+			글쓴이 hrin 조회수 ${recipe.viewCount}<br>
+			<fmt:formatDate value="${recipe.recipeDate}" pattern="yyyy-MM-dd"/> 
 		</div>
 	</c:forEach>
 	<c:if test="${empty result.list}">

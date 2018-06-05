@@ -52,7 +52,7 @@ input#search-bar:focus::-webkit-input-placeholder {
 	cursor: pointer;
 	transform: scale(1.05);
 }
-h4 { margin: 10px; }
+h5 { margin: 10px; font-weight: bold; }
 #pageing { text-align: center;}
 #title { font-size: 25px; }
 #clear { clear :both; }
