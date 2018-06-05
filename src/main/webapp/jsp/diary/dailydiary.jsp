@@ -20,7 +20,7 @@
 <div class="date">
 <a href="#"><img src="<c:url value="/images/icon/before.png" />" width="30px" height="30px"></a>
 <fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />
-<a href="#"><img src="/bitdaily/images/icon/next.png" width="30px" height="30px"></a>
+<a href="#"><img src="<c:url value="/images/icon/next.png"/>" width="30px" height="30px"></a>
 <div class="calorie">목표칼로리 <img src="<c:url value="/images/icon/fork.png"/>" width="35px" height="35px"> 1200 kcal</div>
 </div><!-- end .date -->
 
@@ -37,11 +37,11 @@
 	<div class="mainMenu">
 		<p><img src="<c:url value="/images/icon/diary.png"/>"> 오늘의 일기</p>
 		<div id="content">
-			<div id="titleRegist"><input type="text" name="title" id="title" placeholder="제목을 입력하세요"></div>
+			<div id="titleRegist"><input type="text" name="diaryTitle" id="diaryTitle" placeholder="제목을 입력하세요"></div>
 			<form id="note">
 				<div id="summernote"></div>
 			</form>
-			<div id="noteRegist"><input readonly="readonly"><button id="regist">등록</button></div>
+			<div id="noteRegist"><input id="diaryContext" readonly="readonly"><button id="regist">등록</button></div>
 		</div>
 		
 		
@@ -62,32 +62,70 @@
 </div>
 
 <script src="<c:url value="/js/diary/summernote.js"/> "></script>
-<script src="<c:url value="/js/diary/mini.js"/>"></script>
-<script src="<c:url value="/js/diary/diaryActive.js" />"></script>
+<script src="<c:url value="/js/diary/mini.js"/> "></script>
+<script src="<c:url value="/js/diary/diaryActive.js"/> "></script>
 <script>
-	$("#regist").click(function(){
-		console.log($("#title").val());
-		if($("#title").val() == ""){
-			alert("제목을 등록하세요.");
-			return;
-		} 
-		console.log($(".note-editable p").text());
-		if($(".note-editable p").text() == ""){
-			alert("내용을 입력하세요");
-			return;
+function toggleBtn(flag){
+	if(flag) $("#regist").text("수정")
+	else $("#regist").text("등록")
+}
+
+function setDiary(){
+	console.log("ready 다이어리 실행중");
+	$.ajax({
+		url : "/spring-bitdiary/diary/dailydiary/select.json",
+		data : {
+			userSeq : "1",
+			diaryDate : new Date()
 		}
-		$.ajax({
-			url : "<c:out value""/>",
-			data : { 
-				title : $("#title").val() ,
-				content : $(".note-editable p").text()
-			},
-			data-Type: "json",
-			success : function(data){
-				alert(data);
-			}
-		})
+	}).done(function(data){
+		console.log(data);
+		$("#diaryTitle").val(data.title);
+		console.log($(".note-placeholder").text(""));
+		$(".note-editable p").text(data.content);
+		toggleBtn(data.title);
+	}).fail(function(data){
+		alert(data.responseText);
 	})
+}
+function insertDiary(){
+	$.ajax({
+		url : update(),
+		data : {
+			userSeq : "1",
+			title : $("#diaryTitle").val(),
+			content : $(".note-editable p").text(),
+			diaryDate : new Date()
+		}
+	}).done(function(data){
+		alert(data+"성공");
+	})
+}
+function check(){
+	console.log($("#diaryTitle").val());
+	if($("#diaryTitle").val() == ""){
+		alert("제목을 등록하세요.");
+		return false;
+	} 
+	console.log($(".note-editable p").text());
+	if($(".note-editable p").text() == ""){
+		alert("내용을 입력하세요");
+		return false;
+	}
+	return true;
+}
+
+function update(){
+	var path = "/spring-bitdiary/diary/dailydiary/insert.json";
+	if($("#regist").text() == "수정"){
+		path = "/spring-bitdiary/diary/dailydiary/update.json";
+	};
+	return path;
+}
+$("#regist").click(function(){
+	if(check())	insertDiary();
+})
+$(setDiary);
 </script>
 </body>
 </html>
