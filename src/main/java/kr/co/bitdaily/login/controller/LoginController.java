@@ -27,7 +27,6 @@ public class LoginController {
 	@RequestMapping("/login.do")
 	public String login(Member member, HttpSession session,  RedirectAttributes attr) throws Exception{
 		Member loginmember = loginService.retrieveMemberInfo(member.getId());
-		System.out.println(loginmember.getAge());
 		
 		if(member.getPass().equals(loginmember.getPass())) {
 			System.out.println("로그인 성공");
@@ -39,11 +38,16 @@ public class LoginController {
 		}
 	}
 	
-//	@RequestMapping("/logout.do")
-//	@ResponseBody
-//	public String logout(HttpSession session) {
-//		session.invalidate();
-//		return "success";
-//	}
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:loginForm.do";
+	}
 }
+
+
+
+
+
+
 //		HttpSession session = request.getSession();
