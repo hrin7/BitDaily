@@ -53,5 +53,6 @@
 
 	<!-- 컨트롤러 없이 페이지 매핑 -->
 	<mvc:view-controller path="/main/main.do" view-name="main/main" />
+	<mvc:view-controller path="/recipe/writeForm.do" view-name="recipe/recipeWriteForm" />
 
 </beans>

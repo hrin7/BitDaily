@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>레시피 상세 페이지</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <link href="<c:url value='/css/recipe/input.css'/>" rel="stylesheet">
 <link href="<c:url value='/css/recipe/recipeDetail.css'/>" rel="stylesheet">
@@ -16,19 +16,19 @@
 <div id="outer">
 	<div id="titleDiv">
 		<br><br>
-		<span id="titleSpan">리코타 치즈 샐러드</span>
+		<span id="titleSpan">${recipe.title}</span>
 		<span id="writer">hrin</span>
 	</div>
 	<hr>
 	<div id="right">
-		<span id="regDate">2018.05.28</span>
+		<span id="regDate">${recipe.recipeDate}</span>
 	</div>
 	<div id="content">
 		<br>
-		<img src="<c:url value='/images/vegetables.jpg'/>" width="500px;"><br><br>
-		1. 야채샐러드의 기본은 물기를 확실히 털어내는 거겠죠. 신선하고 아삭하게 찬물에 담가두었다가 물기를 빼고 방울토마토는 꼭지를 떼어주면 됩니다.<br>
-		2. 리코타치즈도 준비해주세요.<br>
-		3. 접시에 양상추 - 방울토마토 - 블랙 올리브 - 베이비채소를 보기 좋게 담고빵도 같이 곁들여 놓았어요~ 먹기 전에 발사믹 글레이즈를 뿌려 드시면 더 맛있어요~<br>
+		<c:forEach var="file" items="${fileList}">
+			<img src="<c:url value='${file.filePath}/${file.fileOriName}'/>" width="500px;"><br><br>
+		</c:forEach>
+		${recipe.content}
 		<br><br>
 	</div>
 	<div id="comment">

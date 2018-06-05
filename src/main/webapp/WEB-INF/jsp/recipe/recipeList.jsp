@@ -22,27 +22,40 @@
 	<div id="clear"></div>
 </div>
 <div id="outer">
-	<c:forEach var="recipe" items="${list}">
+	<c:forEach var="recipe" items="${result.list}">
 		<div class="content-box">
-			<div class="imgDiv">
-			  <a href="<c:url value='/jsp/recipe/recipeDetail.jsp'/> "><img src="<c:url value='/images/salad.jpg'/> " class="img"/></a>
-			</div>
-			 <h4>${recipe.title}</h4>
-			 글쓴이 hrin 조회수 ${recipe.viewCount}
+			<a href="detail.do?recipeSeq=${recipe.recipeSeq}">
+				<div class="imgDiv">
+				<c:choose>
+					<c:when test="${not empty recipe.fileList}">
+					  <img src="<c:url value='${recipe.fileList[0].filePath}/${recipe.fileList[0].fileOriName}'/>" class="img"/>
+					</c:when>
+					<c:otherwise>
+					  <img src="<c:url value='/images/noimage.png'/>" class="img"/>
+					</c:otherwise>
+				</c:choose>
+				</div>
+			</a>
+			<h4>${recipe.title}</h4>
+			글쓴이 hrin 조회수 ${recipe.viewCount}
 		</div>
 	</c:forEach>
-	<c:if test="${empty list}">
+	<c:if test="${empty result.list}">
 		입력된 게시물이 없습니다.
 	</c:if>
 	<div id="clear"></div>
 </div>
 <div id="write" style="text-align: right;">
-	<button onclick = "location.href='/bitdaily/jsp/recipe/recipeWriteForm.jsp'">글쓰기</button>
+	<button onclick = "location.href='${pageContext.request.contextPath}/recipe/writeForm.do'">글쓰기</button>
 </div>
 <br>
 <div id="pageing">[1][2][3][4][5]</div>
 <br>
 
 <script src="<c:url value='/js/recipe/recipeList.js'/> "></script>
+<script type="text/javascript">
+	console.log("file","${file}");
+
+</script>
 </body>
 </html>

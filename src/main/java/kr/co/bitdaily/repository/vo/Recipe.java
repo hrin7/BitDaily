@@ -1,6 +1,9 @@
 package kr.co.bitdaily.repository.vo;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class Recipe {
 	// 유저 시퀀스 
@@ -23,6 +26,26 @@ public class Recipe {
 
     // 파일 시퀀스 
     private Integer fileSeq;
+    
+    private MultipartFile[] file;
+    
+    private List<RecipeFile> fileList;
+
+	public List<RecipeFile> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<RecipeFile> fileList) {
+		this.fileList = fileList;
+	}
+
+	public MultipartFile[] getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile[] file) {
+		this.file = file;
+	}
 
 	public Integer getUserSeq() {
 		return userSeq;

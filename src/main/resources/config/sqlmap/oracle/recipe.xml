@@ -18,28 +18,29 @@
 	     order by recipe_seq desc 
     </select>
     	
-    <!-- 
-    <select id="selectBoardByNo" parameterType="int" resultMap="boardMap">
+    <select id="selectRecipeByNo" parameterType="int" resultMap="recipeMap">
     	select *
-    	  from tb_board
-    	 where no = #{no} 
+    	  from tb_recipe
+    	 where recipe_seq = #{recipeSeq} 
     </select>	
-    <insert id="insertBoard" parameterType="board">
-    	<selectKey keyProperty="no" resultType="int" order="BEFORE">
-    		select s_board_no.nextval from dual
+    
+    <insert id="insertRecipe" parameterType="recipe">
+    	<selectKey keyProperty="recipeSeq" resultType="int" order="BEFORE">
+    		select s_recipe_seq.nextval from dual
     	</selectKey>
-    	insert into tb_board (
-    		no,
+    	insert into tb_recipe (
+    		user_seq,
+    		recipe_seq,
     		title, 
-    		writer,
     		content
     	) values (
-    		#{no},
+    		1,
+    		#{recipeSeq},
     		#{title},
-    		#{writer},
     		#{content}
     	)
     </insert>
+    <!-- 
     <update id="updateBoard" parameterType="board">
     	update tb_board
     	   set title = #{title},
@@ -93,31 +94,30 @@
 	</update>   
 	
      -->	
-	<!-- 첨부파일 파트 시작
 	
-	<insert id="insertBoardFile" parameterType="boardFile">
-		insert into tb_board_file (
-			file_no, no, file_path, ori_name, system_name, file_size
+	<!-- 첨부파일 파트 시작 -->
+	
+	<resultMap id="recipeFileMap" type="RecipeFile">
+		<result column="file_seq" property="fileSeq" />
+		<result column="recipe_seq" property="recipeSeq" />
+		<result column="file_path" property="filePath" />
+		<result column="file_sys_name" property="fileSysName" />
+		<result column="file_ori_name" property="fileOriName" />
+	</resultMap>
+	
+	<insert id="insertRecipeFile" parameterType="recipeFile">
+		insert into tb_file (
+			file_seq, recipe_seq, file_path, file_sys_name, file_ori_name
 		) values (
-			s_board_file_no.nextval, #{no}, #{filePath}, #{oriName}, #{systemName}, #{fileSize}		
+			tb_file_seq.nextval, #{recipeSeq}, #{filePath}, #{fileSysName}, #{fileOriName}	
 		)
 	</insert> 
 	
-	<resultMap id="boardFileMap" type="boardFile">
-		<result column="file_no" property="fileNo" />
-		<result column="no" property="no" />
-		<result column="file_path" property="filePath" />
-		<result column="ori_name" property="oriName" />
-		<result column="system_name" property="systemName" />
-		<result column="file_size" property="fileSize" />
-	</resultMap>
-	
-	<select id="selectBoardFileByNo" parameterType="int" resultMap="boardFileMap">
+	<select id="selectRecipeFileByNo" parameterType="int" resultMap="recipeFileMap">
 		select *
-		  from tb_board_file
-		 where no = #{no} 
+		  from tb_file
+		 where recipe_seq = #{recipeSeq}
 	</select>
-	 -->
 </mapper>
 
 
