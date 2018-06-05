@@ -2,8 +2,8 @@ CREATE TABLE tb_diary
 (
     user_seq      NUMBER          NOT NULL, 
     diary_seq     NUMBER          primary key, 
-    title         VARCHAR2(20)    NOT NULL, 
-    content       VARCHAR2(20)    NOT NULL, 
+    title         VARCHAR2(4000)    NOT NULL, 
+    content       VARCHAR2(4000)    NOT NULL, 
     diary_date    DATE            default sysdate
 )
 

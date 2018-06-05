@@ -60,12 +60,12 @@ function makeWeekSelectOptions() {
     var startDate = new Date(start);
     var endDate = new Date(end);
     
-    var year = startDate.getFullYear();
-    var month = startDate.getMonth();
+    var startYear = startDate.getFullYear();
+    var startMonth = startDate.getMonth();
  
-    var beforeMonth = new Date(year, month-1, 01);
-    var lastDay = (new Date(beforeMonth.getFullYear(), beforeMonth.getMonth()+1, 0)).getDate();
-    var endDate = new Date(beforeMonth.getFullYear(), beforeMonth.getMonth(), lastDay);
+    var monthAgo = new Date(year, month-1, 01);
+    var monthAgoLastDay = (new Date(monthAgo.getFullYear(), monthAgo.getMonth()+1, 0)).getDate();
+    var monthAgoEndDate = new Date(monthAgo.getFullYear(), monthAgo.getMonth(), monthAgoLastDay);
  
     var week = sdate.getDay();
     sdate.setDate(sdate.getDate() - week);
