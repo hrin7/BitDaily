@@ -4,6 +4,7 @@
 <mapper namespace="kr.co.bitdaily.repository.mapper.MemberMapper">
    
     <resultMap id="memberMap" type="member">
+    	<result column = "user_seq" property = "userSeq" />
         <result column = "id" property = "id" />
         <result column = "name" property = "name" />
         <result column = "pass" property = "pass" />
@@ -18,9 +19,49 @@
     </resultMap>
    
    
+    <select id="selectMember" resultType="member">
+        select id,
+               name,
+               pass
+          from tb_user 
+    </select>
+   
     <select id="selectMemberById" parameterType="string" resultMap="memberMap">
     	select *
     	  from tb_user
     	 where id = #{id}
     </select>
+    
+    <insert id="insertMember"  parameterType="member">
+    	<selectKey resultType="int" keyProperty="userSeq" order="BEFORE">
+			select s_user_no.nextval from dual 
+		</selectKey>
+            insert into tb_user (
+            user_seq,
+            id, 
+            name, 
+            pass, 
+            email,
+            age,
+            user_height,
+            user_weight,
+            gender,
+            goal_weight,
+            goal_calorie,
+            current_weight
+        ) values (
+        	#{userSeq},
+            #{id}, 
+            #{name}, 
+            #{pass}, 
+            #{email},
+            #{age},
+            #{userHeight},
+            #{userWeight},
+            #{gender},
+            #{goalWeight},
+            #{goalCalorie},
+            #{currentWeight}
+        )
+    </insert>
 </mapper>

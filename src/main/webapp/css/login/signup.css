@@ -1,6 +1,6 @@
 /*  @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600"); */
  * { 
- 	box-sizing: content-box; 
+ 	box-sizing:inherit;
  	outline: none; 
  } 
 
@@ -11,7 +11,7 @@ html {
 	color: #6b7b8a;
 }
 .signup-box {
-	height: 60%;
+	height: 65%;
 	width: 45%;
 	padding: 30px;
 	background-color: #fff;
@@ -23,6 +23,9 @@ h1 {
 /* 	font-weight: 400; */
 	text-align: center;
 	font-weight: bolder;
+}
+h2 {
+	color: #458b8b;
 }
 p {
 	font-size: 20px;

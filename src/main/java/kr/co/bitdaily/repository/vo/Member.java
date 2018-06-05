@@ -1,6 +1,7 @@
 package kr.co.bitdaily.repository.vo;
 
 public class Member {
+	private int userSeq;
 	private String id; 
 	private String password; 
 	private String name;
@@ -14,6 +15,13 @@ public class Member {
 	private int goalCalorie;
 	private int currentWeight;
 	
+	
+	public int getUserSeq() {
+		return userSeq;
+	}
+	public void setUserSeq(int userSeq) {
+		this.userSeq = userSeq;
+	}
 	public String getId() {
 		return id;
 	}
