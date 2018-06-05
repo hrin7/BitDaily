@@ -16,12 +16,12 @@
 
 </head>
 <body>
-<%-- <c:set var="today" value="<%=new java.util.Date()%>" /> --%>
 
 <div class="date">
-<a href="#"><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
-<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" />
-<a href="#"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
+<a href="#" id="preDate"><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
+<%-- <fmt:formatDate value="${date}" pattern="yyyy-MM-dd" /> --%>
+<span id="curDate"></span>
+<a href="#" id="nextDate"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
 <div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px"> 1200 kcal</div>
 </div><!-- end .date -->
 
@@ -144,6 +144,5 @@
       
     </div>
   </div>
-
 </body>
 </html>
