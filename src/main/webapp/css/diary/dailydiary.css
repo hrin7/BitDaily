@@ -1,13 +1,15 @@
-#noteRegist > input , #titleRegist > input {
-	width : 90%;
-	margin-right: 10px;
+#diaryTitle , #diaryContext {
+	box-sizing: content-box;
+	width : 90% ;
+	margin-left: 10px;
 }
-#titleRegist > input:focus {
+#diaryTitle:focus {
+	box-sizing: content-box;
 	outline: #aaa;
 	border: 1px solid #aaa;
 }
 
-#noteRegist > input {
+#diaryContext {
 	visibility: hidden;
 }
 
@@ -21,7 +23,7 @@
 	margin-left: 20px;
 	font-size: 0.8em;
 }	
-#noteRegist > button , #titleRegist > button {
+#regist {
 	border: 1px solid #062859;
 	border-radius: 8px;
 	width: 50px; height: 25px;
@@ -30,15 +32,15 @@
 }
 
 
-#noteRegist > button:hover , #titleRegist > button:hover {
+#regist:hover {
 	cursor: pointer;
 	
 }
-#noteRegist > button:focus , #titleRegist > button:focus {
+#regist:focus {
 	outline: none;
 }
-#noteRegist > button:active , #titleRegist > button:active {
-	background-color: rgb(6,40,89,0.2)
+#regist:active {
+	background-color: rgb(6,40,89,0.2);
 }
 .mainMenu > p { 
 	font-size: 25px;
