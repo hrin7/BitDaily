@@ -12,7 +12,7 @@
 	<br><br>
 	<div id="date">
 		<a href="#"><img src="<c:url value="/images/icon/before.png" />" width="30px" height="30px"></a>
-		<span>2018-05-21 ~ 2018-05-27</span>
+		<span id="start">2018-05-21</span>~<span id="end">2018-05-27</span>
 		<a href="#"><img src="<c:url value="/images/icon/next.png" />" width="30px" height="30px"></a>
 	</div>
 	<div id="calorie">
@@ -53,28 +53,61 @@
 	<div id="clear"></div>
 </div>
 <script>
-	function setRank(){
-		$.ajax({
-			url : "<c:url value=""/>"
-		}).done(setRank)
-	}
-	function setRank(data){
-		if(data.calorie){
-			$("#calorie > ul > li").each(function(index){
-				$(this).text(data.calorie[index])
-			});
-		}
-		if(data.workout){
-			$("#workout > ul > li").each(function(index){
-				$(this).text(data.workout[index])
-			});
-		}
-		if(data.weight){
-			$("#weight > ul > li").each(function(index){
-				$(this).text(data.weight[index])
-			})
-		}
-	}
+function makeWeekSelectOptions() {
+    var start = $("#start").text();
+    var end = $("#end").text();
+ 	
+    var startDate = new Date(start);
+    var endDate = new Date(end);
+    
+    var year = startDate.getFullYear();
+    var month = startDate.getMonth();
+ 
+    var beforeMonth = new Date(year, month-1, 01);
+    var lastDay = (new Date(beforeMonth.getFullYear(), beforeMonth.getMonth()+1, 0)).getDate();
+    var endDate = new Date(beforeMonth.getFullYear(), beforeMonth.getMonth(), lastDay);
+ 
+    var week = sdate.getDay();
+    sdate.setDate(sdate.getDate() - week);
+    var edate = new Date(sdate.getFullYear(), sdate.getMonth(), sdate.getDate());
+ 
+    var obj = document.getElementById("sh_week");
+    obj.options.length = 0;
+    var seled = "";
+    while(endDate.getTime() >= edate.getTime()) {
+ 
+        var sYear = sdate.getFullYear();
+        var sMonth = (sdate.getMonth()+1);
+        var sDay = sdate.getDate();
+ 
+        sMonth = (sMonth < 10) ? "0"+sMonth : sMonth;
+        sDay = (sDay < 10) ? "0"+sDay : sDay;
+ 
+        var stxt = sYear + "-" + sMonth + "-" + sDay;
+ 
+        edate.setDate(sdate.getDate() + 6);
+ 
+        var eYear = edate.getFullYear();
+        var eMonth = (edate.getMonth()+1);
+        var eDay = edate.getDate();
+ 
+        eMonth = (eMonth < 10) ? "0"+eMonth : eMonth;
+        eDay = (eDay < 10) ? "0"+eDay : eDay;
+ 
+        var etxt = eYear + "-" + eMonth + "-" + eDay;
+ 
+        if(today.getTime() >= sdate.getTime() && today.getTime() <= edate.getTime()) {
+            seled = stxt+"|"+etxt;
+        }
+ 
+        obj.options[obj.options.length] = new Option(stxt+"~"+etxt, stxt+"|"+etxt);
+ 
+        sdate = new Date(edate.getFullYear(), edate.getMonth(), edate.getDate() + 1);
+        edate = new Date(sdate.getFullYear(), sdate.getMonth(), sdate.getDate());
+    }
+ 
+    if(seled) obj.value = seled;
+}
 </script>
 </body>
 </html>

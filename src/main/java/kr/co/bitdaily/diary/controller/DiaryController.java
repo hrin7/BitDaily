@@ -1,13 +1,12 @@
 package kr.co.bitdaily.diary.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.bitdaily.diary.service.DiaryService;
 import kr.co.bitdaily.repository.vo.Diary;
-import kr.co.bitdaily.service.DiaryService;
 
 @RestController
 @RequestMapping("/diary/dailydiary")
@@ -15,6 +14,8 @@ public class DiaryController {
 	
 	@Autowired
 	private DiaryService diaryService;
+	
+	
 	
 	@RequestMapping("/insert.json")
 	public void insertDiary(Diary diary) {

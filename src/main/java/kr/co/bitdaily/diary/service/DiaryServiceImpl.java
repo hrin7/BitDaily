@@ -1,4 +1,4 @@
-package kr.co.bitdaily.service;
+package kr.co.bitdaily.diary.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
