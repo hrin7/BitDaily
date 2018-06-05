@@ -33,7 +33,7 @@
         <div class="social_btn fb"><a href="#"><span><i class="fa fa-facebook" aria-hidden="true"></i></span>Sign in with Naver</a></div>
         <div class="social_btn tw"><a href="#"><span><i class="fa fa-twitter" aria-hidden="true"></i></span>Sign in with KaKaoTalk</a></div>
         <div class="row clearfix create_account">
-          <div><a href="SignUpForm.jsp">&nbsp;Create an Account</a></div>
+          <div><a href="${pageContext.request.contextPath}/login/signupform.do">&nbsp;Create an Account</a></div>
         </div>
       </div>
       <div class="col_half last">

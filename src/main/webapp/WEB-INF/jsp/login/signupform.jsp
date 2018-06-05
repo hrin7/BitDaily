@@ -15,34 +15,40 @@
 		<hgroup>
 			<h1>Sign up for your Account</h1>
 		</hgroup>
+		<form action="${pageContext.request.contextPath}/login/join.do" method="POST">
 		<p class="input">ID</p>
-		<input class="place" type="text">
+		<input class="place" type="text" name="id">
 		<a id="idcheck" href="javascript:void(0);">중복확인</a>		
 		<p class="input">Name</p>
-		<input class="place" type="text">
+		<input class="place" type="text" name="name">
 		<p class="input">Email</p>
-		<input class="place" type="text">
+		<input class="place" type="text" name="email">
 		<a id="idcheck" href="javascript:void(0);">중복확인</a>
 		<p class="input">Password</p>
-		<input class="place" type="password">
+		<input class="place" type="text" name="pass">
  		<p class="input">Confirm password</p> 
- 		<input class="place" type="password">
-		<p class="input">Age</p>
-	    <div class="input-group"><input class="place" type="text"></div><br>
+ 		<input class="place" type="text"><br><br>
 		<span class="input1">Gender&nbsp;&nbsp;</span>
-        <input type="radio" id="female" value="female" name="gender">
+        <input type="radio" id="f" value="female" name="gender">
         <label for="female" class="light">Female</label>
-        <input type="radio" id="male" value="male" name="gender">
+        <input type="radio" id="m" value="male" name="gender">
         <label for="male" class="light">Male</label><br><br>
-		<span class="input1">키(cm)</span>
-		<input class="place1" type="text">
-		<span class="input1">&nbsp;&nbsp;현재 몸무게(kg)</span>
-		<input class="place1" type="text">	
-		<span class="input1">&nbsp;&nbsp;목표 몸무게(kg)</span>
-		<input class="place1" type="text">				
+		<span class="input1">Age</span>
+	    <input class="place1" type="text" name="age">
+		<span class="input1">&nbsp;height(cm)</span>
+		<input class="place1" type="text" name="userHeight">
+		<span class="input1">&nbsp;Weight(kg)</span>
+		<input class="place1" type="text" name="userWeight"><br><br>
+		<span class="input1">Current Weight(kg)</span>
+		<input class="place1" type="text" name="currentWeight"><br><br>
+		<span class="input1">Goal Weight(kg)&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<input class="place1" type="text" name="goalWeight">
+		<span class="input1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goal Calorie(kg)</span>
+		<input class="place1" type="text" name="goalWeight"><br>					
 		<footer>
 			<input class="btn" type="submit" value="Sign Up">
 		</footer>
+		</form>
 	</div>
 </div>
 </body>
