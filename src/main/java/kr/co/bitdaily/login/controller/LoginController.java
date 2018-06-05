@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.bitdaily.login.service.LoginService;
 import kr.co.bitdaily.repository.vo.Member;
@@ -20,12 +21,11 @@ public class LoginController {
 	
 	@RequestMapping("/loginForm.do") 
 	public String joinForm() { 
-		System.out.println("로그인 폼 들어옴");
 		return "login/loginForm";
 	} 
 	
 	@RequestMapping("/login.do")
-	public String login(Member member, HttpSession session) throws Exception{
+	public String login(Member member, HttpSession session,  RedirectAttributes attr) throws Exception{
 		Member loginmember = loginService.retrieveMemberInfo(member.getId());
 		System.out.println(loginmember.getAge());
 		
@@ -34,7 +34,7 @@ public class LoginController {
 			session.setAttribute("member", member);
 			return "redirect:/main/main.do"; //로그인 후 이동 페이지
 		}else {
-			
+			attr.addFlashAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다");
 			return "redirect:loginForm.do";
 		}
 	}

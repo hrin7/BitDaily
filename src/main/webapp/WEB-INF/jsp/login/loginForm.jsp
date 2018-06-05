@@ -55,6 +55,11 @@
   </div>
 </div>
 	<script>
+	//로그인 실패시 alert창 뜸.
+	if ("${msg}") { 
+		alert("${msg}"); 
+	} 
+	
 	//비번찾기
 		$("#searchPass").click(function () {
 			swal.mixin({
