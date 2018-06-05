@@ -29,9 +29,9 @@
  		<p class="input">Confirm password</p> 
  		<input class="place" type="text"><br><br>
 		<span class="input1">Gender&nbsp;&nbsp;</span>
-        <input type="radio" id="f" value="female" name="gender">
+        <input type="radio" id="fmale" value="F" name="gender">
         <label for="female" class="light">Female</label>
-        <input type="radio" id="m" value="male" name="gender">
+        <input type="radio" id="male" value="M" name="gender">
         <label for="male" class="light">Male</label><br><br>
 		<span class="input1">Age</span>
 	    <input class="place1" type="text" name="age">
@@ -44,7 +44,7 @@
 		<span class="input1">Goal Weight(kg)&nbsp;&nbsp;&nbsp;&nbsp;</span>
 		<input class="place1" type="text" name="goalWeight">
 		<span class="input1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goal Calorie(kg)</span>
-		<input class="place1" type="text" name="goalWeight"><br>					
+		<input class="place1" type="text" name="goalCalorie"><br>					
 		<footer>
 			<input class="btn" type="submit" value="Sign Up">
 		</footer>

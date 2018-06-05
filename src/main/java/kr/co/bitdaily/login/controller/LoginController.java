@@ -52,15 +52,16 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/join.do")
-	public String join(Member member, RedirectAttributes attr) throws Exception{
-		Member loginmember = loginService.retrieveMemberInfo(member.getId());
+	public String join(Member member, RedirectAttributes attr, HttpSession session) throws Exception{
 		
 		if(member.getCurrentWeight() == 0 ) {
-			attr.addFlashAttribute("msg", "가입이 실패 하였습니다. 로그인 페이지로 이동합니다.");
+			attr.addFlashAttribute("msg", "가입 실패 하였습니다..");
 			return "redirect:loginForm.do";
 		}else {
+			loginService.insertMemberInfo(member);
+			session.setAttribute("member", member);
 			System.out.println("가입 성공");
-			return "redirect:loginForm.do"; //가입 후 로그인 페이지
+			return "redirect:/main/main.do"; //가입 후 로그인 페이지
 		}
 	}
 	
