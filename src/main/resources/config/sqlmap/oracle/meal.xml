@@ -11,7 +11,7 @@
 		<result column="meal_gram" property="mealGram" />
 		<result column="file_path" property="filePath" />
 	</resultMap>
-	<resultMap id="detailMealMap" type="detailMeal">
+	<resultMap id="detailMealMap" type="mealDetail">
 		<result column="meal_seq" property="mealSeq" />
 		<result column="user_seq" property="userSeq" />
 		<result column="meal_date" property="mealDate" />
@@ -27,5 +27,7 @@
 	  from tb_food
 	 where food_name like '%'||#{foodName}||'%'
 	</select>
+	
+	
 
 </mapper>
