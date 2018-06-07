@@ -79,7 +79,7 @@ a {
 	color: #8dc6cd;
 	font-weight: 600;
 	text-decoration: none;
-	font-style: italic;
+	font-style: normal;
 }
 .btn {
 	height: 30px;
@@ -116,7 +116,7 @@ input.check {
 	border-radius: 5px;
 	width: 80%;
 	}
-	
+#idcheck { font-style: normal;}
 	
 
 	

@@ -10,4 +10,7 @@ public interface MemberMapper {
 	public void insertMember(Member member) throws Exception;
 	
 	public List<Member> selectMember() throws Exception;
+	
+	public String selectMemberId(String id) throws Exception;
+	
 }

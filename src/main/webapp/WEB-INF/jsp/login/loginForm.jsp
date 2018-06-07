@@ -55,6 +55,54 @@
   </div>
 </div>
 	<script>
+	
+	<script type="text/javascript">
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+				clientId: "_qYdxNPv8LMSC0CJB6cr",
+			callbackUrl: "http://127.0.0./spring-bitdiary/login/login.do",
+			isPopup: true, /* 팝업을 통한 연동처리 여부 */
+			loginButton: {color: "green", type: 3, height: 30} /* 로그인 버튼의 타입을 지정 */
+		}
+	);
+	
+	/* 설정정보를 초기화하고 연동을 준비 */
+	naverLogin.init();
+	
+// 	 (5) 현재 로그인 상태를 확인 
+	window.addEventListener('load', function () {
+		naverLogin.getLoginStatus(function (status) {
+			if (status) {
+				/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+				setLoginStatus();
+			} else {
+				console.log("로그인실패");
+			}
+		});
+	});
+
+	/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+//			function logOut() {
+//				naverLogin.logout();
+//			});
+	function setLoginStatus() {
+		
+		console.dir(naverLogin.user);
+		
+		var f = document.loginForm;
+		
+		f.social_id.value = naverLogin.user.id;
+		f.social_name.value = naverLogin.user.name;
+		f.social_email.value = naverLogin.user.email;
+		f.social_gender.value = naverLogin.user.gender;
+		f.submit();
+			naverLogin.logout();
+	
+	
+	
+	
+	
+	
 	//로그인 실패시 alert창 뜸.
 	if ("${msg}") { 
 		alert("${msg}"); 

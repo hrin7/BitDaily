@@ -19,13 +19,18 @@
     </resultMap>
    
    
+    
     <select id="selectMember" resultType="member">
         select id,
                name,
                pass
           from tb_user 
     </select>
-   
+    <select id="selectMemberId" parameterType="string" resultType="string">
+        select id
+          from tb_user 
+         where id = #{id} 
+    </select>
     <select id="selectMemberById" parameterType="string" resultMap="memberMap">
     	select *
     	  from tb_user
@@ -64,4 +69,17 @@
             #{currentWeight}
         )
     </insert>
+    
+        <update id="updateMember" parameterType="member">
+        update tb_user
+           set pass = #{pass},
+           set email = #{email},
+           set age = #{age},
+           set user_height = #{userHeight},
+           set user_height = #{goalWeight},
+           set goal_weight = #{currentWeight},
+           set goal_calorie = #{goalCalorie}
+         where id   = #{id}  
+    </update>
+    
 </mapper>

@@ -27,5 +27,9 @@ public class LoginServiceImpl implements LoginService{
 		mapper.insertMember(member);
 	}
 	
+	public String selectMemberId(String id) throws Exception {
+		return id;
+		
+	}
 	
 }

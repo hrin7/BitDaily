@@ -1,12 +1,13 @@
 package kr.co.bitdaily.login.controller;
 
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.bitdaily.login.service.LoginService;
@@ -24,6 +25,20 @@ public class LoginController {
 	public String joinForm() { 
 		return "login/loginForm";
 	} 
+	
+	//아이디 체크
+	@RequestMapping("/signUpForm.json") 
+	public @ResponseBody boolean signUpForm(Member member) throws Exception { 
+		List<Member> list = loginService.retrieveMember();
+		for (Member rmember : list) {
+			if(rmember.getId().equals(member.getId())) {
+				return true;
+			}
+		}
+		return false;
+	} 
+	
+	
 	//로그인 된 후..
 	@RequestMapping("/login.do")
 	public String login(Member member, HttpSession session,  RedirectAttributes attr) throws Exception{
@@ -31,7 +46,7 @@ public class LoginController {
 		
 		if(member.getPass().equals(loginmember.getPass())) {
 			System.out.println("로그인 성공");
-			session.setAttribute("member", member);
+			session.setAttribute("member", loginmember);
 			return "redirect:/main/main.do"; //로그인 후 이동 페이지
 		}else {
 			attr.addFlashAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다");
@@ -59,13 +74,19 @@ public class LoginController {
 			return "redirect:loginForm.do";
 		}else {
 			loginService.insertMemberInfo(member);
-			session.setAttribute("member", member);
+//			session.setAttribute("member", member);
 			System.out.println("가입 성공");
-			return "redirect:/main/main.do"; //가입 후 로그인 페이지
+			return "redirect:loginForm.do"; //가입 후 로그인 페이지
 		}
 	}
 	
-}
+	
+	
+	
+	
+}	
+
+
 
 
 

@@ -1,23 +1,31 @@
 /*  @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600"); */
+/*  @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/NanumSquare.css'); */
  * { 
- 	box-sizing: content-box; 
+ 	box-sizing:content-box;
  	outline: none; 
+ 	font-style: 'NanumSquare', 'Sans-serif';
  } 
 
 html {
- 	font-family: "Source Sans Pro", sans-serif;
+ 	font-family: "source sans pro", sans-serif;
+/*  	font-style: normal; */
+/*  	font-family: 'NanumSquare', 'Sans-serif'; */
 	font-weight: 600;
 	background-color: #8dc6cd;
 	color: #6b7b8a;
 }
 .signup-box {
-	height: 60%;
-	width: 45%;
+	height: 80%;
+	width: 55%;
 	padding: 30px;
 	background-color: #fff;
-	margin: 50px auto;
+	margin: auto;
 	border-radius: 5px;
+/* 	padding-left: 10px; */
 }
+.navbar-brand {font-style: normal;}
+
+
 h1 {
 	font-size: 30px;
 /* 	font-weight: 400; */
@@ -35,6 +43,27 @@ p.input{
 
 span.input1{
 	font-size: 21px;
+/* 	padding-left: 20px; */
+/* 	margin-left: 10%; */
+}
+span.input12{
+	font-size: 21px;
+/* 	padding-left: 20px; */
+	margin-left: 7%;
+}
+input.place2  {
+/* 	padding-top:20px; */
+	height: 35px;
+	width: 16%;
+	padding-left: 25px;
+	border: solid #c6e2e6 2px;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: 400;
+	color: #6b7b8a;
+	background-color: #fbfbfb;
+	margin-bottom: 10px;
+	margin-left: 4%;
 }
 input.place  {
 /* 	padding-top:20px; */
@@ -51,7 +80,7 @@ input.place  {
 input.place1  {
 /* 	padding-top:20px; */
 	height: 35px;
-	width: 10%;
+	width: 16%;
 	padding-left: 25px;
 	border: solid #c6e2e6 2px;
 	border-radius: 5px;
@@ -59,6 +88,7 @@ input.place1  {
 	font-weight: 400;
 	color: #6b7b8a;
 	background-color: #fbfbfb;
+	margin-bottom: 10px;
 }
 
 input.place:focus {
@@ -77,7 +107,7 @@ a {
 	color: #8dc6cd;
 	font-weight: 600;
 	text-decoration: none;
-	font-style: italic;
+	font-style: normal;
 }
 .btn {
 	height: 30px;
@@ -104,7 +134,7 @@ a {
 	font-style: bold;
 	font-weight:bolder;
 	text-transform: uppercase;
-	margin-left: 75%;
+	margin-left: 70%;
 }
 .btn-deletuser:hover {
 	cursor: pointer;
@@ -112,8 +142,8 @@ a {
 
 .btn-update {
 	padding-top: 10px;
-	width:40px;
-	height: 23px;
+	width:30px;
+	height: 20px;
 	padding: 10px 10px;
 	border: none;
 	border-radius: 5px;
@@ -128,11 +158,11 @@ a {
 	cursor: pointer;
 }
 
- footer { 
- 	display: block; 
- 	margin-top: 50px; 
- 	margin-left: 10%; 
- }  
+/*  footer {  */
+/*  	display: block;  */
+/*  	margin-top: 50px;  */
+/*  	margin-left: 10%;  */
+/*  }   */
 input.check {
 	width: 20px;
 	height: 20px;

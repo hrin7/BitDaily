@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/bitdaily/sweetalertFile/sweetalert2.css" />
-<script src="../../sweetalert/jquery-3.2.1.js"></script>
-<script src="../../sweetalertFile/sweetalert2.all.min.js"></script>
+<script src="${pageContext.request.contextPath}/sweetalert/jquery-3.2.1.js"></script>
+<script src="${pageContext.request.contextPath}/sweetalertFile/sweetalert2.all.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/userinfo.css" />
 <style>
 </style>
@@ -19,31 +19,33 @@
 			<h1>User Info</h1> 
 		</hgroup>
 		<p class="input">ID</p>
-		<input class="place" type="text" name="id" value="hong" readonly="readonly">
+		<input class="place" type="text" name="id">
 		<p class="input">Name</p>
-		<input class="place" type="text" name="name" value="홍길동" readonly="readonly">
+		<input class="place" type="text" name="name">
 		<p class="input">Email</p>
-		<input class="place" type="text" value="h@na.com">
+		<input class="place" type="text" name="email">
 		<input class="btn-update" id="updateemail" type="submit" value="수정">
 		<p class="input">Password</p>
-		<input class="place" type="password">
-		<input class="btn-update" id="updatepass" type="submit" value="수정">
-		<p class="input">Age</p><div class="input-group"><input class="place" type="text"></div><br>
-		<span class="input1">Gender&nbsp;&nbsp;</span>
-        <input type="radio" id="Female" value="under_13" name="Female">
-        <label for="under_13" class="light">Female</label>
-        <input type="radio" id="Male" value="over_13" name="Male" checked="checked">
-        <label for="over_13" class="light">Male</label><br><br>
-		<span class="input1">키(cm)</span>
-		<input class="place1" type="text">
-		<span class="input1">&nbsp;&nbsp;현재 몸무게(kg)</span>
-		<input class="place1" type="text">	
-		<span class="input1">&nbsp;&nbsp;목표 몸무게(kg)</span>
-		<input class="place1" type="text">	
-		<input class="btn-update" id="updatgoalweight" type="submit" value="수정">
-		<footer>
-			<input class="btn-deletuser" id="deletuser"value="탈퇴">
-		</footer>
+		<input class="place" type="text" name="pass">
+ 		<input class="btn-update" id="updatepass" type="submit" value="수정"><br><br>
+		<span class="input1">height(cm)</span>
+		<input class="place1" type="text" name="userHeight">
+		<input class="btn-update" id="updateuserHeight" type="submit" value="수정">
+		<span class="input12">Age</span>
+	    <input class="place1" type="text" name="age">
+	    <input class="btn-update" id="updateage" type="submit" value="수정"><br><br>
+		<span class="input1">Current Weight(kg)</span>
+		<input class="place1" type="text" name="currentWeight">
+		<input class="btn-update" id="updatecurrentWeight" type="submit" value="수정"><br>
+		<span class="input1">Goal Weight(kg)</span>
+		<input class="place2" type="text" name="goalWeight">
+		<input class="btn-update" id="updatgoalweight" type="submit" value="수정"><br>
+		<span class="input1">Goal Calorie(kg)</span>
+		<input class="place2" type="text" name="goalCalorie">		
+		<input class="btn-update" id="updategoalCalorie" type="submit" value="수정">			
+		<input class="btn-deletuser" id="deletuser"value="탈퇴">
+		
+		
 	</div>
 </div>
 	<script>
@@ -56,13 +58,18 @@
 			swal('수정 완료!')
 		});
 	//몸무게 수정
-		$("#updatweight").click(function () {
+		$("#updatecurrentWeight").click(function () {
 			swal('수정 완료!')
 		});
 	//목표 몸무게 수정
 		$("#updatgoalweight").click(function () {
 			swal('수정 완료!')
 		});
+	//목표 몸무게 수정
+	$("#updategoalCalorie").click(function () {
+		swal('수정 완료!')
+	});
+	
 	//탈퇴
 		$("#deletuser").click(function () {
 			swal({

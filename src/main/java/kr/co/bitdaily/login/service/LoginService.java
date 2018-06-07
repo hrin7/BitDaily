@@ -8,6 +8,7 @@ public interface LoginService {
 	public List<Member> retrieveMember() throws Exception;
 	public Member retrieveMemberInfo(String id) throws Exception;
 	public void insertMemberInfo(Member member) throws Exception;
+	public String selectMemberId(String id) throws Exception;
 //	public void registMember(Member memberVO) throws Exception;
 //	public void deleteMember(String id) throws Exception;
 }
