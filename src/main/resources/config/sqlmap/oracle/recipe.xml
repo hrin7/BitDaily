@@ -40,18 +40,21 @@
     		#{content}
     	)
     </insert>
-    <!-- 
-    <update id="updateBoard" parameterType="board">
-    	update tb_board
+    
+    <delete id="deleteRecipe" parameterType="int">
+    	delete 
+    	  from tb_recipe
+    	 where recipe_seq = #{recipeSeq}
+    </delete>
+    
+    <update id="updateRecipe" parameterType="recipe">
+    	update tb_recipe
     	   set title = #{title},
     	       content = #{content}
-    	 where no = #{no}
+    	 where recipe_seq = #{recipeSeq}
     </update>	
-    <delete id="deleteBoard" parameterType="int">
-    	delete 
-    	  from tb_board
-    	 where no = #{no}
-    </delete>
+    
+    <!-- 
     <update id="updateBoardViewCnt" parameterType="int">
     	update tb_board
     	   set view_cnt = view_cnt + 1

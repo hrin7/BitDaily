@@ -14,7 +14,8 @@ CREATE TABLE tb_recipe (
 CREATE SEQUENCE s_recipe_seq;
 drop table tb_recipe purge;
 select *
-  from tb_recipe;
+  from tb_recipe
+ order by recipe_seq desc;
 
 insert into tb_recipe (user_seq, recipe_seq, title, content)
 values ( 1, s_recipe_seq.nextval, '리코타치즈', '1. 야채샐러드의 기본은 물기를 확실히 털어내는 거겠죠. 신선하고 아삭하게 찬물에 담가두었다가 물기를 빼고 방울토마토는 꼭지를 떼어주면 됩니다.');
@@ -37,9 +38,15 @@ CREATE SEQUENCE s_comment_seq;
 drop table tb_comment purge;
 
 CREATE TABLE tb_file (
+	recipe_seq       NUMBER(3)   	  NOT NULL,
     file_seq         NUMBER           PRIMARY KEY, 
     file_path        VARCHAR2(500)    NOT NULL, 
+    file_ori_name    VARCHAR2(500)    NOT NULL,
     file_sys_name    VARCHAR2(500)    NOT NULL
 );
 
 CREATE SEQUENCE tb_file_seq;
+drop table tb_file purge;
+select *
+  from tb_file
+ order by file_seq  desc;

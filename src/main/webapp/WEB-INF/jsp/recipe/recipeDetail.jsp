@@ -52,6 +52,11 @@
 			<h5>댓글쓰기</h5>
 			<textarea></textarea>
 			<button>등록</button>
+			<div style="text-align: right;">
+				<button onclick="location.href='updateForm.do?recipeSeq=${recipe.recipeSeq}'">수정</button>
+				<button onclick="location.href='delete.do?recipeSeq=${recipe.recipeSeq}'">삭제</button>
+				<button onclick="location.href='${pageContext.request.contextPath}/recipe/list.do'">목록</button>
+			</div>
 		</div>
 	</div>
 <br><br><br><br><br><br><br>

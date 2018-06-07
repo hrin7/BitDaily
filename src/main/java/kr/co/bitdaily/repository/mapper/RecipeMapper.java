@@ -9,6 +9,8 @@ public interface RecipeMapper {
 	List<Recipe> selectRecipe();
 	Recipe selectRecipeByNo(int recipeSeq);
 	void insertRecipe(Recipe recipe);
+	void deleteRecipe(int recipeSeq);
+	void updateRecipe(Recipe recipe);
 	
 	List<RecipeFile> selectRecipeFileByNo(int recipeSeq);
 	void insertRecipeFile(RecipeFile recipeFile);

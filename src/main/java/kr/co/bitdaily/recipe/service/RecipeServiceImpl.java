@@ -76,5 +76,20 @@ public class RecipeServiceImpl implements RecipeService {
 			}
 		}
 	}
+
+	@Override
+	public void deleteRecipe(int recipeSeq) {
+		mapper.deleteRecipe(recipeSeq);
+	}
+
+	@Override
+	public Recipe updateFormRecipe(int recipeSeq) {
+		return mapper.selectRecipeByNo(recipeSeq);
+	}
+
+	@Override
+	public void updateRecipe(Recipe recipe) {
+		mapper.updateRecipe(recipe);
+	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,5 +39,23 @@ public class RecipeController {
 	public String writeRecipe(Recipe recipe) throws Exception {
 		recipeService.writeRecipe(recipe);
 		return "redirect:/recipe/list.do"; 
+	}
+	
+	@RequestMapping("/delete.do")
+	public String deleteRecipe(int recipeSeq) {
+		recipeService.deleteRecipe(recipeSeq);
+		return "redirect:/recipe/list.do";
+	}
+	
+	@RequestMapping("/updateForm.do")
+	public String updateFormRecipe(int recipeSeq, Model model) {
+		model.addAttribute("recipe", recipeService.updateFormRecipe(recipeSeq));
+		return "recipe/recipeUpdateForm";
+	}
+	
+	@RequestMapping("/update.do")
+	public String updateRecipe(Recipe recipe) {
+		recipeService.updateRecipe(recipe);
+		return "redirect:/recipe/detail.do?recipeSeq=" + recipe.getRecipeSeq();
 	}
 }
