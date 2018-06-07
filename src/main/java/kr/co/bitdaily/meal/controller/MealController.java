@@ -57,21 +57,20 @@ public class MealController {
 		
 		Member member = (Member) session.getAttribute("member");
 		int userSeq = member.getUserSeq();
-		
 		meal.setUserSeq(userSeq);
+		
 		Meal mealResult = mealService.selectMealSeq(meal);
 		session.setAttribute("mealSeq", mealResult.getMealSeq());
 		return mealResult;
 	}
 	
-	/*
+	
 	@RequestMapping("/makeList.json")
 	@ResponseBody
-	public List<MealDetail> makeList(@RequestParam int userSeq) {
-
-		return mealService.selectMealDetail(userSeq);
+	public List<MealDetail> makeList(@RequestParam int mealSeq) {
+		return mealService.selectMealDetail(mealSeq);
 	}
-	*/
+	
 	
 	@RequestMapping("/insertFood.json")
 	@ResponseBody

@@ -11,6 +11,7 @@ public class MealDetail {
 	int foodSeq;
 	double mealGram;
 	String filePath;
+	Food food;
 	
 	/*
 	  mealType
@@ -22,6 +23,12 @@ public class MealDetail {
 	
 	
 	
+	public Food getFood() {
+		return food;
+	}
+	public void setFood(Food food) {
+		this.food = food;
+	}
 	public int getMealSeq() {
 		return mealSeq;
 	}

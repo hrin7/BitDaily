@@ -10,6 +10,7 @@
 		<result column="food_seq" property="foodSeq" />
 		<result column="meal_gram" property="mealGram" />
 		<result column="file_path" property="filePath" />
+		<collection property="food" resultMap="foodMap"/>
 	</resultMap>
 		<resultMap id="mealMap" type="meal">
 		<result column="meal_seq" property="mealSeq" />
@@ -50,5 +51,27 @@
 	insert into tb_meal_detail (meal_seq, meal_detail_seq, meal_type, food_seq, meal_gram, file_path)
 	values (#{mealSeq}, s_meal_detail_no.nextval, #{mealType}, #{foodSeq}, #{mealGram}, #{filePath})
 	</insert>
+	
+	<!-- 
+	<select id="selectMealDetail" parameterType="int" resultMap="detailMealMap">
+	select *
+	  from tb_meal_detail
+	 where meal_seq = #{mealSeq}
+	</select>
+	 -->
+	
+	<select id="selectMealDetail" parameterType="int" resultMap="detailMealMap">
+    select m.meal_seq,
+		   m.food_seq,
+		   m.meal_type,
+		   m.meal_gram,
+		   m.file_path,
+		   f.food_name,
+		   f.food_kcal
+	  from tb_meal_detail m
+	  join tb_food f
+	    on m.food_seq = f.food_seq
+	 where m.meal_seq = #{mealSeq}
+	</select>
 	
 </mapper>

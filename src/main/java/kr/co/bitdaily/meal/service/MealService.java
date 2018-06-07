@@ -16,4 +16,6 @@ public interface MealService {
 
 	void insertFood(MealDetail detail, int userSeq);
 
+	List<MealDetail> selectMealDetail(int mealSeq);
+
 }

@@ -18,11 +18,11 @@
 <body>
 
 <div class="date">
-<a href="#" id="preDate"><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
+<a href="#" id="preDate" onclick="return false"><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
 <%-- <fmt:formatDate value="${date}" pattern="yyyy-MM-dd" /> --%>
 <span id="curDate"></span>
 <a href="#" id="nextDate"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
-<div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px"> 1200 kcal</div>
+<div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px"> ${member.goalCalorie} kcal</div>
 </div><!-- end .date -->
 
 
@@ -44,6 +44,7 @@
 	<div class="icon">아침</div>
 	<input type="hidden" value="1" name="mealType">
 	<div>
+	<div class="result result1"></div>
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
 	</div>
@@ -53,6 +54,7 @@
 	<div class="icon">점심</div>
 	<input type="hidden" value="2" name="mealType">
 	<div>
+	<div class="result result2"></div>
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
 	</div>
@@ -61,7 +63,7 @@
 	<div class="icon">저녁</div>
 	<input type="hidden" value="3" name="mealType">
 	<div>
-<!-- 	<div class="result"></div> -->
+	<div class="result result3"></div>
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
 	</div>
@@ -71,7 +73,7 @@
 	<input type="hidden" value="4" name="mealType">
 	<div>
 
-<!-- 	<div class="result"> -->
+	<div class="result result4">
 	
 	<!-- 
 	<div class="result_area">
@@ -85,7 +87,7 @@
 	</div>
 	 -->
 	
-<!-- 	</div> end .result -->
+	</div>
 	
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
