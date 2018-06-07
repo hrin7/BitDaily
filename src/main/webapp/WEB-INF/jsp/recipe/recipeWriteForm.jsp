@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recipe 글쓰기</title>
+<title>Recipe</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <link href="<c:url value='/css/recipe/recipeWriteForm.css'/>" rel="stylesheet">
 <link href="<c:url value='/css/recipe/input.css'/>" rel="stylesheet">
@@ -28,6 +28,7 @@
 			</div>
 		  <input id="name" type="text" name="title" placeholder="TITLE">
 		  <textarea id="message" type="text" name="content" placeholder="CONTENT"></textarea>
+		  <input type="hidden" name="userSeq" value="${sessionScope.member.userSeq}"/>
 	      <input id="submit" type="submit" value="REGISTER">
 	    </form>
 	</div>

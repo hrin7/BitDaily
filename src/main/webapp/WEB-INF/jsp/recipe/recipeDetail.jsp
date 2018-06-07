@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>레시피 상세 페이지</title>
+<title>Recipe</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <link href="<c:url value='/css/recipe/input.css'/>" rel="stylesheet">
 <link href="<c:url value='/css/recipe/recipeDetail.css'/>" rel="stylesheet">
@@ -18,7 +18,7 @@
 	<div id="titleDiv">
 		<br><br>
 		<span id="titleSpan">${recipe.title}</span>
-		<span id="writer">hrin</span>
+		<span id="writer">${recipe.name}</span>
 	</div>
 	<hr>
 	<div id="right">
@@ -34,20 +34,7 @@
 	</div>
 	<div id="comment">
 		<hr><br>
-		<div class="comment_box">
-			<h5>jungwon</h5>
-			와~~ 맛있겠다~~~ 맛있는 다이어트 가능^^!! 나중에 꼭 리코타 치즈 만들어서 해먹어야겠어요~~ 리코타 치즈 만들 때 소금을 넣지 않으면 반려동물도 먹을 수 있다던데~~ 우리 애덜이랑 같이 먹어야겠어요~~^^ 감사합니다~~호호~~~
-			<br>
-			<span>2018.05.28 16:24</span>
-			<br><br><hr><br>
-		</div>
-		<div class="comment_box">
-			<h5>jungwon</h5>
-			와~~ 맛있겠다~~~ 맛있는 다이어트 가능^^!! 나중에 꼭 리코타 치즈 만들어서 해먹어야겠어요~~ 리코타 치즈 만들 때 소금을 넣지 않으면 반려동물도 먹을 수 있다던데~~ 우리 애덜이랑 같이 먹어야겠어요~~^^ 감사합니다~~호호~~~
-			<br>
-			<span>2018.05.28 16:24</span>
-			<br><br><hr><br>
-		</div>
+		<div id="commentList"></div>
 		<div><br>
 			<h5>댓글쓰기</h5>
 			<textarea></textarea>
@@ -63,5 +50,44 @@
 </div>
 
 <script src="<c:url value='/js/recipe/recipeDetail.js'/>"></script>
+<script>
+	function makeCommentList(result) {
+// 		console.dir(result);
+		var html = "";
+		for (let i = 0; i < result.length; i++) {
+			var comment = result[i];
+			html += '<div class="comment_box">';
+			html += '  <h5>'+comment.name+'</h5>';
+			html += comment.commentText;
+			html += '  <br>';
+			var date = new Date(comment.commentDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			html += '  <span>'+ time +'</span>';
+			html += '  <br><br><hr><br>';
+			html += '</div>';
+		}
+		if (result.length == 0) {
+			html += '<div class="comment_box">댓글이 존재하지 않습니다.</div>'
+		}
+		$("#commentList").html(html);
+	}
+	
+	function commentList() {
+		$.ajax({
+			url: "<c:url value='/recipe/commentList.do'/>",
+			data: {recipeSeq:"${recipe.recipeSeq}"},
+			dataType: "json",
+			success: makeCommentList
+		});
+	}
+	
+	commentList();
+</script>
+
 </body>
 </html>

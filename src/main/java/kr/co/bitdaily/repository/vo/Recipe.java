@@ -27,7 +27,18 @@ public class Recipe {
     // 파일 시퀀스 
     private Integer fileSeq;
     
-    private MultipartFile[] file;
+    // 유저 네임
+    private String name;
+    
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	private MultipartFile[] file;
     
     private List<RecipeFile> fileList;
 

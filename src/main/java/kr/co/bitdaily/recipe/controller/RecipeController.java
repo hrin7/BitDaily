@@ -1,5 +1,6 @@
 package kr.co.bitdaily.recipe.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bitdaily.recipe.service.RecipeService;
 import kr.co.bitdaily.repository.vo.Recipe;
+import kr.co.bitdaily.repository.vo.RecipeComment;
 
 @Controller
 @RequestMapping("/recipe")
@@ -40,7 +43,7 @@ public class RecipeController {
 		recipeService.writeRecipe(recipe);
 		return "redirect:/recipe/list.do"; 
 	}
-	
+
 	@RequestMapping("/delete.do")
 	public String deleteRecipe(int recipeSeq) {
 		recipeService.deleteRecipe(recipeSeq);
@@ -57,5 +60,11 @@ public class RecipeController {
 	public String updateRecipe(Recipe recipe) {
 		recipeService.updateRecipe(recipe);
 		return "redirect:/recipe/detail.do?recipeSeq=" + recipe.getRecipeSeq();
+	}
+	
+	@RequestMapping("/commentList.do")
+	@ResponseBody
+	public List<RecipeComment> retrieveListComment(int recipeSeq) {
+		return recipeService.retrieveListComment(recipeSeq);
 	}
 }

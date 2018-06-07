@@ -31,11 +31,19 @@ CREATE TABLE tb_comment (
     recipe_seq      NUMBER          NOT NULL, 
     comment_seq     NUMBER          PRIMARY KEY, 
     comment_text    VARCHAR2(4000)    NOT NULL, 
-    comment_date    DATE            NOT NULL
+    comment_date    DATE            default sysdate
 );
+
+insert into tb_comment (user_seq, recipe_seq, comment_seq, comment_text)
+values ( 26, 27, s_comment_seq.nextval, '신선하고 아삭하게 찬물에 담가두었다가 물기를 빼고 방울토마토는 꼭지를 떼어주면 됩니다.');
+insert into tb_comment (user_seq, recipe_seq, comment_seq, comment_text)
+values ( 26, 27, s_comment_seq.nextval, '신선하고 아삭하게 찬물에 담가두었다가 물기를 빼고 방울토마토는 꼭지를 떼어주면 됩니다.222');
 
 CREATE SEQUENCE s_comment_seq;
 drop table tb_comment purge;
+select *
+  from tb_comment
+ order by comment_seq desc;
 
 CREATE TABLE tb_file (
 	recipe_seq       NUMBER(3)   	  NOT NULL,
@@ -50,3 +58,7 @@ drop table tb_file purge;
 select *
   from tb_file
  order by file_seq  desc;
+ 
+select *
+  from tb_user
+ order by user_seq;

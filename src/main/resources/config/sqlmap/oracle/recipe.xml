@@ -13,14 +13,18 @@
 	</resultMap>
 
     <select id="selectRecipe" resultMap="recipeMap">
-	    select *
-	      from tb_recipe
+	    select u.user_seq, u.name, recipe_seq, title, content, recipe_date, view_count, file_seq
+	      from tb_recipe r
+    	 inner join tb_user u
+    	    on r.user_seq = u.user_seq
 	     order by recipe_seq desc 
     </select>
     	
     <select id="selectRecipeByNo" parameterType="int" resultMap="recipeMap">
-    	select user_seq, recipe_seq, title, content, recipe_date, view_count, file_seq
-    	  from tb_recipe
+    	select u.user_seq, u.name, recipe_seq, title, content, recipe_date, view_count, file_seq
+    	  from tb_recipe r
+    	 inner join tb_user u
+    	    on r.user_seq = u.user_seq
     	 where recipe_seq = #{recipeSeq} 
     </select>	
     
@@ -34,7 +38,7 @@
     		title, 
     		content
     	) values (
-    		1,
+    		#{userSeq},
     		#{recipeSeq},
     		#{title},
     		#{content}
@@ -54,28 +58,30 @@
     	 where recipe_seq = #{recipeSeq}
     </update>	
     
-    <!-- 
-    <update id="updateBoardViewCnt" parameterType="int">
-    	update tb_board
-    	   set view_cnt = view_cnt + 1
-    	 where no = #{no}
+    <update id="updateRecipeViewCnt" parameterType="int">
+    	update tb_recipe
+    	   set view_count = view_count + 1
+    	 where recipe_seq = #{recipeSeq}
     </update>
 	
-	<resultMap id="commentMap" type="comment">
-		<result column="comment_no" property="commentNo" />
-		<result column="no" property="no" />
-		<result column="writer" property="writer" />
-		<result column="content" property="content" />
-		<result column="reg_date" property="regDate" />
+	<resultMap id="commentMap" type="recipeComment">
+		<result column="user_seq" property="userSeq" />
+		<result column="recipe_seq" property="recipeSeq" />
+		<result column="comment_seq" property="commentSeq" />
+		<result column="comment_text" property="commentText" />
+		<result column="comment_date" property="commentDate" />
 	</resultMap>
 	
-	<select id="selectCommentByNo" parameterType="int" 
-	        resultMap="commentMap">
-	    select *
-	      from tb_comment
-	     where no = #{no}      
+	<select id="selectCommentByNo" parameterType="int" resultMap="commentMap">
+	    select u.user_seq, u.name, c.recipe_seq, c.comment_seq, c.comment_text, c.comment_date
+	      from tb_comment c
+	     inner join tb_user u
+	        on c.user_seq = u.user_seq
+	     where recipe_seq = #{recipeSeq}
+	     order by c.comment_seq desc
 	</select>
     
+    <!-- 
 	<insert id="insertComment" parameterType="comment">
 		insert into tb_comment(
 			comment_no, no, writer, content

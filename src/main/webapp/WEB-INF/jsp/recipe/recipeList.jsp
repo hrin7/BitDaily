@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Recipe</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <link href="<c:url value='/css/recipe/recipeList.css'/>" rel="stylesheet">
 <link href="<c:url value='/css/common/button.css'/>" rel="stylesheet">
@@ -38,7 +39,7 @@
 				</div>
 			</a>
 			<h5>${recipe.title}</h5>
-			글쓴이 hrin 조회수 ${recipe.viewCount}<br>
+			글쓴이 ${recipe.name} 조회수 ${recipe.viewCount}<br>
 			<fmt:formatDate value="${recipe.recipeDate}" pattern="yyyy-MM-dd"/> 
 		</div>
 	</c:forEach>
@@ -48,16 +49,25 @@
 	<div id="clear"></div>
 </div>
 <div id="write" style="text-align: right;">
-	<button onclick = "location.href='${pageContext.request.contextPath}/recipe/writeForm.do'">글쓰기</button>
+	<form id="writeBtn" onsubmit="return check();" action="${pageContext.request.contextPath}/recipe/writeForm.do">
+		<button onclick="return check();">글쓰기</button>
+	</form>
 </div>
 <br>
 <div id="pageing">[1][2][3][4][5]</div>
 <br>
 
 <script src="<c:url value='/js/recipe/recipeList.js'/> "></script>
-<script type="text/javascript">
-	console.log("file","${file}");
-
+<script>
+	function check() {
+		if (${empty sessionScope.member}) {
+			alert("로그인 후 이용 가능합니다");
+			return false;
+		} else {
+			return true;
+		}
+	};
 </script>
+
 </body>
 </html>

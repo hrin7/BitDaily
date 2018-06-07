@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.bitdaily.repository.mapper.RecipeMapper;
 import kr.co.bitdaily.repository.vo.Recipe;
+import kr.co.bitdaily.repository.vo.RecipeComment;
 import kr.co.bitdaily.repository.vo.RecipeFile;
 
 @Service
@@ -34,6 +35,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public Map<String,Object> detailRecipe(int recipeSeq) {
+		mapper.updateRecipeViewCnt(recipeSeq);
 		Map<String, Object> map = new HashMap<>();
 		map.put("recipe", mapper.selectRecipeByNo(recipeSeq));
 		map.put("fileList", mapper.selectRecipeFileByNo(recipeSeq));
@@ -44,7 +46,7 @@ public class RecipeServiceImpl implements RecipeService {
 	public void writeRecipe(Recipe recipe) throws Exception {
 		mapper.insertRecipe(recipe);
 		
-		System.out.println(recipe.getFile());
+//		System.out.println(recipe.getFile());
 		for (MultipartFile file : recipe.getFile()) {
 			String oriFileName = file.getOriginalFilename();
 			if(oriFileName != null && !oriFileName.equals("")) {
@@ -76,7 +78,7 @@ public class RecipeServiceImpl implements RecipeService {
 			}
 		}
 	}
-
+	
 	@Override
 	public void deleteRecipe(int recipeSeq) {
 		mapper.deleteRecipe(recipeSeq);
@@ -90,6 +92,11 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public void updateRecipe(Recipe recipe) {
 		mapper.updateRecipe(recipe);
+	}
+
+	@Override
+	public List<RecipeComment> retrieveListComment(int recipeSeq) {
+		return mapper.selectCommentByNo(recipeSeq);
 	}
 	
 }
