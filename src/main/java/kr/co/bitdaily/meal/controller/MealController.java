@@ -5,16 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bitdaily.meal.service.MealService;
 import kr.co.bitdaily.repository.vo.Food;
+import kr.co.bitdaily.repository.vo.Meal;
+import kr.co.bitdaily.repository.vo.MealDetail;
+import kr.co.bitdaily.repository.vo.Member;
 import kr.co.bitdaily.util.DiaryCalendar;
 
 @Controller
@@ -26,12 +29,6 @@ public class MealController {
 	
 	@RequestMapping("/fooddiary.do")
 	public void foodList() {
-		/*
-		ModelAndView mav = new ModelAndView("diary/fooddiary");
-		DiaryCalendar cal = new DiaryCalendar();
-		mav.addObject("date", cal.getTodayDate());
-		return mav;
-		*/
 	}
 	
 	@RequestMapping("/fooddiary.json")
@@ -42,23 +39,54 @@ public class MealController {
 		Date date = null;
 		if(bntId.equals("preDate")) {
 			date = cal.getPreDate(currentDate);
-//			Meal meal = new Meal();
-//			meal.setUserSeq(1234);
-//			meal.setMealDate(date);
-//			mealService.selectMealSeq(meal);
 		} else {
-			System.out.println(sdf.format(new Date()));
-			System.out.println(sdf.format(currentDate));
 			if(sdf.format(new Date()).equals(sdf.format(currentDate))) {
-				System.out.println("이퀄");
 				date = currentDate;
 			}else {
-				System.out.println("엘스");
 				date = cal.getNextDate(currentDate);
 			}
 		}
 		return date;
 	}
+	
+	@RequestMapping("/mealSeq.json")
+	@ResponseBody
+	public Meal selectMealSeq(@RequestParam Date currentDate, HttpSession session) {
+		Meal meal = new Meal();
+		meal.setMealDate(currentDate);
+		
+		Member member = (Member) session.getAttribute("member");
+		int userSeq = member.getUserSeq();
+		
+		meal.setUserSeq(userSeq);
+		Meal mealResult = mealService.selectMealSeq(meal);
+		session.setAttribute("mealSeq", mealResult.getMealSeq());
+		return mealResult;
+	}
+	
+	/*
+	@RequestMapping("/makeList.json")
+	@ResponseBody
+	public List<MealDetail> makeList(@RequestParam int userSeq) {
+
+		return mealService.selectMealDetail(userSeq);
+	}
+	*/
+	
+	@RequestMapping("/insertFood.json")
+	@ResponseBody
+	public void insertFood(@RequestParam int mealSeq, String mealType, int foodSeq, String mealGram, String filePath, HttpSession session) {
+		MealDetail detail = new MealDetail();
+		detail.setMealSeq(mealSeq);
+		detail.setMealType(mealType);
+		detail.setFoodSeq(foodSeq);
+		detail.setMealGram(Integer.parseInt(mealGram));
+		detail.setFilePath(filePath);
+		Member member = (Member) session.getAttribute("member");
+		int userSeq = member.getUserSeq();
+		mealService.insertFood(detail, userSeq);
+	}
+	
 	
 	@RequestMapping("/foodSearch.json")
 	@ResponseBody

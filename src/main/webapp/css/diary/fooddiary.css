@@ -39,9 +39,12 @@ table {
 	margin-left:30px;
 	border: 1px solid #133668;
 	width: 600px;
-	height: 300px;
+	height: auto;
 	border-radius: 20px;
 	display: inline-block;
+/* 	visibility: hidden; */
+/* 	height: 0; */
+	
 }
 .result_area {
 	float: left;
@@ -52,7 +55,7 @@ table {
 }
 .result_content {
 	width: 185px;
-	height: 185px;
+	height: auto;
 	text-align: center;
 	padding: 4px 4px;
 	margin: 7px 7px;

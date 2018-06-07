@@ -9,8 +9,17 @@ public class MealDetail {
 	String mealType;
 	Date regTime;
 	int foodSeq;
-	int mealGram;
+	double mealGram;
 	String filePath;
+	
+	/*
+	  mealType
+	  1 : 아침
+	  2 : 점심
+	  3 : 저녁
+	  4 : 간식 
+	 */
+	
 	
 	
 	public int getMealSeq() {
@@ -43,10 +52,10 @@ public class MealDetail {
 	public void setFoodSeq(int foodSeq) {
 		this.foodSeq = foodSeq;
 	}
-	public int getMealGram() {
+	public double getMealGram() {
 		return mealGram;
 	}
-	public void setMealGram(int mealGram) {
+	public void setMealGram(double mealGram) {
 		this.mealGram = mealGram;
 	}
 	public String getFilePath() {
@@ -56,6 +65,7 @@ public class MealDetail {
 		this.filePath = filePath;
 	}
 	
+
 	
 
 }

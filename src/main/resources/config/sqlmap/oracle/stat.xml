@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.bitdaily.repository.mapper.StatMapper">
+	<resultMap id="statMap" type="stat">
+		<result column="meal_seq" property="mealSeq" />
+		<result column="user_seq" property="userSeq" />
+		<result column="morning" property="morning" />
+		<result column="lunch" property="lunch" />
+		<result column="diner" property="diner" />
+		<result column="snack" property="snack" />
+	</resultMap>
+
+	<insert id="insertStat" parameterType="stat">
+	insert into tb_stat (meal_seq, user_seq, morning, lunch, diner, snack)
+	values (#{mealSeq}, #{userSeq}, #{morning}, #{lunch}, #{diner}, #{snack})
+	</insert>
+	
+	<update id="updateStat" parameterType="stat">
+	update tb_stat
+	   set morning = #{morning},
+		   lunch = #{lunch},
+		   diner = #{diner},
+		   snack = #{snack}
+	   
+	 where meal_seq = #{mealSeq}
+	</update>
+	
+	<select id="selectStatByMealSeq" parameterType="int" resultMap="statMap">
+	select *
+	  from tb_stat
+	 where meal_seq = #{mealSeq}
+	</select>
+
+</mapper>

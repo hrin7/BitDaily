@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bitdaily.repository.mapper.MealMapper">
-	<resultMap id="mealMap" type="meal">
+	<resultMap id="detailMealMap" type="mealDetail">
 		<result column="meal_seq" property="mealSeq" />
 		<result column="meal_detail_seq" property="mealDetailSeq" />
 		<result column="meal_type" property="mealType" />
@@ -11,7 +11,7 @@
 		<result column="meal_gram" property="mealGram" />
 		<result column="file_path" property="filePath" />
 	</resultMap>
-	<resultMap id="detailMealMap" type="mealDetail">
+		<resultMap id="mealMap" type="meal">
 		<result column="meal_seq" property="mealSeq" />
 		<result column="user_seq" property="userSeq" />
 		<result column="meal_date" property="mealDate" />
@@ -28,6 +28,27 @@
 	 where food_name like '%'||#{foodName}||'%'
 	</select>
 	
+	<select id="getFoodKcal" parameterType="int" resultType="double">
+	select food_kcal
+	  from tb_food
+	 where food_seq = #{foodSeq}
+	</select>
 	
-
+	<select id="selectMealSeq" parameterType="meal" resultMap="mealMap">
+	select *
+	  from tb_meal
+	 where user_seq = #{userSeq}
+	   and meal_date = #{mealDate}
+	</select>
+	
+	<insert id="insertMealSeq" parameterType="meal">
+	insert into tb_meal (meal_seq, user_seq, meal_date)
+	values (s_meal_no.nextval, #{userSeq}, #{mealDate})
+	</insert>
+	
+	<insert id="insertMealDetail" parameterType="mealDetail">
+	insert into tb_meal_detail (meal_seq, meal_detail_seq, meal_type, food_seq, meal_gram, file_path)
+	values (#{mealSeq}, s_meal_detail_no.nextval, #{mealType}, #{foodSeq}, #{mealGram}, #{filePath})
+	</insert>
+	
 </mapper>

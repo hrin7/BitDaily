@@ -35,11 +35,14 @@
 	<li><a href="${pageContext.request.contextPath}/jsp/diary/dailydiary.jsp">일기</a></li>
 	</ul>
 	</div>
+
+<input type="hidden" value="${mealSeq}" id="mealSeq">
 	
 	<div class="mainMenu">
 	<p id="title"><img src="${pageContext.request.contextPath}/images/icon/fooddiary.png" width="40px"/> 오늘의 식단</p>
 	<div id="morning">
 	<div class="icon">아침</div>
+	<input type="hidden" value="1" name="mealType">
 	<div>
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
@@ -48,6 +51,7 @@
 
 	<div id="lunch">
 	<div class="icon">점심</div>
+	<input type="hidden" value="2" name="mealType">
 	<div>
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>
@@ -55,6 +59,7 @@
 
 	<div id="dinner">
 	<div class="icon">저녁</div>
+	<input type="hidden" value="3" name="mealType">
 	<div>
 <!-- 	<div class="result"></div> -->
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
@@ -63,10 +68,12 @@
 
 <div id="snack">
 	<div class="icon">간식</div>
+	<input type="hidden" value="4" name="mealType">
 	<div>
 
-	<div class="result">
+<!-- 	<div class="result"> -->
 	
+	<!-- 
 	<div class="result_area">
 	<div class="result_pic">
 	<img class="result_img" src="${pageContext.request.contextPath}/images/yogurt.jpg" width="182px" height="182px">
@@ -76,28 +83,9 @@
 	100kcal<br>
 	</div>
 	</div>
+	 -->
 	
-	<div class="result_area">
-	<div class="result_pic">
-	<img  class="result_img"  src="${pageContext.request.contextPath}/images/yogurt.jpg" width="182px" height="182px">
-	</div>
-	<div class="result_content">
-	<strong>요거트</strong><br>
-	100kcal<br>
-	</div>
-	</div>
-	
-	<div class="result_area">
-	<div class="result_pic">
-	<img  class="result_img"  src="${pageContext.request.contextPath}/images/yogurt.jpg" width="182px" height="182px">
-	</div>
-	<div class="result_content">
-	<strong>요거트</strong><br>
-	100kcal<br>
-	</div>
-	</div>
-	
-	</div> <!-- end .result -->
+<!-- 	</div> end .result -->
 	
 	<div class="add">　　 <a href="#" class="foodAdd"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">　음식 추가</a></div>
 	</div>

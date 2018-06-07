@@ -4,7 +4,7 @@ public class Food {
 	
 	int foodSeq;
 	String foodName;
-	int foodKcal;
+	double foodKcal;
 	
 	
 	
@@ -20,10 +20,10 @@ public class Food {
 	public void setFoodName(String foodName) {
 		this.foodName = foodName;
 	}
-	public int getFoodKcal() {
+	public double getFoodKcal() {
 		return foodKcal;
 	}
-	public void setFoodKcal(int foodKcal) {
+	public void setFoodKcal(double foodKcal) {
 		this.foodKcal = foodKcal;
 	}
 	
