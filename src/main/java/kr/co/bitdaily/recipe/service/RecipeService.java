@@ -15,4 +15,7 @@ public interface RecipeService {
 	void updateRecipe(Recipe recipe);
 	
 	List<RecipeComment> retrieveListComment(int recipeSeq);
+	void writeComment(RecipeComment recipeComment);
+	void deleteComment(int commentSeq);
+	void updateComment(RecipeComment recipeComment);
 }

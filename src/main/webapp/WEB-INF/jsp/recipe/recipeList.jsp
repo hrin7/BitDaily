@@ -60,7 +60,7 @@
 <script src="<c:url value='/js/recipe/recipeList.js'/> "></script>
 <script>
 	function check() {
-		if (${empty sessionScope.member}) {
+		if ('${empty sessionScope.member}') {
 			alert("로그인 후 이용 가능합니다");
 			return false;
 		} else {

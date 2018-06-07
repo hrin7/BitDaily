@@ -36,9 +36,11 @@
 		<hr><br>
 		<div id="commentList"></div>
 		<div><br>
-			<h5>댓글쓰기</h5>
-			<textarea></textarea>
-			<button>등록</button>
+			<form id="writeForm">
+				<h5>댓글쓰기</h5>
+				<textarea name="commentText"></textarea>
+				<button>등록</button>
+			</form>
 			<div style="text-align: right;">
 				<button onclick="location.href='updateForm.do?recipeSeq=${recipe.recipeSeq}'">수정</button>
 				<button onclick="location.href='delete.do?recipeSeq=${recipe.recipeSeq}'">삭제</button>
@@ -56,9 +58,11 @@
 		var html = "";
 		for (let i = 0; i < result.length; i++) {
 			var comment = result[i];
-			html += '<div class="comment_box">';
-			html += '  <h5>'+comment.name+'</h5>';
-			html += comment.commentText;
+			html += '<div class="comment_box" id="comment'+ comment.commentSeq +'">';
+			html += '  <h5><span id="commentName">'+comment.name+'</span>'
+			html += '  <button onclick="commentUpdateForm('+ comment.commentSeq +');">수정</button>'
+			html += '  <button onclick="commentDelete('+ comment.commentSeq +');">삭제</button></h5>';
+			html += '  <div id="commentTextDiv">' + comment.commentText + '</div>';
 			html += '  <br>';
 			var date = new Date(comment.commentDate);
 			var time = date.getFullYear() + "-" 
@@ -68,8 +72,8 @@
 			         + date.getMinutes() + ":"
 			         + date.getSeconds();
 			html += '  <span>'+ time +'</span>';
-			html += '  <br><br><hr><br>';
 			html += '</div>';
+			html += '<br><br><hr><br>';
 		}
 		if (result.length == 0) {
 			html += '<div class="comment_box">댓글이 존재하지 않습니다.</div>'
@@ -84,6 +88,70 @@
 			dataType: "json",
 			success: makeCommentList
 		});
+	}
+	
+	$("#writeForm").submit(function (e) {
+		e.preventDefault();
+		$.ajax({
+			url: "<c:url value='/recipe/commentWrite.do'/>",
+			data: {
+				userSeq: "${recipe.userSeq}",
+				recipeSeq: "${recipe.recipeSeq}",
+				commentText: $("#writeForm textarea").val()
+			},
+			dataType: "json"
+		})
+		.done(function (result) {
+			$("#writeForm textarea").val("");
+			makeCommentList(result);
+		});
+	});
+	
+	function commentDelete(commentSeq) {
+		$.ajax({
+			url: "<c:url value='/recipe/commentDelete.do'/>",
+			data: {
+				recipeSeq: "${recipe.recipeSeq}",
+				commentSeq: commentSeq
+			},
+			dateType: "json",
+			success: makeCommentList
+		});
+	}
+	
+	function commentUpdateForm(commentSeq) {
+		var html = '';
+		html += '<div id="modComment'+ commentSeq +'">';
+		html += '  <h5>' + $("#comment"+commentSeq+"> h5 > #commentName").text();
+		html += '  <button onclick="commentUpdate('+ commentSeq +');">수정</button>';
+		html += '  <button onclick="commentCancel('+ commentSeq +');">취소</button></h5>';
+		html += '<textarea name="commentText" id="commentText'+ commentSeq +'">';
+		html += $("#comment"+commentSeq+"> #commentTextDiv").text();
+		html += '</textarea>';
+		html += '</div>';
+		$("#comment" + commentSeq).after(html);
+		$("#comment" + commentSeq).hide();
+	}
+	
+	function commentUpdate(commentSeq) {
+		$.ajax({
+			url: "<c:url value='/recipe/commentUpdate.do'/>",
+			type: "POST",
+			data: {
+				recipeSeq: "${recipe.recipeSeq}",
+				commentSeq: commentSeq,
+				commentText: $("#commentText" + commentSeq).val()
+			},
+			dateType: "json",
+			success: function (result) {
+				makeCommentList(result);
+			}
+		});
+	}
+	
+	function commentCancel(commentSeq) {
+		$("#comment" + commentSeq).show();
+		$("#modComment" + commentSeq).remove();
 	}
 	
 	commentList();

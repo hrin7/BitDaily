@@ -18,4 +18,7 @@ public interface RecipeMapper {
 	void insertRecipeFile(RecipeFile recipeFile);
 	
 	List<RecipeComment> selectCommentByNo(int recipeSeq);
+	void insertComment(RecipeComment recipeComment);
+	void deleteComment(int commentSeq);
+	void updateComment(RecipeComment recipeComment);
 }

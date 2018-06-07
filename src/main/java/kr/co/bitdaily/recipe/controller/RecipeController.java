@@ -2,6 +2,7 @@ package kr.co.bitdaily.recipe.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,5 +67,27 @@ public class RecipeController {
 	@ResponseBody
 	public List<RecipeComment> retrieveListComment(int recipeSeq) {
 		return recipeService.retrieveListComment(recipeSeq);
+	}
+	
+	@RequestMapping("/commentWrite.do")
+	@ResponseBody 
+	public List<RecipeComment> writeComment(RecipeComment recipeComment) {
+		recipeService.writeComment(recipeComment);
+		return recipeService.retrieveListComment(recipeComment.getRecipeSeq());
+	}
+	
+	@RequestMapping("/commentDelete.do")
+	@ResponseBody
+	public List<RecipeComment> deleteComment(RecipeComment recipeComment) {
+		recipeService.deleteComment(recipeComment.getCommentSeq());
+		return recipeService.retrieveListComment(recipeComment.getRecipeSeq());
+	}
+	
+	@RequestMapping("/commentUpdate.do")
+	@ResponseBody
+	public List<RecipeComment> updateComment(RecipeComment recipeComment) {
+		recipeService.updateComment(recipeComment);
+		List<RecipeComment> list = recipeService.retrieveListComment(recipeComment.getRecipeSeq());
+		return recipeService.retrieveListComment(recipeComment.getRecipeSeq());
 	}
 }

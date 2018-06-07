@@ -25,6 +25,7 @@ public class RecipeServiceImpl implements RecipeService {
 	public Map<String,Object> retrieveListRecipe(int pageNo) {
 		Map<String, Object> map = new HashMap<>();
 		List<Recipe> recipes = mapper.selectRecipe();
+		System.out.println("레시피 사이즈 : "+ recipes.size());
 		for (Recipe r : recipes) {
 			List<RecipeFile> fileList = mapper.selectRecipeFileByNo(r.getRecipeSeq());
 			r.setFileList(fileList);
@@ -97,6 +98,21 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public List<RecipeComment> retrieveListComment(int recipeSeq) {
 		return mapper.selectCommentByNo(recipeSeq);
+	}
+
+	@Override
+	public void writeComment(RecipeComment recipeComment) {
+		mapper.insertComment(recipeComment);
+	}
+
+	@Override
+	public void deleteComment(int commentSeq) {
+		mapper.deleteComment(commentSeq);
+	}
+
+	@Override
+	public void updateComment(RecipeComment recipeComment) {
+		mapper.updateComment(recipeComment);
 	}
 	
 }

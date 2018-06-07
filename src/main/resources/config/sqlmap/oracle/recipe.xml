@@ -78,31 +78,28 @@
 	     inner join tb_user u
 	        on c.user_seq = u.user_seq
 	     where recipe_seq = #{recipeSeq}
-	     order by c.comment_seq desc
+	     order by c.comment_seq
 	</select>
     
-    <!-- 
-	<insert id="insertComment" parameterType="comment">
+	<insert id="insertComment" parameterType="recipeComment">
 		insert into tb_comment(
-			comment_no, no, writer, content
+			comment_seq, recipe_seq, user_seq, comment_text
 		) values (
-			s_comment_no.nextVal, #{no}, #{writer}, #{content}
+			s_comment_seq.nextVal, #{recipeSeq}, #{userSeq}, #{commentText}
 		)
 	</insert>
 	
 	<delete id="deleteComment" parameterType="int">
 	    delete 
 	      from tb_comment
-	     where comment_no = #{commentNo}
+	     where comment_seq = #{commentSeq}
 	</delete>
 	
-	<update id="updateComment" parameterType="comment">
+	<update id="updateComment" parameterType="recipeComment">
 	    update tb_comment
-	       set content = #{content}
-	     where comment_no = #{commentNo}
+	       set comment_text = #{commentText}
+	     where comment_seq = #{commentSeq}
 	</update>   
-	
-     -->	
 	
 	<!-- 첨부파일 파트 시작 -->
 	
