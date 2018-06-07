@@ -12,5 +12,13 @@
 	insert into tb_weight_record (user_seq, record_weight)
 	values (#{userSeq}, #{recordWeight})
 	</insert>
+	
+	<select id="selectWeight" parameterType="int" resultMap="weightMap">
+	select *
+	  from tb_weight_record
+     where user_seq=#{userSeq} 
+       and rownum <![CDATA[<]]> 8
+     order by record_date desc
+	</select>
 
 </mapper>

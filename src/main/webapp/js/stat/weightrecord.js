@@ -1,12 +1,12 @@
 //$(document).ready(function(){
 	$("#nav-weight").addClass("active");
 	
-	$("#weight").click(function () {
+	$(document).on("click", "#weight", function() {
 		$(".but").html("<input type='text' name='weightToday' id='weightToday'>　<button type='button' class='buts' id='registWeight'>등록</button>");
 	});
 	
 	
-	$(document).on("click", ".buts", function() {
+	$(document).on("click", ".but", function() {
 		$.ajax({
 			type : "POST",
 			url : "/spring-bitdiary/stat/weightupdate.json",

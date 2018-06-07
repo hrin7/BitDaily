@@ -1,11 +1,14 @@
 package kr.co.bitdaily.weight.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.bitdaily.repository.vo.Member;
 import kr.co.bitdaily.repository.vo.Weight;
 import kr.co.bitdaily.weight.service.WeightService;
 
@@ -22,10 +25,12 @@ public class WeightController {
 	
 	@RequestMapping("/weightupdate.json")
 	@ResponseBody
-	public void weightUpdate(@RequestParam String weight) {
+	public void weightUpdate(@RequestParam String weight, HttpSession session) {
 
 		//세션에서 userSeq꺼내오기
-		int userSeq = 23452;
+//		int userSeq = 23452;
+		Member member = (Member) session.getAttribute("member");
+		int userSeq = member.getUserSeq();
 		
 		//ajax weight받아오기
 		//@RequestParam
@@ -36,7 +41,7 @@ public class WeightController {
 		//tb_weight_record에 insert하기
 		//userSeq, wright를 Weight에 담아서
 		Weight w = new Weight();
-		w.setUserSeq(23452);
+		w.setUserSeq(userSeq);
 		w.setRecordWeight(Integer.parseInt(weight));
 		weightService.insertWeight(w);
 		

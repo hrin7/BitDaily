@@ -1,5 +1,7 @@
 package kr.co.bitdaily.weight.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,12 @@ public class WeightServiceImpl implements WeightService {
 	public void insertWeight(Weight weight) {
 		mapper.insertWeight(weight);
 	}
+
+	@Override
+	public List<Weight> selectWeight(int userSeq) {
+		return mapper.selectWeight(userSeq);
+	}
+	
+	
 
 }
