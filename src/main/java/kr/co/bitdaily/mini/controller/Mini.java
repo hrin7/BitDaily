@@ -73,22 +73,23 @@ public class Mini {
 		 
 		//유저 (그날짜) 해당하는 아.점.저.간 출력
 		Stat meal = miniservice.selectMeal(mealSeq);
-		int morning = (int) meal.getMorning();
-		int lunch = (int)meal.getLunch();
-		int dinner = (int)meal.getDiner();
-		int snack = (int)meal.getSnack();
+		double morning =  meal.getMorning();
+		double lunch = meal.getLunch();
+		double dinner = meal.getDiner();
+		double snack = meal.getSnack();
 		
-		int sum = morning + lunch + dinner + snack;
-		int pmoring = (sum / morning);
+		int sum = (int) (morning + lunch + dinner + snack);
 		
-		System.out.println("백분율" + pmoring);
-		System.out.println("sum" + sum);
+		int pmoring = (int) ((morning / sum) * 100);
+		int plunch = (int) ((lunch / sum) * 100);
+		int pdinner = (int) ((dinner / sum) * 100);
+		int psnack = (int) ((snack / sum) * 100);
 		
 		Map<String,Integer> result = new HashMap<>(); 
-		result.put("morning", morning); 
-		result.put("lunch", lunch); 
-		result.put("dinner", dinner);
-		result.put("snack", snack);
+		result.put("morning", pmoring); 
+		result.put("lunch", plunch); 
+		result.put("dinner", pdinner);
+		result.put("snack", psnack);
 		
 		return result; 
 		

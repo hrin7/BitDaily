@@ -13,6 +13,6 @@ public interface MemberMapper {
 	
 	public Member selectUserSeq(String id) throws Exception;
 	
-	public void updateCurrentWeight(Member member);
+	public void updateCurrentWeight(Member member)throws Exception;
 	
 }

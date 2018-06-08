@@ -70,6 +70,12 @@
         )
     </insert>
     
+    <select id="selectUserSeq"  parameterType="string" resultMap="memberMap" >
+    	select *
+    	  from tb_user
+    	 where id = #{id} 
+    
+    </select>
         <update id="updateMember" parameterType="member">
         update tb_user
            set pass = #{pass},
@@ -82,7 +88,7 @@
          where id   = #{id}  
     </update>
     
-    <update id="updateCurrentWeight" parameterType="Member">
+    <update id="updateCurrentWeight" parameterType="member">
        update tb_user
           set current_weight = #{currentWeight}
         where user_seq = #{userSeq}

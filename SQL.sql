@@ -23,8 +23,23 @@ insert into tb_user (user_seq, id, name, pass, email, age, user_height, user_wei
 insert into tb_user (user_seq, id, name, pass, email, age, user_height, user_weight, gender, goal_weight, goal_calorie, current_weight)
 	values (s_user_no.nextval,'song', 'song', 'song', 'zzz@zz.com', 35, 182, 88, 'M', 80, 8, 88 );
 
-
+insert into tb_stat (
+	meal_seq, user_seq, morning, lunch, diner, snack
+	) values (200, 26, 200, 500, 1000, 10
+	);
 	
+select *
+  from tb_stat;
+	
+	
+select *
+  from tb_meal;
+  
+insert into tb_meal (
+	meal_seq, user_seq, meal_date
+	) values (200, 26,'18/06/8'
+	);	
+  
 --유저 정보
 select *
   from tb_user;
