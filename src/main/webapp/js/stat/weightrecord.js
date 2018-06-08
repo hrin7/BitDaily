@@ -1,37 +1,40 @@
-//$(document).ready(function(){
-	$("#nav-weight").addClass("active");
-	
-	$(document).on("click", "#weight", function() {
-		$(".but").html("<input type='text' name='weightToday' id='weightToday'>　<button type='button' class='buts' id='registWeight'>등록</button>");
-	});
-	
-	
-	$(document).on("click", ".but", function() {
-		$.ajax({
-			type : "POST",
-			url : "/spring-bitdiary/stat/weightupdate.json",
-			data : {
-				weight : $("#weightToday").val()
-			},
-			success : function() {
-				alert("체중업데이트가 완료되었습니다.");
-				$(".but").html("　 <a href='#' id='weight'><img src='/spring-bitdiary/images/icon/plus.png' width='20px' height='20px'> 오늘체중기록</a>");
-			},
-			error:function(request,status,error){
-		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		       }
-		});
-	});
+
+function setChart(list){
+	var dates = [];
+	var weights = [];
+	for(var i = 0; i < list.length; i++) {
+		var date = new Date(list[i].weightDate);
+		var month = date.getMonth()+1;
+		var date = date.getDate();
+		dates.push(month+"\/"+date);
+		weights.push(list[i].currentWeight);
+//		eval("var date"+i+"="+month+"\/"+date);
+//		eval("var weight"+i+"="+list[i].currentWeight);
+	}
+	var date1 = dates[6];
+	var date2 = dates[5];
+	var date3 = dates[4];
+	var date4 = dates[3];
+	var date5 = dates[2];
+	var date6 = dates[1];
+	var date7 = dates[0];
+	var weight1 = weights[6];
+	var weight2 = weights[5];
+	var weight3 = weights[4];
+	var weight4 = weights[3];
+	var weight5 = weights[2];
+	var weight6 = weights[1];
+	var weight7 = weights[0];
 	
 	var data = {
 		    labels: [
-		        "5/17", "5/18", "5/19", "5/20", "5/21", "5/22", "5/23"
-		    ],
+		    	date1, date2, date3, date4, date5, date6, date7
+		    ], 
 		    datasets: [
 		        {
 		            label: 'kg',
 		            data: [
-		                53, 49, 51, 55, 53, 48, 45
+		            	weight1, weight2, weight3, weight4, weight5, weight6, weight7
 		            ],
 		            backgroundColor: [
 		                'rgba(255, 99, 132, 0.2)',
@@ -62,7 +65,8 @@
 		        yAxes: [
 		            {
 		                ticks: {
-		                    beginAtZero: false                                                                    
+		                    beginAtZero: false,
+		                    stepSize: 0.5
 		                }
 		            }
 		        ]
@@ -74,5 +78,87 @@
 	    data: data,
 	    options: options
 	});
+}
+	$("#nav-weight").addClass("active");
 	
-//})
+	$(document).on("click", "#weight", function() {
+		$(".but").html("<input type='text' name='weightToday' id='weightToday'>　<button type='button' class='buts' id='registWeight'>등록</button>");
+	});
+	
+	
+	$(document).on("click", ".but", function() {
+		$.ajax({
+			type : "POST",
+			url : "/spring-bitdiary/stat/weightupdate.json",
+			data : {
+				weight : $("#weightToday").val()
+			},
+			success : function(result) {
+				alert("체중업데이트가 완료되었습니다.");
+				$(".but").html("　 <a href='#' id='weight'><img src='/spring-bitdiary/images/icon/plus.png' width='20px' height='20px'> 오늘체중기록</a>");
+				$("#sideList").html("");
+				makeWeightList();
+			},
+			error:function(request,status,error){
+		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+		});
+	});
+	
+	function setScale() {
+		$.ajax({
+			type : "POST",
+			url : "/spring-bitdiary/stat/getSession.json",
+			success : function(member) {
+				console.log(member);
+				var startWeight = member.userWeight;
+				var endWeight = member.goalWeight;
+				var curWeight = member.currentWeight;
+				var goal = startWeight-endWeight; //감량해야할 수
+				var cur = startWeight-curWeight; //감량한 수
+				var percentage = ((cur/goal)*100).toFixed(0);
+				if(percentage > 100) {
+					percentage = 100;
+				}
+				$("#percentage").text("　"+percentage+"%");
+				var length = 380;
+				var move = length * (percentage/100);
+				var gap = $(".runner").offset().left - 454.138;
+//				console.log(gap);
+//				$(".runner").animate({left: "-="+gap+"px"}, 1000);
+				$(".runner").animate({right: "-="+move+"px"}, 800);
+			},
+			error:function(request,status,error){
+		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+		});
+	};
+	
+	
+	function makeWeightList() {
+		$.ajax({
+			type : "POST",
+			url : "/spring-bitdiary/stat/weightList.json",
+			success : function(weightList) {
+				console.log(weightList);
+				var list = "";
+				for(var i = 0; i < weightList.length; i++) {
+					list+= "<hr>";
+					var date =  new Date(weightList[i].weightDate);
+					list+= date.getFullYear() + "."
+					+ (date.getMonth() + 1) + "."
+					+ date.getDate()
+					+ "　" + weightList[i].currentWeight + "kg";
+				}
+				$("#sideList").append(list);
+				setChart(weightList);
+				setScale();
+				
+			},
+			error:function(request,status,error){
+		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+		});
+	};
+	
+	makeWeightList();

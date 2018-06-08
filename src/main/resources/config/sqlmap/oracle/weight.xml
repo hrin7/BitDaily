@@ -3,22 +3,25 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.bitdaily.repository.mapper.WeightMapper">
 	<resultMap id="weightMap" type="weight">
+		<result column="weight_seq" property="weightSeq" />
 		<result column="user_seq" property="userSeq" />
-		<result column="record_date" property="recordDate" />
-		<result column="record_weight" property="recordWeight" />
+		<result column="current_weight" property="currentWeight" />
+		<result column="goal_weight" property="goalWeight" />
+		<result column="weight_date" property="weightDate" />
 	</resultMap>
 
 	<insert id="insertWeight" parameterType="weight">
-	insert into tb_weight_record (user_seq, record_weight)
-	values (#{userSeq}, #{recordWeight})
+	insert into tb_stat_weight (weight_seq, user_seq, current_weight, goal_weight)
+	values (s_stat_weight_no.nextval, #{userSeq}, #{currentWeight}, #{goalWeight})
 	</insert>
 	
 	<select id="selectWeight" parameterType="int" resultMap="weightMap">
 	select *
-	  from tb_weight_record
-     where user_seq=#{userSeq} 
-       and rownum <![CDATA[<]]> 8
-     order by record_date desc
+	  from ( select *
+	           from tb_stat_weight
+	          where user_seq=#{userSeq}
+	          order by weight_date desc )
+	 where rownum <![CDATA[<]]> 8
 	</select>
 
 </mapper>

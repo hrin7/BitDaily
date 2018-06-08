@@ -18,13 +18,7 @@
         <result column = "current_weight" property = "currentWeight" />
     </resultMap>
    
-<!--    <select id="selectUserExcer" parameterType="int"> -->
-<!--         select id, s.morning, s.lunch, s.diner, s.snack -->
-<!--           from (select * -->
-<!--           		from tb_stat) s  -->
-<!--          where user_seq = #{userSeq}   -->
    
-<!--    </select> -->
     
     <select id="selectMember" resultType="member">
         select id,
@@ -32,8 +26,8 @@
                pass
           from tb_user 
     </select>
-    <select id="selectUserSeq" parameterType="string" resultMap="memberMap">
-        select user_seq, goal_weight
+    <select id="selectMemberId" parameterType="string" resultType="string">
+        select id
           from tb_user 
          where id = #{id} 
     </select>
@@ -86,6 +80,12 @@
            set goal_weight = #{currentWeight},
            set goal_calorie = #{goalCalorie}
          where id   = #{id}  
+    </update>
+    
+    <update id="updateCurrentWeight" parameterType="Member">
+       update tb_user
+          set current_weight = #{currentWeight}
+        where user_seq = #{userSeq}
     </update>
     
 </mapper>
