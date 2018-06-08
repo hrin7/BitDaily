@@ -24,10 +24,10 @@
 		<input class="place" type="text" name="name">
 		<p class="input">Email</p>
 		<input class="place" type="text" name="email">
-		<input class="btn-update" id="updateemail" type="submit" value="수정">
+		<input class="btn-update" id="updateemail" type="button" value="수정">
 		<p class="input">Password</p>
 		<input class="place" type="text" name="pass">
- 		<input class="btn-update" id="updatepass" type="submit" value="수정"><br><br>
+ 		<input class="btn-update" id="updatepass" type="button" value="수정"><br><br>
 		<span class="input1">height(cm)</span>
 		<input class="place1" type="text" name="userHeight">
 		<input class="btn-update" id="updateuserHeight" type="submit" value="수정">
@@ -49,6 +49,24 @@
 	</div>
 </div>
 	<script>
+	
+	$("#updateemail").click(function () {
+		console.log("updateemail 체크중");
+		$.ajax({
+			url: "${pageContext.request.contextPath}/user/userInfo.json",
+			data: {
+				"email" : f.id.value	
+			},
+			dataType: "json",
+			success: function (data) {
+				console.log('아이디 들어옴');
+				swal('수정 완료!');
+			}
+		});
+	});
+	
+	
+	
 	//이메일 수정
 		$("#updateemail").click(function () {
 			swal('수정 완료!')

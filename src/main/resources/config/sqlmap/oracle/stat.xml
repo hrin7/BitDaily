@@ -31,5 +31,11 @@
 	  from tb_stat
 	 where meal_seq = #{mealSeq}
 	</select>
+	
+	<select id="selectByUserSeq"  parameterType="int" resultMap="statMap">
+	select *
+	  from tb_stat
+	 where user_seq = #{userSeq}
+	</select>
 
 </mapper>

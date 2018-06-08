@@ -11,6 +11,6 @@ public interface MemberMapper {
 	
 	public List<Member> selectMember() throws Exception;
 	
-	public String selectMemberId(String id) throws Exception;
+	public Member selectUserSeq(String id) throws Exception;
 	
 }

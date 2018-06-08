@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <link href="<c:url value='/css/diary/commondiary.css'/>" rel="stylesheet">
 <link href="<c:url value='/css/diary/exercisediary.css'/>" rel="stylesheet">
 <link href="<c:url value='/css/common/button.css'/>" rel="stylesheet">
@@ -96,7 +97,6 @@
 
 
 <script>
-// writeStatis 입니다.
 	function kal (data) {
 		var html= "";
 		data.dailyKal
@@ -106,6 +106,7 @@
 		html += '<p> 남은 열량:'+ data.reCalories + 'kcal </p>';
 		if(data.reCalories <= 0){
 			html += '<p> 더 드시면 곤란해요..ㅠ ^ ㅠ </p>';	
+			return false;
 		}
 		
 		$("#writeMiniStatis").html(html);
@@ -129,14 +130,6 @@
 	}
 	
 KalUserSeq();
-
-//도넛 차트
-
-
-
-
-
-
 </script>
 </body>
 </html>
