@@ -29,19 +29,28 @@ public class Recipe {
     
     // 유저 네임
     private String name;
-    
-    public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	private MultipartFile[] file;
     
     private List<RecipeFile> fileList;
 
+    private int commentCount;
+    
+    public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public String getName() {
+    	return name;
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
 	public List<RecipeFile> getFileList() {
 		return fileList;
 	}
@@ -112,5 +121,32 @@ public class Recipe {
 
 	public void setFileSeq(Integer fileSeq) {
 		this.fileSeq = fileSeq;
+	}
+	
+	private int pageNo = 1;
+	
+	/*
+	 *  1페이지 : 1 ~ 10
+	 *  2페이지 : 11 ~ 20
+	 *  3페이지 : 21 ~ 30 
+	 *  . . . .
+	 */
+	// 각 페이지의 시작 페이지번호
+	// 페이지번호 * 10 - 9,
+	// (페이지번호 - 1) * 10 + 1
+	public int getBegin() {
+		return (pageNo -1) * 6 + 1;
+	}
+	
+	// 각 페이지의 끝 페이지 번호
+	public int getEnd() {
+		return pageNo * 6;
+	}
+	
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
 	}
 }

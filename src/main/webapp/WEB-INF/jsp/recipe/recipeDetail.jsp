@@ -42,8 +42,10 @@
 				<button>등록</button>
 			</form>
 			<div style="text-align: right;">
-				<button onclick="location.href='updateForm.do?recipeSeq=${recipe.recipeSeq}'">수정</button>
-				<button onclick="location.href='delete.do?recipeSeq=${recipe.recipeSeq}'">삭제</button>
+				<c:if test="${sessionScope.member.userSeq eq recipe.userSeq}">
+					<button onclick="location.href='updateForm.do?recipeSeq=${recipe.recipeSeq}'">수정</button>
+					<button onclick="location.href='delete.do?recipeSeq=${recipe.recipeSeq}'">삭제</button>
+				</c:if>
 				<button onclick="location.href='${pageContext.request.contextPath}/recipe/list.do'">목록</button>
 			</div>
 		</div>
@@ -54,15 +56,21 @@
 <script src="<c:url value='/js/recipe/recipeDetail.js'/>"></script>
 <script>
 	function makeCommentList(result) {
+// 		debugger
 // 		console.dir(result);
 		var html = "";
 		for (let i = 0; i < result.length; i++) {
 			var comment = result[i];
-			html += '<div class="comment_box" id="comment'+ comment.commentSeq +'">';
-			html += '  <h5><span id="commentName">'+comment.name+'</span>'
-			html += '  <button onclick="commentUpdateForm('+ comment.commentSeq +');">수정</button>'
-			html += '  <button onclick="commentDelete('+ comment.commentSeq +');">삭제</button></h5>';
-			html += '  <div id="commentTextDiv">' + comment.commentText + '</div>';
+		console.dir(${sessionScope.member.userSeq});
+		console.dir(comment.userSeq);
+		console.log("-------------")
+			html += '<div class="comment_box" id="comment'+comment.commentSeq+'">';
+			html += '  <h5><span id="commentName">'+comment.name+'</span>';
+			if (${sessionScope.member.userSeq} == comment.userSeq) {
+			html += '    <button onclick="commentUpdateForm('+comment.commentSeq+');">수정</button>'
+			html += '    <button onclick="commentDelete('+comment.commentSeq+');">삭제</button></h5>';
+			}
+			html += '  <div id="commentTextDiv">'+comment.commentText+'</div>';
 			html += '  <br>';
 			var date = new Date(comment.commentDate);
 			var time = date.getFullYear() + "-" 
@@ -90,12 +98,21 @@
 		});
 	}
 	
+// 	function check() {
+// 		if (${empty sessionScope.member}) {
+// 			alert("로그인 후 이용 가능합니다");
+// 			return false;
+// 		} else {
+// 			return true;
+// 		}
+// 	};
+	
 	$("#writeForm").submit(function (e) {
 		e.preventDefault();
 		$.ajax({
 			url: "<c:url value='/recipe/commentWrite.do'/>",
 			data: {
-				userSeq: "${recipe.userSeq}",
+				userSeq: "${sessionScope.member.userSeq}",
 				recipeSeq: "${recipe.recipeSeq}",
 				commentText: $("#writeForm textarea").val()
 			},

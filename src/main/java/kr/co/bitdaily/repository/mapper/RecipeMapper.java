@@ -7,13 +7,15 @@ import kr.co.bitdaily.repository.vo.RecipeComment;
 import kr.co.bitdaily.repository.vo.RecipeFile;
 
 public interface RecipeMapper {
-	List<Recipe> selectRecipe();
+	int selectRecipeCount(Recipe recipe);
+	List<Recipe> selectRecipe(Recipe recipe);
 	Recipe selectRecipeByNo(int recipeSeq);
 	void insertRecipe(Recipe recipe);
 	void deleteRecipe(int recipeSeq);
 	void updateRecipe(Recipe recipe);
 	void updateRecipeViewCnt(int recipeSeq);
 	
+	int selectRecipeCommentCount(int recipeSeq);
 	List<RecipeFile> selectRecipeFileByNo(int recipeSeq);
 	void insertRecipeFile(RecipeFile recipeFile);
 	

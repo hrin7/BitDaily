@@ -2,11 +2,11 @@ package kr.co.bitdaily.recipe.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,9 +24,10 @@ public class RecipeController {
 	private RecipeService recipeService;
 	
 	@RequestMapping("/list.do")
-	public ModelAndView retrieveListRecipe(@RequestParam(value="pageNo", defaultValue="1") int pageNo) {
+	public ModelAndView retrieveListRecipe(@ModelAttribute("recipe") Recipe recipe,
+            @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
 		ModelAndView mav = new ModelAndView("recipe/recipeList");
-		mav.addObject("result", recipeService.retrieveListRecipe(pageNo));
+		mav.addObject("result", recipeService.retrieveListRecipe(recipe));
 		return mav;
 	}
 	

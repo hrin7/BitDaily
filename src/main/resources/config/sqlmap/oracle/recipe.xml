@@ -11,13 +11,25 @@
 		<result column="view_count" property="viewCount" />
 		<result column="file_seq" property="fileSeq" />
 	</resultMap>
+	
+	<select id="selectRecipeCount" parameterType="recipe" resultType="int">
+    	select count(*)
+          from tb_recipe
+    </select>
 
-    <select id="selectRecipe" resultMap="recipeMap">
-	    select u.user_seq, u.name, recipe_seq, title, content, recipe_date, view_count, file_seq
-	      from tb_recipe r
-    	 inner join tb_user u
-    	    on r.user_seq = u.user_seq
-	     order by recipe_seq desc 
+    <select id="selectRecipe" resultMap="recipeMap" parameterType="recipe">
+	    select *
+	      from (
+				select rownum rnum, a.*
+				  from ( 
+					    select u.user_seq, u.name, recipe_seq, title, content, recipe_date, view_count, file_seq
+					      from tb_recipe r
+				    	 inner join tb_user u
+				    	    on r.user_seq = u.user_seq
+					     order by recipe_seq desc 
+				  ) a	    
+	      )
+	     where rnum between #{begin} and #{end}
     </select>
     	
     <select id="selectRecipeByNo" parameterType="int" resultMap="recipeMap">
@@ -71,6 +83,12 @@
 		<result column="comment_text" property="commentText" />
 		<result column="comment_date" property="commentDate" />
 	</resultMap>
+	
+	<select id="selectRecipeCommentCount" parameterType="int" resultType="int">
+    	select count(*)
+          from tb_comment
+         where recipe_seq = #{recipeSeq}
+    </select>
 	
 	<select id="selectCommentByNo" parameterType="int" resultMap="commentMap">
 	    select u.user_seq, u.name, c.recipe_seq, c.comment_seq, c.comment_text, c.comment_date

@@ -38,7 +38,7 @@
 				</c:choose>
 				</div>
 			</a>
-			<h5>${recipe.title}</h5>
+			<h5>${recipe.title} [${recipe.commentCount}]</h5>
 			글쓴이 ${recipe.name} 조회수 ${recipe.viewCount}<br>
 			<fmt:formatDate value="${recipe.recipeDate}" pattern="yyyy-MM-dd"/> 
 		</div>
@@ -54,19 +54,33 @@
 	</form>
 </div>
 <br>
-<div id="pageing">[1][2][3][4][5]</div>
+	<c:import url="/WEB-INF/jsp/recipe/page.jsp" />
 <br>
 
 <script src="<c:url value='/js/recipe/recipeList.js'/> "></script>
 <script>
 	function check() {
-		if ('${empty sessionScope.member}') {
+		if (${empty sessionScope.member}) {
 			alert("로그인 후 이용 가능합니다");
 			return false;
 		} else {
 			return true;
 		}
 	};
+	
+	// 함수를 넘겨주고 그 페이지에서 이벤트(href)를 발생시키게 한다.
+	function goPage(pageNo) {
+		location.href = "list.do?pageNo=" + pageNo;
+	}
+	
+	// 이벤트(click)를 여기서 주고 넘긴다
+	$("ul.pagination > li > a").click(function () {
+		// data("page") : data-page의 값을 가져올 수 있다.
+		var no = $(this).data("page");
+		if (no) {
+			location.href = "list.do?pageNo=" + no;
+		}
+	});
 </script>
 
 </body>

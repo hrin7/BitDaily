@@ -7,7 +7,7 @@ import kr.co.bitdaily.repository.vo.Recipe;
 import kr.co.bitdaily.repository.vo.RecipeComment;
 
 public interface RecipeService {
-	Map<String,Object> retrieveListRecipe(int pageNo);
+	Map<String,Object> retrieveListRecipe(Recipe recipe);
 	Map<String,Object> detailRecipe(int recipeSeq);
 	void writeRecipe(Recipe recipe) throws Exception;
 	void deleteRecipe(int recipeSeq);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.bitdaily.repository.mapper.RecipeMapper;
+import kr.co.bitdaily.repository.vo.PageResult;
 import kr.co.bitdaily.repository.vo.Recipe;
 import kr.co.bitdaily.repository.vo.RecipeComment;
 import kr.co.bitdaily.repository.vo.RecipeFile;
@@ -22,15 +23,22 @@ public class RecipeServiceImpl implements RecipeService {
 	private RecipeMapper mapper;
 
 	@Override
-	public Map<String,Object> retrieveListRecipe(int pageNo) {
+	public Map<String,Object> retrieveListRecipe(Recipe recipe) {
+		recipe.setPageNo(recipe.getPageNo());
+		int commentCount = 0;
+		
 		Map<String, Object> map = new HashMap<>();
-		List<Recipe> recipes = mapper.selectRecipe();
-		System.out.println("레시피 사이즈 : "+ recipes.size());
+		List<Recipe> recipes = mapper.selectRecipe(recipe);
 		for (Recipe r : recipes) {
 			List<RecipeFile> fileList = mapper.selectRecipeFileByNo(r.getRecipeSeq());
 			r.setFileList(fileList);
+			commentCount = mapper.selectRecipeCommentCount(r.getRecipeSeq());
+			r.setCommentCount(commentCount);
 		}
+		int count = mapper.selectRecipeCount(recipe);
+		
 		map.put("list", recipes);
+		map.put("pageResult", new PageResult(recipe.getPageNo(), count));
 		return map;
 	}
 
