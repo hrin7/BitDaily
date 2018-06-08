@@ -11,12 +11,12 @@
 <div id="outer">
 	<br><br>
 	<div id="date">
-		<a href="#"><img src="<c:url value="/images/icon/before.png" />" width="30px" height="30px"></a>
-		<span id="start">2018-05-21</span>~<span id="end">2018-05-27</span>
-		<a href="#"><img src="<c:url value="/images/icon/next.png" />" width="30px" height="30px"></a>
+		<a href="#" id="prev"><img src="<c:url value="/images/icon/before.png" />" width="30px" height="30px"></a>
+		<span id="start"></span>~<span id="end"></span>
+		<a href="#" id="next"><img src="<c:url value="/images/icon/next.png" />" width="30px" height="30px"></a>
 	</div>
-	<div id="calorie">
-		<h4>주간 칼로리</h4>
+	<div id="activeRank">
+		<h4>주간 활동</h4>
 		<ul>
 			<li class="lines first"><p class="box rankdeco firstcolor">1</p><p class="box namedeco">홍길동</p></li>
 			<li class="lines second"><p class="box rankdeco secondcolor">2</p><p class="box namedeco">홍길동</p></li>
@@ -53,61 +53,93 @@
 	<div id="clear"></div>
 </div>
 <script>
-function makeWeekSelectOptions() {
-    var start = $("#start").text();
-    var end = $("#end").text();
- 	
-    var startDate = new Date(start);
-    var endDate = new Date(end);
-    
-    var startYear = startDate.getFullYear();
-    var startMonth = startDate.getMonth();
- 
-    var monthAgo = new Date(year, month-1, 01);
-    var monthAgoLastDay = (new Date(monthAgo.getFullYear(), monthAgo.getMonth()+1, 0)).getDate();
-    var monthAgoEndDate = new Date(monthAgo.getFullYear(), monthAgo.getMonth(), monthAgoLastDay);
- 
-    var week = sdate.getDay();
-    sdate.setDate(sdate.getDate() - week);
-    var edate = new Date(sdate.getFullYear(), sdate.getMonth(), sdate.getDate());
- 
-    var obj = document.getElementById("sh_week");
-    obj.options.length = 0;
-    var seled = "";
-    while(endDate.getTime() >= edate.getTime()) {
- 
-        var sYear = sdate.getFullYear();
-        var sMonth = (sdate.getMonth()+1);
-        var sDay = sdate.getDate();
- 
-        sMonth = (sMonth < 10) ? "0"+sMonth : sMonth;
-        sDay = (sDay < 10) ? "0"+sDay : sDay;
- 
-        var stxt = sYear + "-" + sMonth + "-" + sDay;
- 
-        edate.setDate(sdate.getDate() + 6);
- 
-        var eYear = edate.getFullYear();
-        var eMonth = (edate.getMonth()+1);
-        var eDay = edate.getDate();
- 
-        eMonth = (eMonth < 10) ? "0"+eMonth : eMonth;
-        eDay = (eDay < 10) ? "0"+eDay : eDay;
- 
-        var etxt = eYear + "-" + eMonth + "-" + eDay;
- 
-        if(today.getTime() >= sdate.getTime() && today.getTime() <= edate.getTime()) {
-            seled = stxt+"|"+etxt;
-        }
- 
-        obj.options[obj.options.length] = new Option(stxt+"~"+etxt, stxt+"|"+etxt);
- 
-        sdate = new Date(edate.getFullYear(), edate.getMonth(), edate.getDate() + 1);
-        edate = new Date(sdate.getFullYear(), sdate.getMonth(), sdate.getDate());
-    }
- 
-    if(seled) obj.value = seled;
+var start = $("#start").text();
+var end = $("#end").text();
+
+function modifyDate(arr){
+	var startDay = new Date(arr[0]);
+	var year = startDay.getFullYear();
+	var month = startDay.getMonth()+1;
+	if(month < 10){
+		month = '0' + month;
+	}
+	var day = startDay.getDate();
+	if(day < 10){
+		day = '0' + day;
+	}
+	$("#start").text(year + '-' + month + '-' + day);
+	var endDay = new Date(arr[1]);
+	year = endDay.getFullYear();
+	month = endDay.getMonth()+1;
+	if(month < 10){
+		month = '0' + month;
+	}
+	var day = endDay.getDate();
+	if(day < 10){
+		day = '0' + day;
+	}
+	$("#end").text(year + '-' + month + '-' + day);
+	setRank();
 }
+
+
+function setWeek(){
+	$.ajax({
+		url : "/spring-bitdiary/rank/setWeek.json"
+	}).done(modifyDate)
+}
+setWeek();
+
+$("#prev").click(function(){
+	
+	$.ajax({
+		url : "/spring-bitdiary/rank/prevWeek.json",
+		data : {
+			date : new Date($("#start").text())
+		}
+	}).done(modifyDate)
+});
+
+$("#next").click(function(){	
+	$.ajax({
+		url : "/spring-bitdiary/rank/nextWeek.json",
+		data : {
+			date : new Date($("#start").text())
+		}
+	}).done(modifyDate)
+});
+
+function setRank(){
+	console.log($("#start").text());
+	console.log(new Date($("#end").text()));
+	$.ajax({
+		url : "/spring-bitdiary/rank/rank.json",
+		data : {
+				startDate : new Date($("#start").text()),
+				endDate : new Date($("#end").text())
+		}
+	}).done(function(result){
+		$("#activeRank > ul > li > p:last-child").each(function(index){
+			console.log("제발",result.active[index]);
+			$(this).text("없음");
+			if(result.active[index]){
+				console.log("들어오세요 제발~");
+				$(this).text(result.active[index].userSeq);
+			}
+		})
+		console.log(result.active[0].userSeq);
+		$("#workout > ul > li > p:last-child").each(function(index){
+			console.log("제발",result.workout[index]);
+			$(this).text("없음");
+			if(result.work[index]){
+				console.log("들어오세요 제발~");
+				$(this).text(result.workout[index].userSeq);
+			}
+		})
+		
+	})
+}
+
 </script>
 </body>
 </html>

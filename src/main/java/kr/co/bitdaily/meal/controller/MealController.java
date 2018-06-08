@@ -2,6 +2,7 @@ package kr.co.bitdaily.meal.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -67,30 +68,60 @@ public class MealController {
 	
 	@RequestMapping("/makeList.json")
 	@ResponseBody
-	public List<MealDetail> makeList(@RequestParam int mealSeq) {
-		return mealService.selectMealDetail(mealSeq);
+	public List<MealDetail> makeList(@RequestParam String userSeq , Date mealDate) {
+		Meal meal = new Meal();
+		meal.setUserSeq(Integer.parseInt(userSeq));
+		meal.setMealDate(mealDate);
+		meal = mealService.selectMealSeq(meal);
+		return mealService.selectMealDetail(meal.getMealSeq());
 	}
 	
 	
 	@RequestMapping("/insertFood.json")
 	@ResponseBody
-	public void insertFood(@RequestParam int mealSeq, String mealType, int foodSeq, String mealGram, String filePath, HttpSession session) {
+	public void insertFood(@RequestParam Date mealDate, String userSeq, String mealType, String foodSeq , String mealGram, String filePath) {
+		
+		System.out.println("식사 날짜" + mealDate);
+		System.out.println("유저 시퀀스" + userSeq);
+		System.out.println("식사 타입" + mealType);
+		System.out.println("음식 시퀀스" + foodSeq);
+		System.out.println("식사 그람" + mealGram);
+		System.out.println("파일" + filePath);
+		
+		Meal meal = new Meal();
+		meal.setUserSeq(Integer.parseInt(userSeq));
+		meal.setMealDate(mealDate);
+		meal = mealService.selectMealSeq(meal);
+		
 		MealDetail detail = new MealDetail();
-		detail.setMealSeq(mealSeq);
+		detail.setMealSeq(meal.getMealSeq());
 		detail.setMealType(mealType);
-		detail.setFoodSeq(foodSeq);
+		detail.setFoodSeq(Integer.parseInt(foodSeq));
 		detail.setMealGram(Integer.parseInt(mealGram));
 		detail.setFilePath(filePath);
-		Member member = (Member) session.getAttribute("member");
-		int userSeq = member.getUserSeq();
-		mealService.insertFood(detail, userSeq);
+		mealService.insertFood(detail, Integer.parseInt(userSeq));
+		
+		
+//		MealDetail detail = new MealDetail();
+//		detail.setMealSeq(mealSeq);
+//		detail.setMealType(mealType);
+//		detail.setFoodSeq(foodSeq);
+//		detail.setMealGram(Integer.parseInt(mealGram));
+//		detail.setFilePath(filePath);
+//		Member member = (Member) session.getAttribute("member");
+//		int userSeq = member.getUserSeq();
+//		mealService.insertFood(detail, userSeq);
 	}
 	
 	
 	@RequestMapping("/foodSearch.json")
 	@ResponseBody
 	public List<Food> foodSearch(@RequestParam String keyword) {
+		System.out.println("서칭 작동중...............");
+		System.out.println("키워드 명 : " + keyword);
 		return mealService.selectFood(keyword);
 	}
-
+	
+	
+	
 }

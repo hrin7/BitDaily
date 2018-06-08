@@ -8,13 +8,13 @@ body {
 	height : 700px;
 }
 
-#calorie, #workout , #weight {
+#activeRank, #workout , #weight {
 	width : 29%;
 	margin : 30px 18px;
 	height : 400px;
 	float: left;
 }
-#calorie > ul , #workout > ul , #weight > ul {
+#activeRank > ul , #workout > ul , #weight > ul {
 	list-style: none;
 }
 
