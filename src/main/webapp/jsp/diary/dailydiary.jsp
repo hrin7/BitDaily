@@ -33,7 +33,7 @@
 	</div>
 	
 	<div class="mainMenu">
-		<p><img src="<c:url value="/images/icon/diary.png"/>"> 오늘의 일기</p>
+		<p id="title"><img src="${pageContext.request.contextPath}/images/icon/fooddiary.png" width="40px"/> <span id="today">오늘</span>의 식단</p>
 		<div id="content">
 			<div id="titleRegist"><input type="text" name="diaryTitle" id="diaryTitle" placeholder="제목을 입력하세요"></div>
 			<form id="note">

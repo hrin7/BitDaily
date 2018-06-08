@@ -10,6 +10,7 @@
 <link href="${pageContext.request.contextPath}/css/diary/commondiary.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/diary/dailydiary.css" >
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/diary/fooddiary.css" >
 </head>
 <body>
 
@@ -37,17 +38,17 @@
 			<div class="mealContent">
 				<div class="result" id="morning">
 				</div>
-				<div class='searchBox'>
+				<div class="searchBox">
 					<div class="inputbox">
-						<input type='text' name='foodName' class='searchFood'/>
-						<img src='/spring-bitdiary/images/icon/search.png' width='30px' height='30px' class='searching'>
-						<a class='popup' data-toggle='modal' href='#visionModal'><img src='/spring-bitdiary/images/icon/camera.png' width='40px' height='40px'></a>
+						<input type="text" name="foodName" class="searchFood"/>
+						<img src="/spring-bitdiary/images/icon/search.png" width="30px" height="30px" class="searching">
+						<a class="popup" data-toggle="modal" href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png" width="40px" height="40px"></a>
 					</div>
-					<div class='search_list'>
+					<div class="search_list">
 					</div>
-					<div id='buttons'>
+					<div id="buttons">
 						<input class="hiddenBox" readonly="readonly" value="1">
-						<button type='button' class='buts cancle'>취소</button><button type='button' class='buts insert'>등록</button>
+						<button type="button" class="buts cancle">취소</button><button type="button" class="buts insert">등록</button>
 					</div>
 				</div>
 				<div class="addFoodBox">
@@ -60,16 +61,16 @@
 			<p class="mealType">점심</p>
 			<div class="mealContent">
 				<div class="result" id="lunch"></div>
-				<div class='searchBox'>
+				<div class="searchBox">
 					<div class="inputbox">
-						<input type='text' name='foodName' class='searchFood'/>
-						<img src='/spring-bitdiary/images/icon/search.png' width='30px' height='30px' class='searching'>
-						<a class='popup' data-toggle='modal' href='#visionModal'><img src='/spring-bitdiary/images/icon/camera.png' width='40px' height='40px'></a>
+						<input type="text" name="foodName" class="searchFood"/>
+						<img src="/spring-bitdiary/images/icon/search.png" width="30px" height="30px" class="searching">
+						<a class="popup" data-toggle="modal" href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png" width="40px" height="40px"></a>
 					</div>
-					<div class='search_list'></div>
-					<div id='buttons'>
+					<div class="search_list"></div>
+					<div id="buttons">
 						<input class="hiddenBox" readonly="readonly" value="2">
-						<button type='button' class='buts cancle'>취소</button><button type='button' class='buts insert'>등록</button>
+						<button type="button" class="buts cancle">취소</button><button type="button" class="buts insert">등록</button>
 					</div>
 				</div>
 				<div class="addFoodBox">
@@ -81,17 +82,17 @@
 			<p class="mealType">저녁</p>
 			<div class="mealContent">
 				<div class="result" id="dinner"></div>
-				<div class='searchBox'>
+				<div class="searchBox">
 					<div class="inputbox">
-						<input type='text' name='foodName' class='searchFood'/>
-						<img src='/spring-bitdiary/images/icon/search.png' width='30px' height='30px' class='searching'>
-						<a class='popup' data-toggle='modal' href='#visionModal'><img src='/spring-bitdiary/images/icon/camera.png' width='40px' height='40px'></a>
+						<input type="text" name="foodName" class="searchFood"/>
+						<img src="/spring-bitdiary/images/icon/search.png" width="30px" height="30px" class="searching">
+						<a class="popup" data-toggle="modal" href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png" width="40px" height="40px"></a>
 					</div>
-					<div class='search_list'>
+					<div class="search_list">
 					</div>
-					<div id='buttons'>
+					<div id="buttons">
 						<input class="hiddenBox" readonly="readonly" value="3">
-						<button type='button' class='buts cancle'>취소</button><button type='button' class='buts insert'>등록</button>
+						<button type="button" class="buts cancle">취소</button><button type="button" class="buts insert">등록</button>
 					</div>
 				</div>
 				<div class="addFoodBox">
@@ -103,17 +104,17 @@
 			<p class="mealType">간식</p>
 			<div class="mealContent">
 				<div class="result" id="snack"></div>
-				<div class='searchBox'>
+				<div class="searchBox">
 					<div class="inputbox">
-						<input type='text' name='foodName' class='searchFood'/>
-						<img src='/spring-bitdiary/images/icon/search.png' width='30px' height='30px' class='searching'>
-						<a class='popup' data-toggle='modal' href='#visionModal'><img src='/spring-bitdiary/images/icon/camera.png' width='40px' height='40px'></a>
+						<input type="text" name="foodName" class="searchFood"/>
+						<img src="/spring-bitdiary/images/icon/search.png" width="30px" height="30px" class="searching">
+						<a class="popup" data-toggle="modal" href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png" width="40px" height="40px"></a>
 					</div>
-					<div class='search_list'></div>
-					<div id='buttons'>
+					<div class="search_list"></div>
+					<div id="buttons">
 						<input class="hiddenBox" readonly="readonly" value="4">
-						<button type='button' class='buts cancle'>취소</button>
-						<button type='button' class='buts insert'>등록</button>
+						<button type="button" class="buts cancle">취소</button>
+						<button type="button" class="buts insert">등록</button>
 					</div>
 				</div>
 				<div class="addFoodBox">
