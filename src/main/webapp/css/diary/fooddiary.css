@@ -1,31 +1,12 @@
-@charset "UTF-8";
-
 .food_record {
 	width: 90%;
 }
 table {
 	margin: 20px auto;
-	padding: 10px;
+	paddFoodBoxing: 10px;
 }
-.icon {
-	color: #062859;
-	font-weight: bold;
-	font-size: large;
-	width: 40px;
-	height: 40px;
-	padding: 1px 1px;
-	text-shadow: 1px 1px 1px #c6d5f2;
-	
-}
-.add {
-	margin-left:30px;
-	margin-top: 3px;
-	border: 1px dashed #133668;
-	width: 600px;
-	height: 30px;
-	border-radius: 20px;
-	display: inline-block;
-}
+
+
 .select {
 	margin-left:30px;
 	border: 1px dashed #133668;
@@ -33,23 +14,10 @@ table {
 	height: auto;
 	border-radius: 20px;
 		display: inline-block;
-		padding : 20px 0;
+		paddFoodBoxing : 20px 0;
 }
-.result {
-	margin-left:30px;
-	border: 1px solid #133668;
-	width: 600px;
-	height: auto;
-	border-radius: 20px;
-	display: inline-block;
-/* 	visibility: hidden; */
-/* 	height: 0; */
-	
-}
-.result_area {
-	float: left;
-	margin: 10px auto;
-}
+
+
 .result_pic {
 	margin: 8px 8px;
 }
@@ -57,44 +25,15 @@ table {
 	width: 185px;
 	height: auto;
 	text-align: center;
-	padding: 4px 4px;
+	paddFoodBoxing: 4px 4px;
 	margin: 7px 7px;
 }
-.searchBox {
-	margin-left: 30px;
-	width: 460px;
-	border: 1px solid #aaa;
-}
-#search_list {
-	margin: 10px 50px;
-}
-.input_gram {
-	width: 80px;
-	float: right;
-	border: 1px solid #aaa;
-}
-#buttons {
-	text-align: right;
-	margin-right: 50px;
-}
 
-.buts {
-	border: 1px solid #00AFFF;
-	border-radius: 8px;
-	width: 50px; height: 25px;
-	color: #00AFFF;
-	font-size: 13px;
-}
 .buts:hover { cursor: pointer; }
 .buts:focus { outline: none; }
 .buts:active { background-color: rgba(0,50,200,0.1) }
 
-#morning, #lunch, #dinner, #snack {
-	width: 100%;
-	height: auto;
-	margin: 50px;
-	box-sizing: border-box;
-}
+
 
 .result_img {
 	border-radius: 20px;
@@ -105,5 +44,113 @@ text-decoration: none;
 color : black;
 }
 #title { font-size: 25px;
-    padding: 20px;
-    margin: 10px 32px; }
+    paddFoodBoxing: 20px;
+    margin: 10px 32px; 
+}
+
+a.addFood {
+	display:inline-block;
+	margin-left: 50px;
+	height: 30px;
+	line-height: 30px;
+}
+a > img {
+	margin-right: 10px;
+}
+<!-- -->
+
+.inputBox {
+	width: 75%;
+}
+.hiddenBox {
+	width: 65%;
+	visibility: hidden;
+}
+
+.mealType {
+	color: #062859;
+	font-weight: bold;
+	font-size: large;
+	text-shadow: 1px 1px 1px #c6d5f2;
+}
+
+.searchFood {
+	margin-left: 30px;
+	width: 65%;
+	border: 1px solid #aaa;
+}
+
+.buts { 
+ 	border: 1px solid #00AFFF; 
+ 	border-radius: 8px; 
+ 	width: 50px; height: 25px; 
+ 	color: #00AFFF; 
+ 	font-size: 13px; 
+ 	margin-left: 10px;
+}
+
+
+
+.search_list {
+	width:75%;
+}
+
+.searchedFood {
+	position: relative;
+	margin-left: 30px;
+	margin-top: auto;
+	margin-bottom: auto;
+	padding: 0px;
+	width: 100%;
+	height : 35px;
+}
+input[id^=result] {
+	margin: 10px;
+}
+
+.keyword {
+	margin: 0 10px;
+	line-height: 35px;
+}
+.gram {
+	position: absolute;
+	width : 15%;
+	text-align: right;
+	right: 0;
+	margin: 5px;
+}
+
+.result {
+	margin-left:30px;
+	margin-top: 3px;
+	border: 1px solid #133668;
+	width: 75%;
+	height: auto;
+	border-radius: 20px;
+	display: inline-block;
+}
+
+.addFoodBox {
+	margin-left:30px;
+	margin-top: 3px;
+	border: 1px dashed #133668;
+	width: 75%;
+	height: 30px;
+	border-radius: 20px;
+	display: inline-block;
+}
+
+.meal {
+	position: relative;
+	width: 100%;
+	height: auto;
+	margin: 50px;
+	box-sizing: border-box;
+}
+
+.result_area {
+	float: left;
+	margin: 10px 10px;
+	width: 30%;
+	overflow: hidden;
+}
