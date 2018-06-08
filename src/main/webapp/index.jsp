@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head>\
 <body>
 <%-- 	<c:redirect url="main/main.do" /> --%>
 	<c:redirect url="/login/loginForm.do" />

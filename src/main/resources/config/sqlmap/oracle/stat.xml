@@ -32,6 +32,9 @@
 	 where meal_seq = #{mealSeq}
 	</select>
 	
+	
+	
+<!-- 	minipart -->
 	<select id="selectByUserSeq"  parameterType="int" resultMap="statMap">
 	select *
 	  from tb_stat

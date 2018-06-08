@@ -16,6 +16,7 @@ public interface MealMapper {
 	void insertMealSeq(Meal meal);
 	void insertMealDetail(MealDetail detail);
 	List<MealDetail> selectMealDetail(int mealSeq);
+	Meal selectByUserSeq(int userSeq);
 
 
 }

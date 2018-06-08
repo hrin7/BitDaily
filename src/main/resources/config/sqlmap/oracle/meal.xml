@@ -74,4 +74,9 @@
 	 where m.meal_seq = #{mealSeq}
 	</select>
 	
+	<select id="selectByUserSeq" parameterType="int" resultMap="mealMap">
+		select *
+		  from tb_meal
+		 where  user_seq = #{userSeq}
+	</select>
 </mapper>

@@ -91,7 +91,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script src="<c:url value='/js/diary/mini.js'/>"></script>
+<%-- <script src="<c:url value='/js/diary/mini.js'/>"></script> --%>
 <script src="<c:url value='/js/diary/exercisediary.js'/>"></script>
 
 
@@ -112,13 +112,15 @@
 	}
 	
 	function KalUserSeq() {
+		console.log("실행중.........");
 		var id = "${sessionScope.member.id}";
-		console.log(id);
+// 		console.log(id);
 		$.ajax({
 			url: "${pageContext.request.contextPath}/mini/mini.json",
 			data: {"id" : "${sessionScope.member.id}"},
 			dataType: "json",
 			success: function (data) {
+				console.log("성공");
 				kal(data);
 				console.log(data);
 			},
@@ -128,14 +130,142 @@
 		});
 	}
 	
-KalUserSeq();
+	KalUserSeq();
 
+	var img = new Image();
+
+	var ctx = document.getElementById("pieCanvas").getContext('2d');
+	var fillPattern = ctx.createPattern(img, 'repeat');
+	
+	
+	function dou() {
+		var userSeq = "${sessionScope.member.userSeq}";
+		console.log(userSeq);
+		$.ajax({
+			url: "${pageContext.request.contextPath}/mini/minidou.json",
+			data: {"userSeq" : "${sessionScope.member.userSeq}"},
+			dataType: "json",
+			success: function (data) {
+				console.log(data);
+				var data = {
+					    datasets: [{
+					        data: [data.morning, data.lunch, data.dinner, data.snack],
+						    backgroundColor: [
+						    	 'rgba(255, 99, 132)',
+					             'rgba(255, 159, 64)',
+					             'rgba(54, 162, 235)',
+					             'rgba(255, 205, 86)'
+						    ]
+					    }],
+					    // These labels appear in the legend and in the tooltips when hovering different arcs
+					    labels: [
+					        '아침',
+					        '점심',
+					        '저녁',
+					        '간식'
+					    ]
+					};
+				var img = new Image();
+
+				var ctx = document.getElementById("pieCanvas").getContext('2d');
+				var fillPattern = ctx.createPattern(img, 'repeat');
+				var myPieChart = new Chart(ctx,{
+				    type: 'doughnut',
+				    data: data,
+				    options: {
+						rotation : 1 * Math.PI,
+						'animation.animateScale' : true,
+				    }
+				});
+			},
+	
+			
+		});
+	}
+	
+	dou();
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //도넛 차트
 
+// var img = new Image();
 
+// 	var ctx = document.getElementById("pieCanvas").getContext('2d');
+// 	var fillPattern = ctx.createPattern(img, 'repeat');
+	
+	
+// 	function KalUserSeq() {
+// 		var userSeq = "${sessionScope.member.userSeq}";
+// 		console.log(userSeq);
+// 		$.ajax({
+// 			url: "${pageContext.request.contextPath}/mini/minidou.json",
+// 			data: {"userSeq" : "${sessionScope.member.userSeq}"},
+// 			dataType: "json",
+// 			success: function (data) {
+// 				console.log(data);
+// 				var data = {
+// 					    datasets: [{
+// 					        data: [data.morning, data.lunch, data.dinner, data.snack],
+// 						    backgroundColor: [
+// 						    	 'rgba(255, 99, 132)',
+// 					             'rgba(255, 159, 64)',
+// 					             'rgba(54, 162, 235)',
+// 					             'rgba(255, 205, 86)'
+// 						    ]
+// 					    }],
+// 					    // These labels appear in the legend and in the tooltips when hovering different arcs
+// 					    labels: [
+// 					        '아침',
+// 					        '점심',
+// 					        '저녁',
+// 					        '간식'
+// 					    ]
+// 					};
+// 				var img = new Image();
 
+// 				var ctx = document.getElementById("pieCanvas").getContext('2d');
+// 				var fillPattern = ctx.createPattern(img, 'repeat');
+// 				var myPieChart = new Chart(ctx,{
+// 				    type: 'doughnut',
+// 				    data: data,
+// 				    options: {
+// 						rotation : 1 * Math.PI,
+// 						'animation.animateScale' : true,
+// 				    }
+// 				});
+// 			},
+	
+			
+// 		});
+// 	}
+	
 
-
+// 	KalUserSeq();
 
 </script>
 </body>
