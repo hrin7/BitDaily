@@ -35,21 +35,21 @@
 		<p id="title"><img src="${pageContext.request.contextPath}/images/icon/dumbbell.png"/> 오늘의 운동 다이어리</p>
 		<div id="exeTable"></div>
 		<br>
-		<form class="search-container" action="<c:url value='/diary/exeSearch.do'/>">
+		<form class="search-container">
 		    <input type="text" id="search-bar" name="excerciseName" placeholder="운동 검색하기">
-		    <input type="image" class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
+		    <a href="javascript:exeSearch();"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
 	    </form>
 	    
 	    <div style="height: 300px;">
 	    	<table id="searchResult">
-	    	  <c:forEach var="exe" items="${list}">
-				<tr>
-					<td><a href="#t" class="exeName">${exe.excerciseName}</a></td>
-					<td style="width: 12%; text-align: right;">1분</td>
-					<td style="width: 12%; text-align: right;" class="exeKcal">${exe.excerciseKcal}kcal</td>
-				</tr>
-				<tr><td colspan="5"><hr></td></tr>
-	    	  </c:forEach>
+<%-- 	    	  <c:forEach var="exe" items="${list}"> --%>
+<!-- 				<tr> -->
+<%-- 					<td><a href="#t" class="exeName">${exe.excerciseName}</a></td> --%>
+<!-- 					<td style="width: 12%; text-align: right;">1분</td> -->
+<%-- 					<td style="width: 12%; text-align: right;" class="exeKcal">${exe.excerciseKcal}kcal</td> --%>
+<!-- 				</tr> -->
+<!-- 				<tr><td colspan="5"><hr></td></tr> -->
+<%-- 	    	  </c:forEach> --%>
 			</table>
 	    </div>
 	    
@@ -72,7 +72,31 @@
 <script src="<c:url value='/js/diary/exercisediary.js'/>"></script>
 
 <script>
-	$(".exeName").click(function () {
+	function exeSearch() {
+		$.ajax({
+			url: "<c:url value='/diary/exeSearch.do'/>",
+			data: {excerciseName: $("#search-bar").val()},
+			dataType: "json",
+			success: function (result) {
+				var html = "";
+				for (let i = 0; i < result.length; i++) {
+					var exe = result[i];
+					html += '  <tr>';
+					html += '    <td><a href="#t" class="exeName">'+exe.excerciseName+'</a></td>';
+					html += '    <td style="width: 12%; text-align: right;">1분</td>';
+					html += '    <td style="width: 12%; text-align: right;" class="exeKcal">'+exe.excerciseKcal+'kcal</td>';
+					html += '  </tr>';
+					html += '  <tr><td colspan="5"><hr></td></tr>';
+				}
+				$("#searchResult").html(html);
+			},
+			error: function (e) {
+				console.dir(e);
+			}
+		});
+	}
+	
+	$(document).on("click", ".exeName", function() { 
 //  		alert($(this).text());
 		$.ajax({
 			url: "<c:url value='/diary/exeSearchName.do'/>",
