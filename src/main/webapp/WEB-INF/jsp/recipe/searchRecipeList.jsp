@@ -24,7 +24,7 @@
 	<div id="clear"></div>
 </div>
 <div id="outer">
-	<c:forEach var="recipe" items="${result.list}">
+	<c:forEach var="recipe" items="${list}">
 		<div class="content-box">
 			<a href="detail.do?recipeSeq=${recipe.recipeSeq}">
 				<div class="imgDiv">
@@ -43,7 +43,7 @@
 			<fmt:formatDate value="${recipe.recipeDate}" pattern="yyyy-MM-dd"/> 
 		</div>
 	</c:forEach>
-	<c:if test="${empty result.list}">
+	<c:if test="${empty list}">
 		입력된 게시물이 없습니다.
 	</c:if>
 	<div id="clear"></div>
@@ -59,42 +59,6 @@
 
 <script src="<c:url value='/js/recipe/recipeList.js'/> "></script>
 <script>
-<%-- 
-	function search() {
-		$.ajax({
-			url: "<c:url value='/recipe/searchList.do'/>",
-			data: {title: $("#search-bar").val()},
-			dataType: "json",
-			success: function (result) {
-				console.dir(result);
-				var html = "";
-				for (var i = 0; i < result.length; i++) {
-					var recipe = result[i];
-					html += '<div class="content-box">                                                                                               ';
-					html += '	<a href="detail.do?recipeSeq='+recipe.recipeSeq+'">                                                                   ';
-					html += '		<div class="imgDiv">                                                                                             ';
-					if (recipe.fileList != null) {
-						html += '		<img src="<c:url value=\''+recipe.fileList[0].filePath/recipe.fileList[0].fileOriName+'\'/>" class="img"/> ';
-					} else {
-						html += '		<img src="<c:url value=\'/images/noimage.png\'/>" class="img"/>                                              ';
-					}
-					html += '		</div>                                                                                                           ';
-					html += '	</a>                                                                                                                 ';
-					html += '	<h5>'+recipe.title+' ['+recipe.commentCount+']</h5>                                                                    ';
-					html += '	글쓴이 '+recipe.name+' 조회수 '+recipe.viewCount+'<br>                                                                       ';
-					html += '	<fmt:formatDate value="'+recipe.recipeDate+'" pattern="yyyy-MM-dd"/>                                                  ';
-					html += '</div>                                                                                                                  ';
-				}
-				if (result == null) {
-					html += '	검색된 게시물이 없습니다.                                                                                                       ';
-				}
-				html += '<div id="clear"></div>                                                                                                  ';
-				$("#outer").html(html);
-			}
-		});
-	}
---%>
-
 	function check() {
 		if (${empty sessionScope.member}) {
 			alert("로그인 후 이용 가능합니다");

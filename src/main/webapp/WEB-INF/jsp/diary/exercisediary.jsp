@@ -72,6 +72,19 @@
 <script src="<c:url value='/js/diary/exercisediary.js'/>"></script>
 
 <script>
+	function exeDelete(exerciseRecordSeq) {
+		$.ajax({
+			url: "<c:url value='/diary/exeDelete.do'/>",
+			data: {
+				userSeq: "${sessionScope.member.userSeq}",
+				exerciseRecordSeq: exerciseRecordSeq,
+				exerciseDate : new Date()
+			},
+			dateType: "json",
+			success: makeExeList
+		});
+	}
+
 	function exeSearch() {
 		$.ajax({
 			url: "<c:url value='/diary/exeSearch.do'/>",
@@ -170,7 +183,7 @@
 			html += '		<td style="width: 12%; text-align: right;">'+exe.exerciseTime+'분</td>';
 			html += '		<td style="width: 12%; text-align: right;">'+exe.excerciseKcal+'kcal</td>';
 			html += '		<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/edit.png"/></td>';
-			html += '		<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/trash.png"/></td>';
+			html += '		<td style="width: 5%;"><a href="javascript:exeDelete('+exe.exerciseRecordSeq+');"><img src="${pageContext.request.contextPath}/images/icon/trash.png"/></a></td>';
 			html += '	</tr>';
 			html += '	<tr><td colspan="5"><hr></td></tr>';
 			timeSum += exe.exerciseTime;
@@ -196,7 +209,7 @@
 		$.ajax({
 			url: "<c:url value='/diary/exeDiaryList.do'/>",
 			data:  { 
-				userSeq : "41",
+				userSeq : "${sessionScope.member.userSeq}",
 				exerciseDate : new Date()
 			},
 			dataType: "json",

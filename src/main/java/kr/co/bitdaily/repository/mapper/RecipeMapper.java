@@ -14,6 +14,7 @@ public interface RecipeMapper {
 	void deleteRecipe(int recipeSeq);
 	void updateRecipe(Recipe recipe);
 	void updateRecipeViewCnt(int recipeSeq);
+	List<Recipe> searchRecipeByTitle(String title);
 	
 	int selectRecipeCommentCount(int recipeSeq);
 	List<RecipeFile> selectRecipeFileByNo(int recipeSeq);

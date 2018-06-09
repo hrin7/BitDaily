@@ -8,5 +8,6 @@ public interface ExerciseService {
 	List<Exercise> retrieveListExe(Exercise exe);
 	List<Exercise> searchExercise(String excerciseName);
 	Exercise searchExerciseName(String excerciseName);
-	void insertExercise(Exercise Exercise);
+	void insertExercise(Exercise exercise);
+	void deleteExercise(Exercise exercise);
 }

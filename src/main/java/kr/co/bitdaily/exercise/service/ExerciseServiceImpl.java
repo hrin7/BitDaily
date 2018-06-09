@@ -33,8 +33,13 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 
 	@Override
-	public void insertExercise(Exercise Exercise) {
-		exeMapper.insertExercise(Exercise);
+	public void insertExercise(Exercise exercise) {
+		exeMapper.insertExercise(exercise);
+	}
+
+	@Override
+	public void deleteExercise(Exercise exercise) {
+		exeMapper.deleteExercise(exercise);
 	}
 	
 }

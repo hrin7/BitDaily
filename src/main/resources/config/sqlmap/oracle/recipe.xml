@@ -12,6 +12,13 @@
 		<result column="file_seq" property="fileSeq" />
 	</resultMap>
 	
+	<select id="searchRecipeByTitle" parameterType="String" resultMap="recipeMap">
+		select *
+		  from tb_recipe
+		 where title like '%'||#{title}||'%'
+		 order by recipe_date desc
+	</select>
+	
 	<select id="selectRecipeCount" parameterType="recipe" resultType="int">
     	select count(*)
           from tb_recipe

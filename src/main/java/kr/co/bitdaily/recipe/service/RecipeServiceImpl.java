@@ -23,6 +23,11 @@ public class RecipeServiceImpl implements RecipeService {
 	private RecipeMapper mapper;
 
 	@Override
+	public List<Recipe> searchRecipeByTitle(String title) {
+		return mapper.searchRecipeByTitle(title);
+	}
+
+	@Override
 	public Map<String,Object> retrieveListRecipe(Recipe recipe) {
 		recipe.setPageNo(recipe.getPageNo());
 		int commentCount = 0;

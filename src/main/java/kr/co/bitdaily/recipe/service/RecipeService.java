@@ -13,6 +13,7 @@ public interface RecipeService {
 	void deleteRecipe(int recipeSeq);
 	Recipe updateFormRecipe(int recipeSeq);
 	void updateRecipe(Recipe recipe);
+	List<Recipe> searchRecipeByTitle(String title);
 	
 	List<RecipeComment> retrieveListComment(int recipeSeq);
 	void writeComment(RecipeComment recipeComment);

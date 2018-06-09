@@ -7,6 +7,7 @@
 		<result column="excercise_seq" property="excerciseSeq" />
 		<result column="exercise_seq" property="exerciseSeq" />
 		<result column="excercise_seq" property="excerciseSeq" />
+		<result column="exercise_record_seq" property="exerciseRecordSeq" />
 		<result column="exercise_time" property="exerciseTime" />
 		<result column="exercise_date" property="exerciseDate" />
 		<result column="excercise_name" property="excerciseName" />
@@ -14,7 +15,7 @@
 	</resultMap>
 
     <select id="selectExercise" parameterType="exercise" resultMap="exerciseMap">
-		select r.user_seq, r.exercise_seq, r.exercise_time, r.exercise_date, e.excercise_name, (exercise_time*excercise_kcal) as excercise_kcal
+		select r.exercise_record_seq, r.user_seq, r.exercise_seq, r.exercise_time, r.exercise_date, e.excercise_name, (exercise_time*excercise_kcal) as excercise_kcal
 		  from tb_exercise_record r
 		 inner join tb_exercise e
 		    on r.exercise_seq = e.excercise_seq
@@ -37,12 +38,18 @@
     
     <insert id="insertExercise" parameterType="exercise">
     	insert into tb_exercise_record (
-    		user_seq, exercise_seq, exercise_time
+    		exercise_record_seq, user_seq, exercise_seq, exercise_time
     	) values (
-    		#{userSeq}, #{exerciseSeq}, #{exerciseTime}
+    		s_exercise_record_seq.nextval, #{userSeq}, #{exerciseSeq}, #{exerciseTime}
     	)
     </insert>
 
+	<delete id="deleteExercise" parameterType="exercise">
+		delete
+		  from tb_exercise_record
+		 where user_seq = #{userSeq}
+		   and exercise_record_seq = #{exerciseRecordSeq}
+	</delete>
 </mapper>
 
 

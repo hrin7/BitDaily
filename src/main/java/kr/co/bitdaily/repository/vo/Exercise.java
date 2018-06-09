@@ -15,6 +15,16 @@ public class Exercise {
     // 운동 시퀀스 
     private Integer excerciseSeq;
     private Integer exerciseSeq;
+    
+    private Integer exerciseRecordSeq;
+
+	public Integer getExerciseRecordSeq() {
+		return exerciseRecordSeq;
+	}
+
+	public void setExerciseRecordSeq(Integer exerciseRecordSeq) {
+		this.exerciseRecordSeq = exerciseRecordSeq;
+	}
 
 	public Integer getExerciseSeq() {
 		return exerciseSeq;

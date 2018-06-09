@@ -23,6 +23,22 @@ public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
 	
+//	@RequestMapping("/searchList.do")
+//	@ResponseBody
+//	public List<Recipe> searchRecipeByTitle(Recipe recipe) {
+//		System.out.println(recipe.getTitle());
+//		System.out.println(recipeService.searchRecipeByTitle(recipe.getTitle()));
+//		return recipeService.searchRecipeByTitle(recipe.getTitle());
+//	}
+	
+	@RequestMapping("/searchList.do")
+	public String searchRecipeByTitle(Recipe recipe, Model model) {
+		System.out.println(recipe.getTitle());
+		System.out.println(recipeService.searchRecipeByTitle(recipe.getTitle()));
+		model.addAttribute("list", recipeService.searchRecipeByTitle(recipe.getTitle()));
+		return "/recipe/searchRecipeList";
+	}
+	
 	@RequestMapping("/list.do")
 	public ModelAndView retrieveListRecipe(@ModelAttribute("recipe") Recipe recipe,
             @RequestParam(value="pageNo", defaultValue="1") int pageNo) {

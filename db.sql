@@ -65,6 +65,7 @@ select *
  
  
 CREATE TABLE tb_exercise_record (
+    exercise_record_seq   NUMBER    PRIMARY KEY, 
     user_seq         NUMBER    NOT NULL, 
     exercise_seq     NUMBER    NOT NULL, 
     exercise_time    NUMBER    NOT NULL, 
@@ -72,7 +73,8 @@ CREATE TABLE tb_exercise_record (
 );
 
 drop table tb_exercise_record purge;
-CREATE SEQUENCE tb_exercise_seq;
+CREATE SEQUENCE s_exercise_seq;
+CREATE SEQUENCE s_exercise_record_seq;
 
 CREATE TABLE tb_exercise (
     excercise_seq     NUMBER          PRIMARY KEY, 
@@ -87,9 +89,9 @@ select *
   from tb_exercise_record
  order by exercise_date;
 
-insert into tb_exercise_record (user_seq, exercise_seq, exercise_time) values (41, 1, 30);
-insert into tb_exercise_record (user_seq, exercise_seq, exercise_time) values (41, 2, 40);
-insert into tb_exercise_record (user_seq, exercise_seq, exercise_time) values (41, 3, 20);
+insert into tb_exercise_record (exercise_record_seq, user_seq, exercise_seq, exercise_time) values (s_exercise_record_seq.nextval, 41, 1, 30);
+insert into tb_exercise_record (exercise_record_seq, user_seq, exercise_seq, exercise_time) values (s_exercise_record_seq.nextval, 41, 2, 40);
+insert into tb_exercise_record (exercise_record_seq, user_seq, exercise_seq, exercise_time) values (s_exercise_record_seq.nextval, 41, 3, 20);
 
 select r.user_seq, e.excercise_seq, r.exercise_time, r.exercise_date, e.excercise_name, (exercise_time*excercise_kcal) as excercise_kcal
   from tb_exercise_record r
