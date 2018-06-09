@@ -21,7 +21,12 @@ public class WeightServiceImpl implements WeightService {
 	@Override
 	public void insertWeight(Weight weight, Member member) {
 		mapper.insertWeight(weight);
-		memberMapper.updateCurrentWeight(member);
+		try {
+			memberMapper.updateCurrentWeight(member);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

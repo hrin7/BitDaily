@@ -85,16 +85,26 @@ function whatIsTheDate(){
 }
 
 $(".tab").click(function(){
+	var html = "";
+	if ($(this).data("kind")  == "1") {
+		// 화면 식단 정보 설정
+		setFood();
+	}else if($(this).data("kind") == "2"){
+		html = "운동";
+		$(".mainMenu").html(html);
+	}else {		
+		
+	}
 	$(".tab").removeClass("sub_active");
 	$(this).addClass("sub_active");
 })
 
-$(".addFood").click(function(){
+$(".mainMenu").on("click", ".addFood", function(){
 	$(this).parent().hide();
 	$(this).parent().prev().show();
-})
+});
 
-$(".cancle").click(function(){
+$(".mainMenu").on("click", ".cancle", function(){
 	$(this).parent().prev().prev().children().first().val("")
 	$(this).parent().prev().empty();
 	$(this).parent().parent().hide();
@@ -103,7 +113,7 @@ $(".cancle").click(function(){
 
 
 
-$(".searching").click(function(){
+$(".mainMenu").on("click", ".searching", function(){
 	var that = $(this);
 	$.ajax({
 		url : "/spring-bitdiary/diary/foodSearch.json",
@@ -182,7 +192,7 @@ $("#nextDate").click(function(){
 	
 })
 
-$(".insert").click(function(){
+$(".mainMenu").on("click", function(){
 	var that = $(this);
 	$.ajax({
 		url : "/spring-bitdiary/diary/insertFood.json",
@@ -201,10 +211,29 @@ $(".insert").click(function(){
 	});
 })
 
-$(".searchBox").hide();
+function setFood() {
+	var html = $("#foodDetail").html();
+	console.log(html)
+	$(".mainMenu").html(html);
+	
+	setDate();
+	makeList();
+	whatIsTheDate();
+}
 
-$("#nav-diary").addClass("active");
+function setDiary(){
+	var html = $("#diaryDetail").htmal();
+	console.log(html);
+	$(".mainMenu").html(html);
+	
+}
 
-setDate();
-makeList();
-whatIsTheDate();
+$(function () {
+	$(".searchBox").hide();
+	$("#nav-diary").addClass("active");
+
+	var tabNo = 1;
+	if (tabNo == 1) {
+		setFood();  // 식단 초기 설정하기
+	} 
+});

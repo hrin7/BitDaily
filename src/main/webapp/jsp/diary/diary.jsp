@@ -15,9 +15,9 @@
 <body>
 
 <div class="date">
-	<a href="#" id="preDate" ><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
+	<a href="#1" id="preDate" ><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
 	<span id="now"></span>
-	<a href="#" id="nextDate"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
+	<a href="#1" id="nextDate"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
 	<div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px">${member.goalCalorie}kcal</div>
 </div><!-- end .date -->
 
@@ -25,9 +25,9 @@
 <div class="diary">
 	<div class="subMenu">
 		<ul>
-			<li><a href="#" class="tab">식단</a></li>
-			<li><a href="#" class="tab">운동</a></li>
-			<li><a href="#" class="tab">일기</a></li>
+			<li><a href="#1" class="tab" data-kind="1">식단</a></li>
+			<li><a href="#2" class="tab" data-kind="2">운동</a></li>
+			<li><a href="#3" class="tab" data-kind="3">일기</a></li>
 		</ul>
 	</div>
 	<div class="mainMenu">
@@ -74,19 +74,27 @@
     </div>
   </div>
   
+  <div id="foodDetail" style="display: none;">
+  		<p id="title"><img src="${pageContext.request.contextPath}/images/icon/fooddiary.png"width="40px"/><span id="today">오늘</span>의식단</p><div class="meal"><p class="mealType">아침</p><div class="mealContent"><div class="result"id="morning"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="1"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#1"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div><div class="meal"><p class="mealType">점심</p><div class="mealContent"><div class="result"id="lunch"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="2"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#1"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div><div class="meal"><p class="mealType">저녁</p><div class="mealContent"><div class="result"id="dinner"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="3"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#1"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div><div class="meal"><p class="mealType">간식</p><div class="mealContent"><div class="result"id="snack"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="4"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#1"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div>
+  </div>
+  
+  <div id="diaryDetail" style="display: none">
+	<p id="title"><img src="${pageContext.request.contextPath}/images/icon/fooddiary.png" width="40px"/> <span id="today">오늘</span>의 식단</p>
+	<div id="content">
+		<div id="titleRegist"><input type="text" name="diaryTitle" id="diaryTitle" placeholder="제목을 입력하세요"></div>
+		<form id="note">
+			<div id="summernote"></div>
+		</form>
+		<div id="noteRegist"><input id="diaryContext" readonly="readonly"><button id="regist">등록</button></div>
+	</div>
+  </div>
+  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/diary/mini.js"></script>
-<script src="${pageContext.request.contextPath}/js/diary/fooddiary.js"></script>
+<script src="${pageContext.request.contextPath}/js/diary/diary.js"></script>
 <script type="text/javascript">
-	var foodHTML = '<p id="title"><img src="${pageContext.request.contextPath}/images/icon/fooddiary.png"width="40px"/><span id="today">오늘</span>의식단</p><div class="meal"><p class="mealType">아침</p><div class="mealContent"><div class="result"id="morning"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="1"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div><div class="meal"><p class="mealType">점심</p><div class="mealContent"><div class="result"id="lunch"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="2"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div><div class="meal"><p class="mealType">저녁</p><div class="mealContent"><div class="result"id="dinner"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="3"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div><div class="meal"><p class="mealType">간식</p><div class="mealContent"><div class="result"id="snack"></div><div class="searchBox"><div class="inputbox"><input type="text"name="foodName"class="searchFood"/><img src="/spring-bitdiary/images/icon/search.png"width="30px"height="30px"class="searching"><a class="popup"data-toggle="modal"href="#visionModal"><img src="/spring-bitdiary/images/icon/camera.png"width="40px"height="40px"></a></div><div class="search_list"></div><div id="buttons"><input class="hiddenBox"readonly="readonly"value="4"><button type="button"class="buts cancle">취소</button><button type="button"class="buts insert">등록</button></div></div><div class="addFoodBox"><a href="#"class="addFood"><img src="${pageContext.request.contextPath}/images/icon/plus.png"width="20px"height="20px">음식추가</a></div></div></div>';
-$(".tab").click(function(){
-	var text = $(this).text();
-	if(text == '식단'){
-		$(".mainMenu").html(foodHTML);
-	}
-})	
 </script>
 </body>
 </html>
