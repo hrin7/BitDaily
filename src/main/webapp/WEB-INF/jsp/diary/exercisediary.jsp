@@ -14,12 +14,11 @@
 </head>
 <body>
 
-<c:set var="today" value="<%=new java.util.Date()%>" />
 <div class="date">
-<a href="#"><img src="<c:url value='/images/icon/before.png'/>" width="30px" height="30px"></a>
-<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />
-<a href="#"><img src="<c:url value='/images/icon/next.png'/>" width="30px" height="30px"></a>
-<div class="calorie">목표칼로리 <img src="<c:url value='/images/icon/fork.png'/>" width="35px" height="35px"> 1200 kcal</div>
+	<a href="#" id="preDate" ><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
+	<span id="now"></span>
+	<a href="#" id="nextDate"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
+	<div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px">${member.goalCalorie}kcal</div>
 </div><!-- end .date -->
 
 
@@ -34,52 +33,29 @@
 	
 	<div class="mainMenu">
 		<p id="title"><img src="${pageContext.request.contextPath}/images/icon/dumbbell.png"/> 오늘의 운동 다이어리</p>
-		<table>
-			<tr>
-				<td>걷기</td>
-				<td style="width: 12%; text-align: right;">200분</td>
-				<td style="width: 12%; text-align: right;">100kcal</td>
-				<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/edit.png"/></td>
-				<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/trash.png"/></td>
-			</tr>
-			<tr><td colspan="5"><hr></td></tr>
-			<tr>
-				<td>빨리달리기</td>
-				<td style="width: 12%; text-align: right;">30분</td>
-				<td style="width: 12%; text-align: right;">90kcal</td>
-				<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/edit.png"/></td>
-				<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/trash.png"/></td>
-			</tr>
-			<tr><td colspan="5"><hr></td></tr>
-			<tr>
-				<td><span>Total</span></td>
-				<td style="width: 12%; text-align: right;"><span>230</span>분</td>
-				<td style="width: 12%; text-align: right;"><span>190</span>kcal</td>
-				<td style="width: 5%;"></td>
-				<td style="width: 5%;"></td>
-			</tr>
-			<tr><td colspan="5"><hr></td></tr>
-		</table>
+		<div id="exeTable"></div>
 		<br>
-		<form class="search-container">
-		    <input type="text" id="search-bar" placeholder="운동 검색하기">
-		    <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+		<form class="search-container" action="<c:url value='/diary/exeSearch.do'/>">
+		    <input type="text" id="search-bar" name="excerciseName" placeholder="운동 검색하기">
+		    <input type="image" class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
 	    </form>
 	    
-	    <div style="height: 300px;"></div>
-	    
-	    <div class="footMenu">
-	      <table>
-	        <tr>
-	    	  <td style="width: 18%;"><span>수영</span></td>
-	    	  <td style="width: 15%; text-align: right;"> 운동시간</td>
-	    	  <td style="width: 18%;"> <input type="text" name="exeHour" id="exeHour"/> 분</td>
-	    	  <td style="width: 15%; text-align: right;"> 소모칼로리 </td>
-	    	  <td style="width: 13%; text-align: right;"><span>0</span>kcal</td>
-	    	  <td><button>등록</button> <button>취소</button></td>
-	        </tr>
-	      </table>
+	    <div style="height: 300px;">
+	    	<table id="searchResult">
+	    	  <c:forEach var="exe" items="${list}">
+				<tr>
+					<td><a href="#t" class="exeName">${exe.excerciseName}</a></td>
+					<td style="width: 12%; text-align: right;">1분</td>
+					<td style="width: 12%; text-align: right;" class="exeKcal">${exe.excerciseKcal}kcal</td>
+				</tr>
+				<tr><td colspan="5"><hr></td></tr>
+	    	  </c:forEach>
+			</table>
 	    </div>
+	    
+	    <form id="insertForm">
+	      <div class="footMenu"></div>
+	    </form>
 	</div>
 </div><!-- end .diary -->
 
@@ -95,41 +71,196 @@
 <script src="<c:url value='/js/diary/mini.js'/>"></script>
 <script src="<c:url value='/js/diary/exercisediary.js'/>"></script>
 
-
 <script>
-	function kal (data) {
-		var html= "";
-		data.dailyKal
-		html += '<p> 1 일 필요 열량 :'+ data.dailyKal + 'kcal </p>';
-		html += '<p> 하루 섭취 열량 :'+ data.dailyMeal + 'kcal </p>';  
-		html += '<p> 운동(소모한)열량 :'+ data.dailyExcer + 'kcal </p>';
-		html += '<p> 남은 열량:'+ data.reCalories + 'kcal </p>';
-		if(data.reCalories <= 0){
-			html += '<p> 더 드시면 곤란해요..ㅠ ^ ㅠ </p>';	
-			return false;
-		}
-		
-		$("#writeMiniStatis").html(html);
-	}
-	
-	function KalUserSeq() {
-		var id = "${sessionScope.member.id}";
-		console.log(id);
+	$(".exeName").click(function () {
+//  		alert($(this).text());
 		$.ajax({
-			url: "${pageContext.request.contextPath}/mini/mini.json",
-			data: {"id" : "${sessionScope.member.id}"},
+			url: "<c:url value='/diary/exeSearchName.do'/>",
+			data:  {excerciseName : $(this).text()},
 			dataType: "json",
-			success: function (data) {
-				kal(data);
-				console.log(data);
+			success: function (result) {
+				$("#searchResult").hide();
+				var html = "";
+				html += '<table id="footMenuTable">';
+			    html += '    <tr>';
+			    html += '	  <td style="width: 18%;"><span>'+result.excerciseName+'</span></td>';
+			    html += '	  <td style="width: 15%; text-align: right;"> 운동시간</td>';
+			    html += '	  <td style="width: 18%;"> <input type="text" name="exeHour" id="exeHour"/> 분</td>';
+			    html += '	  <td style="width: 15%; text-align: right;"> 소모칼로리 </td>';
+			    html += '	  <td style="width: 13%; text-align: right;"><span id="kcalSpan">'+result.excerciseKcal+'</span>kcal</td>';
+			    html += '	  <td><button id="insertBtn">등록</button> <button id="cancelBtn" type="button">취소</button></td>';
+			    html += '    </tr>';
+		        html += '<input type="hidden" name="exerciseSeq" id="rExerciseSeq" value="'+result.excerciseSeq+'">';
+		        html += '</table>';
+		    	$(".footMenu").html(html);
+		        
+		        $("#exeHour").keyup(function () {
+		    		// 칼로리 계산
+		    	    var kcal = $(this).val()*result.excerciseKcal
+		    	    // 문서 객체에 입력한다.
+		    	    $("#kcalSpan").html(kcal);
+		    	})
 			},
-			error : function(data){
-				console.log('에러',data);
+			error: function (e) {
+				console.dir(e);
 			}
 		});
+	});
+	
+	$(document).on("click", "#cancelBtn", function() { 
+		$("#footMenuTable").hide();
+	});
+	
+	$("#insertForm").submit(function (e) {
+		e.preventDefault();
+		$.ajax({
+			url: "<c:url value='/diary/exeInsert.do'/>",
+			data: {
+				userSeq: "${sessionScope.member.userSeq}",
+				exerciseSeq: $("#rExerciseSeq").val(),
+				exerciseTime: $("#exeHour").val(),
+				exerciseDate : new Date()
+			},
+			dataType: "json",
+			success: function (result) {
+				$("#exeHour").val("");
+				makeExeList(result);
+			},
+			error: function(e) {
+				console.dir(e);
+			}
+		})
+	})
+	
+
+	function makeExeList(result) {
+// 		console.dir(result);
+		var html = "";
+		html += '<table>';
+		var timeSum = 0;
+		var kcalSum = 0;
+		for (let i = 0; i < result.length; i++) {
+			var exe = result[i];
+			html += '	<tr>';
+			html += '		<td>'+exe.excerciseName+'</td>';
+			html += '		<td style="width: 12%; text-align: right;">'+exe.exerciseTime+'분</td>';
+			html += '		<td style="width: 12%; text-align: right;">'+exe.excerciseKcal+'kcal</td>';
+			html += '		<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/edit.png"/></td>';
+			html += '		<td style="width: 5%;"><img src="${pageContext.request.contextPath}/images/icon/trash.png"/></td>';
+			html += '	</tr>';
+			html += '	<tr><td colspan="5"><hr></td></tr>';
+			timeSum += exe.exerciseTime;
+			kcalSum += exe.excerciseKcal;
+		}
+		html += '	<tr>';
+		html += '		<td><span>Total</span></td>';
+		html += '		<td style="width: 12%; text-align: right;"><span>'+timeSum+'</span>분</td>';
+		html += '		<td style="width: 12%; text-align: right;"><span>'+kcalSum+'</span>kcal</td>';
+		html += '		<td style="width: 5%;"></td>';
+		html += '		<td style="width: 5%;"></td>';
+		html += '	</tr>';
+		html += '	<tr><td colspan="5"><hr></td></tr>';
+		if (result.length == 0) {
+			html += '<tr><td colspan="5">오늘은 등록된 운동이 아직 없네요!</td></tr>';
+			html += '<tr><td colspan="5"><hr></td></tr>';
+		}
+		html += '</table>';
+		$("#exeTable").html(html);
+	}
+
+	function exeList() {
+		$.ajax({
+			url: "<c:url value='/diary/exeDiaryList.do'/>",
+			data:  { 
+				userSeq : "41",
+				exerciseDate : new Date()
+			},
+			dataType: "json",
+			success: makeExeList
+		});
+	}
+	exeList();
+	
+	function setDate(){
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var day = date.getDate();
+		if(month <  10){
+			month = '0'+month;
+		}
+		if(day < 10){
+			day = "0" + day;
+		}
+		$("#now").text(year+"-"+month+"-"+day);
+	}
+
+	function whatIsTheDate(){
+		var date = new Date($("#now").text());
+// 		console.log(new Date($("#now").text()));
+// 		console.log('전광판',date);
+		var month = date.getMonth()+1;
+		var day = date.getDate();
+// 		console.log(date.getMonth()+1);
+// 		console.log(date.getDate());
+		var today = new Date();
+// 		console.log('오늘',today);
+		var todayMonth = today.getMonth()+1;
+// 		console.log(todayMonth);
+		var todayDay = today.getDate();
+		if(month == todayMonth && day == todayDay){
+			console.log("오늘");
+			$("#today").text("오늘");
+			return;
+		}
+		if(date > today){
+			console.log("내일");
+			$("#today").text("내일");
+			return;
+		}
+		if(date < today){
+			console.log("어제");
+			$("#today").text("어제");
+			return;
+		}
 	}
 	
-KalUserSeq();
+	setDate();
+	whatIsTheDate();
+	
+// 	function kal (data) {
+// 		var html= "";
+// 		data.dailyKal
+// 		html += '<p> 1 일 필요 열량 :'+ data.dailyKal + 'kcal </p>';
+// 		html += '<p> 하루 섭취 열량 :'+ data.dailyMeal + 'kcal </p>';  
+// 		html += '<p> 운동(소모한)열량 :'+ data.dailyExcer + 'kcal </p>';
+// 		html += '<p> 남은 열량:'+ data.reCalories + 'kcal </p>';
+// 		if(data.reCalories <= 0){
+// 			html += '<p> 더 드시면 곤란해요..ㅠ ^ ㅠ </p>';	
+// 			return false;
+// 		}
+		
+// 		$("#writeMiniStatis").html(html);
+// 	}
+	
+// 	function KalUserSeq() {
+// 		var id = "${sessionScope.member.id}";
+// 		console.log(id);
+// 		$.ajax({
+// 			url: "${pageContext.request.contextPath}/mini/mini.json",
+// 			data: {"id" : "${sessionScope.member.id}"},
+// 			dataType: "json",
+// 			success: function (data) {
+// 				kal(data);
+// 				console.log(data);
+// 			},
+// 			error : function(data){
+// 				console.log('에러',data);
+// 			}
+// 		});
+// 	}
+	
+// KalUserSeq();
 </script>
 </body>
 </html>

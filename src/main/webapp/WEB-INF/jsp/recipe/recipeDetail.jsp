@@ -61,9 +61,9 @@
 		var html = "";
 		for (let i = 0; i < result.length; i++) {
 			var comment = result[i];
-		console.dir(${sessionScope.member.userSeq});
-		console.dir(comment.userSeq);
-		console.log("-------------")
+// 		console.dir(${sessionScope.member.userSeq});
+// 		console.dir(comment.userSeq);
+// 		console.log("-------------")
 			html += '<div class="comment_box" id="comment'+comment.commentSeq+'">';
 			html += '  <h5><span id="commentName">'+comment.name+'</span>';
 			if (${sessionScope.member.userSeq} == comment.userSeq) {

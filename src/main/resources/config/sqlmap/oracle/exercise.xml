@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.bitdaily.repository.mapper.ExerciseMapper">
+	<resultMap id="exerciseMap" type="exercise">
+		<result column="user_seq" property="userSeq" />
+		<result column="excercise_seq" property="excerciseSeq" />
+		<result column="exercise_seq" property="exerciseSeq" />
+		<result column="excercise_seq" property="excerciseSeq" />
+		<result column="exercise_time" property="exerciseTime" />
+		<result column="exercise_date" property="exerciseDate" />
+		<result column="excercise_name" property="excerciseName" />
+		<result column="excercise_kcal" property="excerciseKcal" />
+	</resultMap>
+
+    <select id="selectExercise" parameterType="exercise" resultMap="exerciseMap">
+		select r.user_seq, r.exercise_seq, r.exercise_time, r.exercise_date, e.excercise_name, (exercise_time*excercise_kcal) as excercise_kcal
+		  from tb_exercise_record r
+		 inner join tb_exercise e
+		    on r.exercise_seq = e.excercise_seq
+		 where to_char(exercise_date, 'yyyy-mm-dd') = to_char(#{exerciseDate}, 'yyyy-mm-dd')
+		   and user_seq = #{userSeq}
+		 order by r.exercise_date
+    </select>
+    
+    <select id="searchExercise" parameterType="string" resultMap="exerciseMap">
+    	select *
+    	  from tb_exercise
+    	 where excercise_name like '%'||#{excerciseName}||'%'
+    </select>
+    
+    <select id="searchExerciseName" parameterType="string" resultMap="exerciseMap">
+    	select *
+    	  from tb_exercise
+    	 where excercise_name = #{excerciseName}
+    </select>
+    
+    <insert id="insertExercise" parameterType="exercise">
+    	insert into tb_exercise_record (
+    		user_seq, exercise_seq, exercise_time
+    	) values (
+    		#{userSeq}, #{exerciseSeq}, #{exerciseTime}
+    	)
+    </insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

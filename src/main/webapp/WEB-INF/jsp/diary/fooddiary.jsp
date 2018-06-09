@@ -26,7 +26,7 @@
 	<div class="subMenu">
 		<ul>
 			<li><a href="#" class="tab">식단</a></li>
-			<li><a href="#" class="tab">운동</a></li>
+			<li><a href="<c:url value='/diary/exercise.do'/>" class="tab">운동</a></li>
 			<li><a href="#" class="tab">일기</a></li>
 		</ul>
 	</div>

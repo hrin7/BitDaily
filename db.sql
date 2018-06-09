@@ -62,3 +62,38 @@ select *
 select *
   from tb_user
  order by user_seq;
+ 
+ 
+CREATE TABLE tb_exercise_record (
+    user_seq         NUMBER    NOT NULL, 
+    exercise_seq     NUMBER    NOT NULL, 
+    exercise_time    NUMBER    NOT NULL, 
+    exercise_date    DATE      default sysdate
+);
+
+drop table tb_exercise_record purge;
+CREATE SEQUENCE tb_exercise_seq;
+
+CREATE TABLE tb_exercise (
+    excercise_seq     NUMBER          PRIMARY KEY, 
+    excercise_name    VARCHAR2(300)    NOT NULL, 
+    excercise_kcal    NUMBER          NOT NULL
+);
+
+select *
+  from tb_exercise;
+
+select *
+  from tb_exercise_record
+ order by exercise_date;
+
+insert into tb_exercise_record (user_seq, exercise_seq, exercise_time) values (41, 1, 30);
+insert into tb_exercise_record (user_seq, exercise_seq, exercise_time) values (41, 2, 40);
+insert into tb_exercise_record (user_seq, exercise_seq, exercise_time) values (41, 3, 20);
+
+select r.user_seq, e.excercise_seq, r.exercise_time, r.exercise_date, e.excercise_name, (exercise_time*excercise_kcal) as excercise_kcal
+  from tb_exercise_record r
+ inner join tb_exercise e
+    on r.exercise_seq = e.excercise_seq
+ where to_char(exercise_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')
+   and user_seq = 41;
