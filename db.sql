@@ -99,3 +99,14 @@ select r.user_seq, e.excercise_seq, r.exercise_time, r.exercise_date, e.excercis
     on r.exercise_seq = e.excercise_seq
  where to_char(exercise_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')
    and user_seq = 41;
+   
+   
+CREATE TABLE tb_stat_exercise (
+    user_seq         NUMBER    NOT NULL, 
+    exercise_time    NUMBER    NULL, 
+    exercise_date    DATE      default sysdate
+);
+
+drop table tb_stat_exercise purge;
+select *
+  from tb_stat_exercise;

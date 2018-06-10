@@ -40,7 +40,7 @@
 		    <a href="javascript:exeSearch();"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
 	    </form>
 	    
-	    <div style="height: 300px;">
+	    <div style="height: 100%; margin: 20px 0px 80px;">
 	    	<table id="searchResult">
 <%-- 	    	  <c:forEach var="exe" items="${list}"> --%>
 <!-- 				<tr> -->

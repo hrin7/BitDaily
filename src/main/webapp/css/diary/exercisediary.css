@@ -45,4 +45,4 @@ tr,td { padding: 0px 5px; }
 	width: 60px;
 }
 span { font-weight: bold; font-size: 20px; }
-.footMenu { width: 100%; position:absolute; bottom:0px; padding: 25px; }
+.footMenu { width: 100%; position:absolute; bottom:0px; margin: 0px 10px; }
