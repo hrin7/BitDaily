@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.bitdaily.repository.mapper.RankMapper;
+import kr.co.bitdaily.repository.mapper.StatMapper;
 import kr.co.bitdaily.repository.vo.Dates;
 import kr.co.bitdaily.repository.vo.Rank;
 
@@ -16,6 +17,9 @@ public class RankServiceImpl implements RankService {
 	
 	@Autowired
 	private RankMapper mapper;
+	
+	@Autowired
+	private StatMapper statMapper;
 
 	@Override
 	public List<Rank> selectActive(Dates date) {
@@ -65,7 +69,4 @@ public class RankServiceImpl implements RankService {
 		Date end = cal.getTime();
 		return new Date[] {start ,end};
 	}
-	
-	
-
 }

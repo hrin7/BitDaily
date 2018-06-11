@@ -104,7 +104,6 @@ public class RecipeController {
 	@ResponseBody
 	public List<RecipeComment> updateComment(RecipeComment recipeComment) {
 		recipeService.updateComment(recipeComment);
-		List<RecipeComment> list = recipeService.retrieveListComment(recipeComment.getRecipeSeq());
 		return recipeService.retrieveListComment(recipeComment.getRecipeSeq());
 	}
 }

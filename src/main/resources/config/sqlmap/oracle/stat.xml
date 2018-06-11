@@ -69,4 +69,12 @@
 		  from tb_stat_exercise
 		 where user_seq = #{userSeq}
 	</select>
+	
+	<select id="selectStatExeByDate" parameterType="statExercise" resultMap="statExeMap">
+		select *
+		  from tb_stat_exercise
+		  where to_char(exercise_date, 'yyyy-mm-dd') = to_char(#{exerciseDate}, 'yyyy-mm-dd')
+	</select>
+	
+	
 </mapper>

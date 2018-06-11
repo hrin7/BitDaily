@@ -20,4 +20,5 @@ public interface StatMapper {
 	StatExercise selectStatExeByUserSeq(int userSeq);
 	void insertStatExercise(StatExercise statExe);
 	void updateStatExercise(StatExercise statExe);
+	StatExercise selectStatExeByDate(StatExercise statExe);
 }

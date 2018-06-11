@@ -3,7 +3,14 @@ package kr.co.bitdaily.repository.vo;
 public class Rank {
 	private Integer userSeq;
 	private Integer total;
+	private String name;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Integer getUserSeq() {
 		return userSeq;
 	}

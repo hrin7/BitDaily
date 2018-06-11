@@ -110,3 +110,30 @@ CREATE TABLE tb_stat_exercise (
 drop table tb_stat_exercise purge;
 select *
   from tb_stat_exercise;
+  
+select *
+  from tb_stat;
+  
+select *
+  from tb_meal
+ order by meal_date desc;
+  
+select *
+  from TB_USER
+ where user_seq = '32';
+ 
+select *
+  from tb_stat_exercise
+ where to_char(exercise_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')
+ order by exercise_date desc
+ 
+SELECT a.name, sum(exercise_time) As total
+  FROM ( 
+	  	select e.user_seq, e.exercise_time, e.exercise_date, u.name
+	  	  from tb_stat_exercise e
+	  	 inner join tb_user u
+	  	    on e.user_seq = u.user_seq
+	  	 where exercise_date between sysdate-6 and sysdate
+  	   ) a
+ group by a.name
+ order by total desc;

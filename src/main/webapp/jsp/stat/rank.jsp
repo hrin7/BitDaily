@@ -127,13 +127,13 @@ function setRank(){
 				$(this).text(result.active[index].userSeq);
 			}
 		})
-		console.log(result.active[0].userSeq);
+// 		console.log(result.active[0].userSeq);
 		$("#workout > ul > li > p:last-child").each(function(index){
-			console.log("제발",result.workout[index]);
+			console.log("운동 인덱스",result.exercise[index]);
 			$(this).text("없음");
-			if(result.work[index]){
+			if(result.exercise[index]){
 				console.log("들어오세요 제발~");
-				$(this).text(result.workout[index].userSeq);
+				$(this).text(result.exercise[index].name);
 			}
 		})
 		

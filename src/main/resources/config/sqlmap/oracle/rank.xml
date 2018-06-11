@@ -16,10 +16,16 @@
 	</select>
 
    	<select id="selectExercise" parameterType="dates" resultMap="rankMap">
-   		SELECT user_seq, sum(exercise_time) As total
-		FROM (select * from tb_stat_exercise where exercise_date between #{startDate} and #{endDate})
-		group by user_seq
-		order by total desc
+   		SELECT a.name as name, sum(exercise_time) As total
+		  FROM ( 
+			  	select e.user_seq, e.exercise_time, e.exercise_date, u.name
+			  	  from tb_stat_exercise e
+			  	 inner join tb_user u
+			  	    on e.user_seq = u.user_seq
+			  	 where exercise_date between #{startDate} and #{endDate}
+		  	   ) a
+		 group by a.name
+		 order by total desc
    	</select>
    	
    	<select id="selectWeight" parameterType="dates" resultMap="rankMap">

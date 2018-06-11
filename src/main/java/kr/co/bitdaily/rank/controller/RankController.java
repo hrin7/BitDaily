@@ -53,4 +53,5 @@ public class RankController {
 	public @ResponseBody Date[] nextWeek(@RequestParam("date") Date date) {
 		return service.nextWeek(date);
 	}
+
 }
