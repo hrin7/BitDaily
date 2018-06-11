@@ -82,7 +82,11 @@ function setChart(list){
 	$("#nav-weight").addClass("active");
 	
 	$(document).on("click", "#weight", function() {
-		$(".but").html("<input type='text' name='weightToday' id='weightToday'>　<button type='button' class='buts' id='registWeight'>등록</button>");
+		$(".but").html("<input type='text' name='weightToday' id='weightToday'>　<button type='button' class='buts' id='cancletWeight'>취소</button> <button type='button' class='buts' id='registWeight'>등록</button>");
+	});
+	
+	$(document).on("click", "#cancletWeight", function() {
+		$(".but").html('　 <a href="#" id="weight"><img src="/spring-bitdiary/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a>');
 	});
 	
 	
