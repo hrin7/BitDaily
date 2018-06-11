@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/bitdaily/sweetalertFile/sweetalert2.css" />
+<link rel="stylesheet" href="/spring-bitdiary/sweetalertFile/sweetalert2.css" />
 <script src="${pageContext.request.contextPath}/sweetalert/jquery-3.2.1.js"></script>
 <script src="${pageContext.request.contextPath}/sweetalertFile/sweetalert2.all.min.js"></script>
  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -58,8 +58,8 @@
         </form>
         
           <div class="row clearfix bottom_row">
-            <div class="col_half searchPass"><input class="searchPass" id="searchPass" value="Forgot Password?" type="submit" ></div>
-            <div class="col_half searchPass"><input class="searchId" id="searchId" value="Forgot ID?" type="submit" ></div>
+            <div class="col_half searchPass"><input class="searchPass" id="searchPass" value="Forgot Password?" type="button" ></div>
+            <div class="col_half searchPass"><input class="searchId" id="searchId" value="Forgot ID?" type="button" ></div>
           </div>
           
           
@@ -104,7 +104,10 @@
 			  }
 			})
 		});
+	
+	
 		//ID 찾기
+		var findId;
 		$("#searchId").click(function () {
 			swal.mixin({
 			  input: 'text',
@@ -117,19 +120,29 @@
 			    text: '...'
 			  },
 			  '이메일을 입력하세요',
-			]).then((result) => {
-			  if (result.value) {
-			    swal({
-			      title: 'ID는..',
-			      html:
-			        ':D: <pre>' +
-			          JSON.stringify(result.value) +
-			        '</pre>',
-			      confirmButtonText: '성공!'
-			    })
-			  }
+			]).then(function(result){
+				findId = result;
+				fnFindId(findId);
+			
 			})
 		});
+		function fnFindId(data) {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/login/fogetId.json",
+				type: "POST",
+				data : {
+					"name" : data.value[0],
+					"email": data.value[1]
+				},
+			}).done(function (val) {
+				swal("회원의 아이디는 "+val.id + "입니다");
+				console.log(val);
+			}).fail(function () {
+				swal('이름과 이메일의 정보가 일치 하지 않습니다.!')
+			});
+		}
+
+
 	</script>
 </body>
 </html>

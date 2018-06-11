@@ -18,8 +18,12 @@
         <result column = "current_weight" property = "currentWeight" />
     </resultMap>
    
-   
-    
+<!--    //비번 찾기 -->
+	<select id="selectName" parameterType="member" resultMap="memberMap">
+        select *
+          from tb_user 
+         where name = #{name}
+    </select>
     <select id="selectMember" resultType="member">
         select id,
                name,

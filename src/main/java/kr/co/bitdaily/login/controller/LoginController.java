@@ -37,7 +37,21 @@ public class LoginController {
 		return "login/loginForm";
 	} 
 	
-	
+	@RequestMapping("/fogetId.json") 
+	@ResponseBody
+	public Member fogetId(Member member) throws Exception { 
+		Member dbmember = loginService.selectMemberByName(member);
+		System.out.println("fogetId 들어옴"+member.getName());
+		System.out.println(member.getEmail());
+		System.out.println(dbmember.getEmail());
+		System.out.println(dbmember.getPass());
+		if(dbmember.getEmail().equals(member.getEmail())){
+			System.out.println("1111");
+			return dbmember;
+		}
+		System.out.println("2222");
+		return member;
+	} 
 	
 	
 	

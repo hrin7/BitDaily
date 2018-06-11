@@ -5,6 +5,7 @@ import java.util.List;
 import kr.co.bitdaily.repository.vo.Member;
 
 public interface LoginService {
+	public Member selectMemberByName(Member member) throws Exception;
 	public List<Member> retrieveMember() throws Exception;
 	public Member retrieveMemberInfo(String id) throws Exception;
 	public void insertMemberInfo(Member member) throws Exception;
