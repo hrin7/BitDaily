@@ -134,6 +134,21 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>12.1.0.1-atlassian-hosted</version>
 		</dependency>
+		
+		<!-- 구글 비전 API -->
+	    <dependency>
+		  <groupId>com.google.cloud</groupId>
+		  <artifactId>google-cloud-vision</artifactId>
+		  <version>1.14.0</version>
+		</dependency>
+		
+		<!-- 구글 번역 API -->
+		<dependency>
+		  <groupId>com.google.cloud</groupId>
+		  <artifactId>google-cloud-translate</artifactId>
+		  <version>1.14.0</version>
+		</dependency>
+
 
 </dependencies>	
 
