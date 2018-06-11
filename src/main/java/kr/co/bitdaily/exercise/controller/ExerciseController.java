@@ -46,6 +46,9 @@ public class ExerciseController {
 	}
 	@RequestMapping("/exeUpdate.do")
 	public List<Exercise> updateExercise(Exercise exercise) {
+		System.out.println("업데이트 유저 시퀀스 : " + exercise.getUserSeq());
+		System.out.println("업데이트 운동 시퀀스: " + exercise.getExerciseRecordSeq());
+		System.out.println("업데이트 운동 시간 : " + exercise.getExerciseTime());
 		exeService.updateExercise(exercise);
 		return exeService.retrieveListExe(exercise);
 	}

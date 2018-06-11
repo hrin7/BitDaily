@@ -26,9 +26,30 @@
 <div class="diary">
 	<div class="subMenu">
 		<ul>
-			<li><a href="#1" class="tab" data-kind="1">식단</a></li>
-			<li><a href="#2" class="tab" data-kind="2">운동</a></li>
-			<li><a href="#3" class="tab" data-kind="3">일기</a></li>
+			<c:choose>
+				<c:when test="${param.page == 1}">
+					<li><a href="#1" class="tab" data-kind="1" class="sub_active">식단</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#1" class="tab" data-kind="1">식단</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${param.page == 2 }">
+					<li><a href="#2" class="tab" data-kind="2" class="sub_active">운동</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#2" class="tab" data-kind="2">운동</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${param.page == 3 }">
+					<li><a href="#3" class="tab" data-kind="3" class="sub_active">일기</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#3" class="tab" data-kind="3">일기</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 	<div class="mainMenu">

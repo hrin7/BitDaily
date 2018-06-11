@@ -18,8 +18,7 @@ $(".tab").click(function(){
 		// 화면 식단 정보 설정
 		setFood();
 	}else if($(this).data("kind") == "2"){
-		html = "운동";
-		$(".mainMenu").html(html);
+		setExercise();
 	}else {		
 		setDiary();
 	}
@@ -61,30 +60,31 @@ function setDiary(){
 	whatIsTheDate();
 }
 
+function setExercise(){
+	var html = $("#exerciseDetail").html();
+	$(".mainMenu").html(html);
+	
+	makeExercise();
+	whatIsTheDate();
+}
+
 //오늘의 일기 문구 수정하는 이벤트
 function whatIsTheDate(){
 	var date = new Date($("#now").text());
-	console.log('전광판',date);
 	var month = date.getMonth();
 	var day = date.getDate();
-	console.log(date.getMonth());
-	console.log(date.getDate());
 	var today = new Date();
-	console.log('오늘',today);
 	var todayMonth = today.getMonth();
 	var todayDay = today.getDate();
 	if(month == todayMonth && day == todayDay){
-		console.log("오늘");
 		$("#today").text("오늘");
 		return;
 	}
 	if(date > today){
-		console.log("내일");
 		$("#today").text("내일");
 		return;
 	}
 	if(date < today){
-		console.log("어제");
 		$("#today").text("어제");
 		return;
 	}
@@ -113,6 +113,7 @@ $("#preDate").click(function(){
 			whatIsTheDate();
 			makeList();
 			makeDiary();
+			makeExercise();
 		}
 		});
 	
@@ -150,6 +151,7 @@ $("#nextDate").click(function(){
 			whatIsTheDate();
 			makeList();
 			makeDiary();
+			makeExercise();
 		}
 		});
 	
@@ -263,7 +265,7 @@ $(".mainMenu").on("click", ".insert" ,  function(){
 /* 일기 파트 시작*/
 function makeDiary(){
 	$("#diaryTitle").val("");
-	$(".note-editable p").text("");
+	$(".note-editable").text("");
 	$.ajax({
 		url : "/spring-bitdiary/diary/dailydiary/select.json",
 		data : {
@@ -274,7 +276,7 @@ function makeDiary(){
 		console.log(data);
 		$("#diaryTitle").val(data.title);
 		console.log($(".note-placeholder").text(""));
-		$(".note-editable p").text(data.content);
+		$(".note-editable").text(data.content);
 		toggleBtn(data.title);
 		makeDisabled();
 	})
@@ -286,7 +288,7 @@ function insertDiary(){
 		data : {
 			userSeq : "1",
 			title : $("#diaryTitle").val(),
-			content : $(".note-editable p").text(),
+			content : $(".note-editable").text(),
 			diaryDate : new Date()
 		}
 	}).done(function(data){
@@ -301,8 +303,8 @@ function check(){
 		alert("제목을 등록하세요.");
 		return false;
 	} 
-	console.log($(".note-editable p").text());
-	if($(".note-editable p").text() == ""){
+	console.log($(".note-editable").text());
+	if($(".note-editable").text() == ""){
 		alert("내용을 입력하세요");
 		return false;
 	}
@@ -334,7 +336,6 @@ function makeDisabled(){
 	var currentDate = new Date();
 	var currentDateMonth = currentDate.getMonth();
 	var currentDateDate = currentDate.getDate();
-	alert("전광판 날짜 " + month + date + "오늘 날짜 " + currentDateMonth + currentDateDate);
 	if(!(month === currentDateMonth && date === currentDateDate)){
 		$("#diaryTitle").attr("disabled",true);
 		$(".note-editable").attr("contenteditable","false");
@@ -349,7 +350,207 @@ function makeDisabled(){
 /* 일기 파트 끝 */
 
 
+/* 운동 파트 시작 */
+function makeExercise() {
+	$.ajax({
+		url: "/spring-bitdiary/diary/exeDiaryList.do",
+		data:  { 
+			userSeq : "41",
+			exerciseDate : new Date($("#now").text())
+		},
+		dataType: "json",
+		success: makeExeList
+	});
+}
 
+function makeExeList(result) {
+	var html = "";
+	html += '<table>';
+	var timeSum = 0;
+	var kcalSum = 0;
+	for (let i = 0; i < result.length; i++) {
+		var exe = result[i];
+		html += '	<tr>';
+		html += '		<td>'+exe.excerciseName+'</td>';
+		html += '		<td style="width: 12%; text-align: right;" class="exeTime"><span>'+exe.exerciseTime+'</span>분</td>';
+		html += '		<td style="width: 12%; text-align: right;"><span>'+exe.excerciseKcal+'</span>kcal</td>';
+		html += '		<td style="width: 5%;"><a href="#1" class="updateTime" data-flag="yes" data-value='+exe.exerciseRecordSeq+' "><img src="/spring-bitdiary/images/icon/edit.png"/></a></td>';
+		html += '		<td style="width: 5%;"><a href="#1" class="deleteExercise" data-value="' + exe.exerciseRecordSeq + '"><img src="/spring-bitdiary/images/icon/trash.png"/></a></td>';
+		html += '	</tr>';
+		html += '	<tr><td colspan="5"><hr></td></tr>';
+		timeSum += exe.exerciseTime;
+		kcalSum += exe.excerciseKcal;
+	}
+	html += '	<tr>';
+	html += '		<td><span>Total</span></td>';
+	html += '		<td style="width: 12%; text-align: right;"><span>'+timeSum+'</span>분</td>';
+	html += '		<td style="width: 12%; text-align: right;"><span>'+kcalSum+'</span>kcal</td>';
+	html += '		<td style="width: 5%;"></td>';
+	html += '		<td style="width: 5%;"></td>';
+	html += '	</tr>';
+	html += '	<tr><td colspan="5"><hr></td></tr>';
+	if (result.length == 0) {
+		html += '<tr><td colspan="5">오늘은 등록된 운동이 아직 없네요!</td></tr>';
+		html += '<tr><td colspan="5"><hr></td></tr>';
+	}
+	html += '</table>';
+	$("#exeTable").html(html);
+	$(".footMenu").hide();
+}
+
+$(".mainMenu").on("click","#searching" , function(){
+	$("#searchResult").html("");
+	$.ajax({
+		url: "/spring-bitdiary/diary/exeSearch.do",
+		data: {excerciseName: $("#search-bar").val()},
+		success: function (result) {
+			var html = "";
+			for (let i = 0; i < result.length; i++) {
+				var exe = result[i];
+				html += '  <tr>';
+				html += '    <td><a href="#t" class="searchedExercise">'+exe.excerciseName+'</a></td>';
+				html += '    <td style="width: 12%; text-align: right;">1분</td>';
+				html += '    <td style="width: 12%; text-align: right;" class="exeKcal">'+exe.excerciseKcal+'kcal</td>';
+				html += '  </tr>';
+				html += '  <tr><td colspan="5"><hr></td></tr>';
+			}
+			if(result.length === 0){
+				html += '  <tr>';
+				html += '    <td>검색된 결과가 없습니다.</td>';
+				html += '  </tr>';
+				html += '  <tr><td colspan="5"><hr></td></tr>';
+			}
+			$("#searchResult").html(html);
+			$("#searchResult").show();
+			$(".footMenu").hide();
+		}
+	});
+})
+	
+$(".mainMenu").on("click", ".searchedExercise",function(){
+	$.ajax({
+		url: "/spring-bitdiary/diary/exeSearchName.do",
+		data:  {excerciseName : $(this).text()},
+		success : function(result){
+			$("#searchResult").hide();
+			var html = "";
+			html += '<table id="footMenuTable">';
+		    html += '    <tr>';
+		    html += '	  <td style="width: 18%;"><span>'+result.excerciseName+'</span></td>';
+		    html += '	  <td style="width: 15%; text-align: right;"> 운동시간</td>';
+		    html += '	  <td style="width: 18%;"> <input type="text" name="exeHour" id="exerciseMinute" maxlength="4"/> 분</td>';
+		    html += '	  <td style="width: 15%; text-align: right;"> 소모칼로리 </td>';
+		    html += '	  <td style="width: 13%; text-align: right;"><span id="kcalSpan">'+result.excerciseKcal+'</span>kcal</td>';
+		    html += '	  <td><button id="insertBtn" class="btn">등록</button> <button id="cancelBtn" class="btn" type="button">취소</button></td>';
+		    html += '    </tr>';
+	        html += '<input type="hidden" name="exerciseSeq" id="rExerciseSeq" value="'+result.excerciseSeq+'">';
+	        html += '</table>';
+	    	$(".footMenu").html(html);
+	    	$(".footMenu").show();
+
+	        $("#exerciseMinute").keyup(function (e) {
+	        	if(e.keyCode < 48 || 57 < e.keyCode){
+	        		var text = $("#exerciseMinute").val();
+	        		$("#exerciseMinute").val(text.substring(text.length))
+	        	}
+	    		// 칼로리 계산
+	    	    var kcal = $(this).val()*result.excerciseKcal
+	    	    // 문서 객체에 입력한다.
+	    	    $("#kcalSpan").html(kcal);
+	    	})
+		}
+	})
+})
+
+$(".mainMenu").on("click", "#insertBtn" ,function(e){
+	e.preventDefault();
+	if($("#exerciseMinute").val() <= 0 && $("#exerciseMinute").val() == "" ){
+		alert("운동 시간은 0분 이상만 입력 가능합니다.");
+		return;
+	}
+	$.ajax({
+		url: "/spring-bitdiary/diary/exeInsert.do",
+		data: {
+			userSeq: "41",
+			exerciseSeq: $("#rExerciseSeq").val(),
+			exerciseTime: $("#exerciseMinute").val(),
+			exerciseDate : new Date($("#now").text())
+		},
+		dataType: "json",
+		success: function (result) {
+			$("#exerciseMinute").val("");
+			makeExeList(result);
+		}
+	})
+})
+
+$(document).on("click", "#cancelBtn", function() { 
+	$("#searchResult").show();
+	$("#footMenuTable").hide();
+});
+
+$(".mainMenu").on("click",".deleteExercise",function(){
+	var flag = $(this).parent().prev().find("a").data("flag");
+	if(flag == "yes"){
+		$.ajax({
+			url: "/spring-bitdiary/diary/exeDelete.do",
+			data: {
+				userSeq: "41",
+				exerciseRecordSeq: $(this).data("value"),
+				exerciseDate : new Date($("#now").text())
+			},
+			success: makeExeList
+		});
+	}else {
+		makeExercise()
+	}
+})
+
+
+
+
+$(".mainMenu").on("click",".updateTime",function(){
+	var exerciseName = $(this).parent().parent().children().first().text();
+	var exerciseRecordSeq = $(this).data("value");
+	var kcal = "";
+	var that = $(this);
+	if($(this).data("flag") == "yes"){
+		$.ajax({
+			url: "/spring-bitdiary/diary/exeSearchName.do",
+			data:  {excerciseName : exerciseName },
+			success : function(result){
+				kcal = result.excerciseKcal;
+				var exerciseTime = that.parent().prev().prev().children().text();
+				var exerciseRecordSeq = that.data("value");
+				that.parent().prev().prev().children().html('<input type="text" class="changeTime" maxlength="4" data-kcal="' + kcal +'" value="'+ exerciseTime+'">')
+			}
+		})
+		$(this).data("flag","no");
+	}else {
+		var exerciseTime = that.parent().prev().prev().find('input').val();
+		$.ajax({
+			url: "/spring-bitdiary/diary/exeUpdate.do",
+			data: {
+				userSeq: "41",
+				exerciseTime: exerciseTime,
+				exerciseRecordSeq : exerciseRecordSeq,
+				exerciseDate : new Date($("#now").text())
+			},
+			dataType: "json",
+			success: function (result) {
+				$("#exerciseMinute").val("");
+				makeExeList(result);
+			}
+		})
+		$(this).data("flag","yes");
+	}
+})
+
+$(".mainMenu").on("keyup",".changeTime",function(){
+	var calKcal = $(this).val() * $(this).data("kcal");
+})
+
+/* 운동 파트 끝 */
 
 
 

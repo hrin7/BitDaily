@@ -21,3 +21,8 @@ FROM (select * from tbl_test_stat_exercise where exercise_date between to_date('
 group by user_seq
 order by total desc;
 
+update tb_exercise_record
+set		exercise_time = #{exerciseTime}
+where user_seq = 41
+and exercise_record_seq = #{exerciseRecordSeq}
+
