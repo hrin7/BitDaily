@@ -34,6 +34,27 @@ float: right;
     box-sizing: border-box;
     cursor: pointer;
 }
+.modal-body {
+height: 300px;
+padding-top: 30px;
+}
+.dropzone {
+height: 235px;
+}
+#zero {
+	margin: 30px;
+	text-align: center;
+}
+.modal-meal-body {
+	height: 100px;
+}
+#modal-but {
+	margin: 30px auto;
+}
+#gram {
+width: 340px;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
@@ -77,7 +98,7 @@ float: right;
 					</div>
 				</div>
 				<div class="addFoodBox">
-					<a href="#" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
+					<a href="#add" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
 				</div>
 			</div>
 		</div>
@@ -100,7 +121,7 @@ float: right;
 					</div>
 				</div>
 				<div class="addFoodBox">
-					<a href="#" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
+					<a href="#add" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
 				</div>
 			</div>
 		</div>
@@ -123,7 +144,7 @@ float: right;
 					</div>
 				</div>
 				<div class="addFoodBox">
-					<a href="#" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
+					<a href="#add" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
 				</div>
 			</div>
 		</div>
@@ -146,7 +167,7 @@ float: right;
 					</div>
 				</div>
 				<div class="addFoodBox">
-					<a href="#" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
+					<a href="#add" class="addFood" ><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px">음식 추가</a>
 				</div>
 			</div>
 		</div>
@@ -179,19 +200,19 @@ float: right;
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" style="text-align: center">
-<%--           <button class="replace"><img src="${pageContext.request.contextPath}/images/icon/image.png" width="150px" height="150px"></button>  --%>
-<!--           <input type="file" class="upload"> -->
           
           <div id="form">
           <form method="post" class="dropzone" enctype="multipart/form-data" action="${pageContext.request.contextPath}/diary/upload.json" 
           id="my-awesome-dropzone">
             <div class="dz-message alert" id="dropzone-previews">
-                <p>사진을 이곳에 끌어놓거나 클릭해 주세요.</p>
+                <br><p>사진을 이곳에 끌어놓거나 클릭해 주세요.</p>
             </div>
           </form>
           </div>
           
-
+			<div id="wait">
+			<p><h2>분석중...잠시만 기다려주세요.</h2></p>
+			</div>
           
           
           <div id="visionResult">
@@ -210,8 +231,34 @@ float: right;
     </div>
   </div>
   
+  <!-- 식단정보 수정,삭제 모달 -->
+   <div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">식단 정보 수정/삭제</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-meal-body" style="text-align: center">
+          <div id="modal-but">
+          <input type="text" name="gram" id="gram" placeholder="섭취량을 수정하거나 식단을 삭제할 수 있습니다." /> 
+<!--           <button type="button" class="btn btn-primary" id="updateMeal">섭취량수정</button> -->
+          　<img src="/spring-bitdiary/images/icon/edit.png" id="updateMeal" />
+<!--           <button type="button" class="btn btn-primary" id="deleteMeal">삭제</button> -->
+          <img src="/spring-bitdiary/images/icon/trash.png" id="deleteMeal"/>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
   <script type="text/javascript">
+  $("#wait").hide();
   $("#visionResult").hide();
+  
   
   $("#visionBnt").on("click", function () {
 	  
@@ -220,8 +267,6 @@ float: right;
 		$("#visionModal").modal('hide');
 		console.log(keyword);
 		$(".searchFood").val(keyword);
-		
-		
 		$("#visionResult").hide();
 		$("#dropzone-previews").html("<p>사진을 이곳에 끌어놓거나 클릭해 주세요.</p>");
 		$("#form").show();
@@ -245,23 +290,25 @@ float: right;
           uploadMultiple: false,
           init: function() {
               this.on("success", function(file, response) {
-//                   $('#form').hide();
+                  $('#form').hide();
+                  $("#wait").show();
 //                   console.log(file);
                   console.log(response);
                   console.log(response.fileName);
+                  $(".modal-body").css("cursor","wait");
                   
-                  $('#form').waitMe({
-                	  effect : 'win8',
-                	  text : '기다려',
-//                 	  bg : "rgba(255,255,255,0.7)"",
-//                 	  color : "#000",
-                	  maxSize : '',
-                	  waitTime : -1,
-                	  textPos : 'vertical',
-                	  fontSize : '',
-                	  source : '',
-                	  onClose : function() {}
-                  });
+//                   $('#form').waitMe({
+//                 	  effect : 'win8',
+//                 	  text : '기다려',
+// //                 	  bg : "rgba(255,255,255,0.7)"",
+// //                 	  color : "#000",
+//                 	  maxSize : '',
+//                 	  waitTime : -1,
+//                 	  textPos : 'vertical',
+//                 	  fontSize : '',
+//                 	  source : '',
+//                 	  onClose : function() {}
+//                   });
 
                   
           		$.ajax({
@@ -271,8 +318,9 @@ float: right;
         				"fileName" : response.fileName
         			},
         			success : function(result) {
-        				$('#form').hide();
+        				$("#wait").hide();
         				$("#visionResult").show();
+        				$(".modal-body").css("cursor","");
         				
         				var resultPage = "";
         				for(var i = 0 ; i <result.length; i++) {
