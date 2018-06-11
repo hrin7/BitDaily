@@ -1,5 +1,7 @@
 package kr.co.bitdaily.repository.vo;
 
+import java.util.Date;
+
 public class Stat {
 	
 	int mealSeq;
@@ -8,6 +10,14 @@ public class Stat {
 	double lunch;
 	double diner;
 	double snack;
+	Date mealDate;
+	
+	public Date getMealDate() {
+		return mealDate;
+	}
+	public void setMealDate(Date mealDate) {
+		this.mealDate = mealDate;
+	}
 	public int getMealSeq() {
 		return mealSeq;
 	}

@@ -1,9 +1,20 @@
 package kr.co.bitdaily.meal.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.cloud.vision.v1.Image;
+import com.google.protobuf.ByteString;
 
 import kr.co.bitdaily.repository.mapper.MealMapper;
 import kr.co.bitdaily.repository.mapper.StatMapper;
@@ -20,6 +31,47 @@ public class MealServiceImpl implements MealService {
 	@Autowired
 	private StatMapper statMapper;
 	
+	@Override
+	public Image getImage(String filePath) throws IOException {
+        Image image;
+
+            ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
+            image = Image.newBuilder().setContent(imgBytes).build();
+
+        return image;
+    }
+	
+	@Override
+	public String fileUpload(MultipartFile file, HttpServletRequest req) throws IllegalStateException, IOException {
+
+			String oriFileName = file.getOriginalFilename();
+			String saveFileName = "";
+			if(oriFileName != null && !oriFileName.equals("")) {
+				// 확장자 처리
+				String ext = "";
+				// 뒤쪽에 있는 . 의 위치 
+				int index = oriFileName.lastIndexOf(".");
+				if (index != -1) {
+					// 파일명에서 확장자명(.포함)을 추출
+					ext = oriFileName.substring(index);
+				}
+				// 고유한 파일명 만들기	
+				saveFileName = "fooddiary-" + UUID.randomUUID().toString() + ext;
+				System.out.println("저장할 파일명 : " + saveFileName);
+				
+				// 데이터베이스에 파일 정보 저장
+
+				// 임시저장된 파일을 원하는 경로에 저장
+//				File f = new File("C:/java-lec/git/bitdaily/src/main/webapp/images/fooddiary");
+				String uploadPath = req.getServletContext().getRealPath("/")+"images/fooddiary";
+				System.out.println("uploadPath:"+uploadPath);
+				File f = new File(uploadPath);
+				if (!f.exists()) f.mkdirs();
+				file.transferTo(new File(f, saveFileName));
+				
+			}
+			return saveFileName;
+	}
 	@Override
 	public List<Food> selectFood(String keyword) {
 		return mealMapper.selectFood(keyword);
@@ -42,17 +94,24 @@ public class MealServiceImpl implements MealService {
 	}
 
 	@Override
-	public void insertFood(MealDetail detail, int userSeq) {
+	public void insertFood(MealDetail detail, int userSeq, Date mealDate) {
 		
 		//식단등록
 		mealMapper.insertMealDetail(detail);
 		
 		//통계테이블등록
-		int mealSeq = detail.getMealSeq();
+//		int mealSeq = detail.getMealSeq();
+		Meal meal = new Meal();
+		meal.setMealDate(mealDate);
+		meal.setUserSeq(userSeq);
+		Meal resultMeal = mealMapper.selectMealSeq(meal);
+		int mealSeq = resultMeal.getMealSeq();
+		System.out.println("밀스퀀스"+mealSeq);
 		
 		Stat newStat = new Stat();
 		newStat.setMealSeq(mealSeq);
 		newStat.setUserSeq(userSeq);
+		newStat.setMealDate(mealDate);
 		
 		String mealType = detail.getMealType();
 		
@@ -105,4 +164,6 @@ public class MealServiceImpl implements MealService {
 	public List<MealDetail> selectMealDetail(int mealSeq) {
 		return mealMapper.selectMealDetail(mealSeq);
 	}
+
+
 }

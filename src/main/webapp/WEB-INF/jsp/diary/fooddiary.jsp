@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -11,6 +10,31 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/diary/dailydiary.css" >
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/diary/fooddiary.css" >
+
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+<script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
+<script src="/spring-bitdiary/js/waitme/waitMe.min.js"></script>
+
+<style>
+#visionImage {
+display: inline-block;
+}
+#visionText {
+padding: 5px;
+padding-right: 30px;
+text-align: left;
+float: right;
+}
+.dropform {
+    min-height: 150px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background: white;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+</style>
 </head>
 <body>
 
@@ -47,6 +71,7 @@
 					<div class="search_list">
 					</div>
 					<div id="buttons">
+						<input type="hidden" name="filePath" id="filePath" value="">
 						<input class="hiddenBox" readonly="readonly" value="1">
 						<button type="button" class="buts cancle">취소</button><button type="button" class="buts insert">등록</button>
 					</div>
@@ -69,6 +94,7 @@
 					</div>
 					<div class="search_list"></div>
 					<div id="buttons">
+						<input type="hidden" name="filePath" id="filePath" value="">
 						<input class="hiddenBox" readonly="readonly" value="2">
 						<button type="button" class="buts cancle">취소</button><button type="button" class="buts insert">등록</button>
 					</div>
@@ -91,6 +117,7 @@
 					<div class="search_list">
 					</div>
 					<div id="buttons">
+						<input type="hidden" name="filePath" id="filePath" value="">
 						<input class="hiddenBox" readonly="readonly" value="3">
 						<button type="button" class="buts cancle">취소</button><button type="button" class="buts insert">등록</button>
 					</div>
@@ -112,6 +139,7 @@
 					</div>
 					<div class="search_list"></div>
 					<div id="buttons">
+						<input type="hidden" name="filePath" id="filePath" value="">
 						<input class="hiddenBox" readonly="readonly" value="4">
 						<button type="button" class="buts cancle">취소</button>
 						<button type="button" class="buts insert">등록</button>
@@ -151,23 +179,126 @@
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" style="text-align: center">
-          <img src="${pageContext.request.contextPath}/images/icon/image.png" width="150px" height="150px"><br>
-          <input type="file">
+<%--           <button class="replace"><img src="${pageContext.request.contextPath}/images/icon/image.png" width="150px" height="150px"></button>  --%>
+<!--           <input type="file" class="upload"> -->
+          
+          <div id="form">
+          <form method="post" class="dropzone" enctype="multipart/form-data" action="${pageContext.request.contextPath}/diary/upload.json" 
+          id="my-awesome-dropzone">
+            <div class="dz-message alert" id="dropzone-previews">
+                <p>사진을 이곳에 끌어놓거나 클릭해 주세요.</p>
+            </div>
+          </form>
+          </div>
+          
+
+          
+          
+          <div id="visionResult">
+          <div id="visionImage"></div>
+          <div id="visionText" class="dropzone-previews hide"></div>
+          </div>
+
         
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-          <button type="button" class="btn btn-primary">등록</button>
+          <button type="button" class="btn btn-default" id="visionClose" data-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" id="visionBnt">등록</button>
         </div>
       </div>
       
     </div>
   </div>
   
+  <script type="text/javascript">
+  $("#visionResult").hide();
+  
+  $("#visionBnt").on("click", function () {
+	  
+		var keyword = $("input:checked").val();
+		console.log(keyword);
+		$("#visionModal").modal('hide');
+		console.log(keyword);
+		$(".searchFood").val(keyword);
+		
+		
+		$("#visionResult").hide();
+		$("#dropzone-previews").html("<p>사진을 이곳에 끌어놓거나 클릭해 주세요.</p>");
+		$("#form").show();
+	  
+	});
+  
+  $("#visionClose").on("click", function () {
+		$("#visionResult").hide();
+		$("#dropzone-previews").html("<p>사진을 이곳에 끌어놓거나 클릭해 주세요.</p>");
+		$("#form").show();
+  });
+  
+
+  
+  Dropzone.options.myAwesomeDropzone = {
+          paramName: "file",
+          maxFilesize: 10,
+          addRemoveLinks: true,
+          url: "${pageContext.request.contextPath}/diary/upload.json",
+          previewsContainer: "#dropzone-previews",
+          uploadMultiple: false,
+          init: function() {
+              this.on("success", function(file, response) {
+//                   $('#form').hide();
+//                   console.log(file);
+                  console.log(response);
+                  console.log(response.fileName);
+                  
+                  $('#form').waitMe({
+                	  effect : 'win8',
+                	  text : '기다려',
+//                 	  bg : "rgba(255,255,255,0.7)"",
+//                 	  color : "#000",
+                	  maxSize : '',
+                	  waitTime : -1,
+                	  textPos : 'vertical',
+                	  fontSize : '',
+                	  source : '',
+                	  onClose : function() {}
+                  });
+
+                  
+          		$.ajax({
+        			type : "POST",
+        			url : "/spring-bitdiary/diary/vision.json",
+        			data : { 
+        				"fileName" : response.fileName
+        			},
+        			success : function(result) {
+        				$('#form').hide();
+        				$("#visionResult").show();
+        				
+        				var resultPage = "";
+        				for(var i = 0 ; i <result.length; i++) {
+        					resultPage += "<input type='radio' name='food' value='"+result[i]+"' /> "+result[i]+"<br>"
+        				}
+        				$("#visionText").html(resultPage);
+        				$("#visionImage").html("<img src='/spring-bitdiary/images/fooddiary/"+response.fileName+"' width='200px' height='200px'>");
+        				$("input[name=filePath]").val(response.fileName);
+        				console.log("파일밸류설정"+$("input[name=filePath]").val());
+        			}
+        		});
+              });
+              this.on("addedfile", function(file) {
+                 
+              });
+          }
+      };
+  
+
+
+  </script>
+  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/diary/mini.js"></script>
-<script src="${pageContext.request.contextPath}/js/diary/fooddiary.js"></script>
+<script src="${pageContext.request.contextPath}/js/diary/diary.js"></script>
 </body>
 </html>

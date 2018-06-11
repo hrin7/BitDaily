@@ -1,11 +1,18 @@
 package kr.co.bitdaily.meal.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +20,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.cloud.vision.v1.AnnotateImageRequest;
+import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
+import com.google.cloud.vision.v1.EntityAnnotation;
+import com.google.cloud.vision.v1.Feature;
+import com.google.cloud.vision.v1.Feature.Type;
+import com.google.cloud.vision.v1.Image;
+import com.google.cloud.vision.v1.ImageAnnotatorClient;
+import com.google.protobuf.ByteString;
 
 import kr.co.bitdaily.meal.service.MealService;
 import kr.co.bitdaily.repository.vo.Food;
@@ -20,6 +38,7 @@ import kr.co.bitdaily.repository.vo.Meal;
 import kr.co.bitdaily.repository.vo.MealDetail;
 import kr.co.bitdaily.repository.vo.Member;
 import kr.co.bitdaily.util.DiaryCalendar;
+import kr.co.bitdaily.util.TranslationAPI;
 
 @Controller
 @RequestMapping("/diary")
@@ -27,6 +46,70 @@ public class MealController {
 	
 	@Autowired
 	private MealService mealService;
+	
+	@RequestMapping("/vision.json")
+	@ResponseBody
+	public List<String> detectLabels(String fileName, HttpServletRequest req) throws Exception {
+
+	    ImageAnnotatorClient vision = ImageAnnotatorClient.create();
+
+//	    String filePath = "C:/java-lec/git/bitdaily/src/main/webapp/images/fooddiary/" + fileName;
+	    String filePath = req.getServletContext().getRealPath("/")+"images/fooddiary/" + fileName;
+
+	    Path path = Paths.get(filePath);
+
+	    byte[] data = Files.readAllBytes(path);
+
+	    ByteString imgBytes = ByteString.copyFrom(data);
+
+	    List<AnnotateImageRequest> requests = new ArrayList<AnnotateImageRequest>();
+
+	    Image img = Image.newBuilder().setContent(imgBytes).build();
+
+	    Feature feat = Feature.newBuilder().setType(Type.LABEL_DETECTION).build();
+
+	    AnnotateImageRequest request = AnnotateImageRequest.newBuilder()
+
+	        .addFeatures(feat)
+
+	        .setImage(img)
+
+	        .build();
+
+	    requests.add(request);
+
+	    BatchAnnotateImagesResponse response = vision.batchAnnotateImages(requests);
+	    List<AnnotateImageResponse> responses = response.getResponsesList();
+	    List<String> list = new ArrayList<String>();
+	    
+	    for (AnnotateImageResponse res : responses) {
+	      if (res.hasError()) {
+	        System.out.printf("Error: %s\n", res.getError().getMessage());
+	      }
+	      
+	      TranslationAPI translate = new TranslationAPI();
+	      for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
+	    	  String description = annotation.getDescription();
+	    	  String koDescription = translate.translate(description);
+//	        annotation.getAllFields().forEach((k, v)->list.add(v.toString()));
+	    	  list.add(koDescription);
+	      }
+	    }
+	    return list;
+	    
+	   
+	    
+	}
+
+
+	@RequestMapping("/upload.json")
+	@ResponseBody
+	public Map<String, String> fileUpload(@RequestParam MultipartFile file, HttpServletRequest req) throws IOException {
+		String fileName = mealService.fileUpload(file, req);
+		Map<String, String> map = new HashMap<>();
+		map.put("fileName", fileName);
+		return map;
+	}
 	
 	@RequestMapping("/fooddiary.do")
 	public void foodList() {
@@ -99,7 +182,7 @@ public class MealController {
 		detail.setFoodSeq(Integer.parseInt(foodSeq));
 		detail.setMealGram(Integer.parseInt(mealGram));
 		detail.setFilePath(filePath);
-		mealService.insertFood(detail, Integer.parseInt(userSeq));
+		mealService.insertFood(detail, Integer.parseInt(userSeq), mealDate);
 		
 		
 //		MealDetail detail = new MealDetail();

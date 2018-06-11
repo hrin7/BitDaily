@@ -9,11 +9,12 @@
 		<result column="lunch" property="lunch" />
 		<result column="diner" property="diner" />
 		<result column="snack" property="snack" />
+		<result column="meal_date" property="mealDate" />
 	</resultMap>
 
 	<insert id="insertStat" parameterType="stat">
-	insert into tb_stat (meal_seq, user_seq, morning, lunch, diner, snack)
-	values (#{mealSeq}, #{userSeq}, #{morning}, #{lunch}, #{diner}, #{snack})
+	insert into tb_stat (meal_seq, user_seq, morning, lunch, diner, snack, meal_date)
+	values (#{mealSeq}, #{userSeq}, #{morning}, #{lunch}, #{diner}, #{snack}, #{mealDate})
 	</insert>
 	
 	<update id="updateStat" parameterType="stat">
@@ -22,7 +23,6 @@
 		   lunch = #{lunch},
 		   diner = #{diner},
 		   snack = #{snack}
-	   
 	 where meal_seq = #{mealSeq}
 	</update>
 	
