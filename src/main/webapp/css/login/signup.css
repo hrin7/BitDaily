@@ -93,6 +93,10 @@ a {
 	text-transform: uppercase;
 	margin-left: 75%;
 }
+#signupbtn:hover {
+	cursor: pointer;
+	
+}
  footer { 
  	display: block; 
  	margin-top: 20px; 

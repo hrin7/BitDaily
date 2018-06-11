@@ -1,19 +1,29 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/bitdaily/sweetalertFile/sweetalert2.css" />
-<script src="../../sweetalert/jquery-3.2.1.js"></script>
-<script src="../../sweetalertFile/sweetalert2.all.min.js"></script>
+<script src="${pageContext.request.contextPath}/sweetalert/jquery-3.2.1.js"></script>
+<script src="${pageContext.request.contextPath}/sweetalertFile/sweetalert2.all.min.js"></script>
+ <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/login.css" />
-<style>
-
-	
-	
-</style>
 </head>
+  <%
+    String clientId = "MCZXY_QBmhXRmDMH4Rr7";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost/spring-bitdiary/login/callback.do", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
 <body>
 <!-- 배경 -->
   <figure class='vid'>
@@ -30,7 +40,7 @@
     </div>
     <div class="row clearfix">
       <div class="col_half">
-        <div class="social_btn fb"><a href="#"><span><i class="fa fa-facebook" aria-hidden="true"></i></span>Sign in with Naver</a></div>
+        <div class="social_btn fb"><a href="<%=apiURL%>"><span><i class="fa fa-facebook" aria-hidden="true"></i></span>Sign in with Naver</a></div>
         <div class="social_btn tw"><a href="#"><span><i class="fa fa-twitter" aria-hidden="true"></i></span>Sign in with KaKaoTalk</a></div>
         <div class="row clearfix create_account">
           <div><a href="${pageContext.request.contextPath}/login/signupform.do">&nbsp;Create an Account</a></div>
@@ -44,63 +54,23 @@
           <div class="input_field"><span><i class="fa fa-lock" aria-hidden="true"></i></span>
             <input type="text" name="pass" placeholder="Password" />
           </div>
-          <input class="button" type="submit" value="Sign in"/>
+          <input class="button" type="submit" value="로그인"/>
         </form>
+        
           <div class="row clearfix bottom_row">
             <div class="col_half searchPass"><input class="searchPass" id="searchPass" value="Forgot Password?" type="submit" ></div>
             <div class="col_half searchPass"><input class="searchId" id="searchId" value="Forgot ID?" type="submit" ></div>
           </div>
+          
+          
+          
+          
       </div>
     </div>
   </div>
 </div>
-	<script>
-	
-	<script type="text/javascript">
-	var naverLogin = new naver.LoginWithNaverId(
-		{
-				clientId: "_qYdxNPv8LMSC0CJB6cr",
-			callbackUrl: "http://127.0.0./spring-bitdiary/login/login.do",
-			isPopup: true, /* 팝업을 통한 연동처리 여부 */
-			loginButton: {color: "green", type: 3, height: 30} /* 로그인 버튼의 타입을 지정 */
-		}
-	);
-	
-	/* 설정정보를 초기화하고 연동을 준비 */
-	naverLogin.init();
-	
-// 	 (5) 현재 로그인 상태를 확인 
-	window.addEventListener('load', function () {
-		naverLogin.getLoginStatus(function (status) {
-			if (status) {
-				/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
-				setLoginStatus();
-			} else {
-				console.log("로그인실패");
-			}
-		});
-	});
 
-	/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
-//			function logOut() {
-//				naverLogin.logout();
-//			});
-	function setLoginStatus() {
-		
-		console.dir(naverLogin.user);
-		
-		var f = document.loginForm;
-		
-		f.social_id.value = naverLogin.user.id;
-		f.social_name.value = naverLogin.user.name;
-		f.social_email.value = naverLogin.user.email;
-		f.social_gender.value = naverLogin.user.gender;
-		f.submit();
-			naverLogin.logout();
-	
-	
-	
-	
+	<script>
 	
 	
 	//로그인 실패시 alert창 뜸.
@@ -138,9 +108,9 @@
 		$("#searchId").click(function () {
 			swal.mixin({
 			  input: 'text',
-			  confirmButtonText: 'Next &rarr;',
+			  confirmButtonText: '전송',
 			  showCancelButton: true,
-			  progressSteps: ['1', '2', '3']
+			  progressSteps: ['1', '2']
 			}).queue([
 			  {
 			    title: '이름을 입력하세요',

@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="/bitdaily/sweetalertFile/sweetalert2.css" />
 <script src="${pageContext.request.contextPath}/sweetalert/jquery-3.2.1.js"></script>
 <script src="${pageContext.request.contextPath}/sweetalertFile/sweetalert2.all.min.js"></script>
@@ -15,79 +16,153 @@
 
 <div class="signup">
 	<div class="signup-box">
-		<hgroup>
-			<h1>User Info</h1> 
-		</hgroup>
+		<span id="userInfoNameSpan"> ${sessionScope.member.name} 님의 회원 정보 </span><br>
+		<form name="mForm" action="${pageContext.request.contextPath}/user/userInfodelete.do" method="POST" id="mForm">
 		<p class="input">ID</p>
-		<input class="place" type="text" name="id">
-		<p class="input">Name</p>
-		<input class="place" type="text" name="name">
+		<input class="place" type="text" name="id" value="${sessionScope.member.id}">
+		<p class="input">이름</p>
+		<input class="place" type="text" name="name" value="${sessionScope.member.name}">
 		<p class="input">Email</p>
-		<input class="place" type="text" name="email">
+		<input class="place" type="text" name="email" value="${sessionScope.member.email}">
 		<input class="btn-update" id="updateemail" type="button" value="수정">
 		<p class="input">Password</p>
-		<input class="place" type="text" name="pass">
- 		<input class="btn-update" id="updatepass" type="button" value="수정"><br><br>
-		<span class="input1">height(cm)</span>
-		<input class="place1" type="text" name="userHeight">
+		<input class="place" type="text" name="pass" value="${sessionScope.member.pass}">
+ 		<input class="btn-update" id="updatepass" type="button" value="수정">
+		<p class="input">키(cm)</p>
+		<input class="place" type="text" name="userHeight" value="${sessionScope.member.userHeight}">
 		<input class="btn-update" id="updateuserHeight" type="submit" value="수정">
-		<span class="input12">Age</span>
-	    <input class="place1" type="text" name="age">
-	    <input class="btn-update" id="updateage" type="submit" value="수정"><br><br>
-		<span class="input1">Current Weight(kg)</span>
-		<input class="place1" type="text" name="currentWeight">
-		<input class="btn-update" id="updatecurrentWeight" type="submit" value="수정"><br>
-		<span class="input1">Goal Weight(kg)</span>
-		<input class="place2" type="text" name="goalWeight">
-		<input class="btn-update" id="updatgoalweight" type="submit" value="수정"><br>
-		<span class="input1">Goal Calorie(kg)</span>
-		<input class="place2" type="text" name="goalCalorie">		
-		<input class="btn-update" id="updategoalCalorie" type="submit" value="수정">			
-		<input class="btn-deletuser" id="deletuser"value="탈퇴">
+		<p class="input">나이</p>
+	    <input class="place" type="text" name="age" value="${sessionScope.member.age}">
+	    <input class="btn-update" id="updateage" type="button" value="수정">
+		<p class="input">현재 몸무게(kg)</p>
+		<input class="place" type="text" name="currentWeight" value="${sessionScope.member.currentWeight}">
+		<input class="btn-update" id="updatecurrentWeight" type="button" value="수정">
+		<p class="input">목표 몸무게(kg)</p>
+		<input class="place" type="text" name="goalWeight" value="${sessionScope.member.goalWeight}">
+		<input class="btn-update" id="updatgoalweight" type="button" value="수정">
 		
+		<input class="btn-deletuser" type="button" id="deletuser"value="탈퇴">
+		</form>
 		
 	</div>
 </div>
 	<script>
+	var f = document.mForm;
 	
+	
+	//이메일 수정
 	$("#updateemail").click(function () {
 		console.log("updateemail 체크중");
 		$.ajax({
-			url: "${pageContext.request.contextPath}/user/userInfo.json",
+			url: "${pageContext.request.contextPath}/user/updateEmail.json",
 			data: {
-				"email" : f.id.value	
+				"email" : f.email.value,
+				"id" : "${sessionScope.member.id}"
 			},
 			dataType: "json",
 			success: function (data) {
-				console.log('아이디 들어옴');
-				swal('수정 완료!');
+				if(data == false){
+				swal('이메일 수정 완료!');
+				}
 			}
 		});
 	});
 	
+	//pass비밀번호 수정
+		$("#updatepass").click(function () {
+			console.log("updatepass 체크중");
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/updatePass.json",
+				data: {
+					"pass" : f.pass.value,
+					"id" : "${sessionScope.member.id}"
+				},
+				dataType: "json",
+				success: function (data) {
+					if(data == false){
+					swal('이메일 완료!');
+					}
+				}
+			});
+		});
+	
+		//나이 수정
+		$("#updateage").click(function () {
+			console.log("updateage 체크중");
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/updateAge.json",
+				data: {
+					"age" : f.age.value,
+					"id" : "${sessionScope.member.id}"
+				},
+				dataType: "json",
+				success: function (data) {
+					if(data == false){
+					swal('나이 수정 완료!');
+					}
+				}
+			});
+		});
 	
 	
-	//이메일 수정
-		$("#updateemail").click(function () {
-			swal('수정 완료!')
+	
+	
+	
+		//키 수정
+		$("#updateuserHeight").click(function () {
+			console.log("userHeight 체크중");
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/updateHeight.json",
+				data: {
+					"userHeight" : f.userHeight.value,
+					"id" : "${sessionScope.member.id}"
+				},
+				dataType: "json",
+				success: function (data) {
+					if(data == false){
+					swal('키 수정 완료!');
+					}
+				}
+			});
 		});
-	//키 수정
-		$("#updatheight").click(function () {
-			swal('수정 완료!')
-		});
+	
+	
+	
+	
 	//몸무게 수정
 		$("#updatecurrentWeight").click(function () {
-			swal('수정 완료!')
+			console.log("updatecurrentWeight 체크중");
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/updateWeight.json",
+				data: {
+					"currentWeight" : f.currentWeight.value,
+					"id" : "${sessionScope.member.id}"
+				},
+				dataType: "json",
+				success: function (data) {
+					if(data == false){
+					swal('몸무게 수정 완료!');
+					}
+				}
+			});
 		});
 	//목표 몸무게 수정
 		$("#updatgoalweight").click(function () {
-			swal('수정 완료!')
+			console.log("goalWeight 체크중");
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/updateGoalWeight.json",
+				data: {
+					"goalWeight" : f.goalWeight.value,
+					"id" : "${sessionScope.member.id}"
+				},
+				dataType: "json",
+				success: function (data) {
+					if(data == false){
+					swal('목표 몸무게  완료!');
+					}
+				}
+			});
 		});
-	//목표 몸무게 수정
-	$("#updategoalCalorie").click(function () {
-		swal('수정 완료!')
-	});
-	
 	//탈퇴
 		$("#deletuser").click(function () {
 			swal({
@@ -105,34 +180,9 @@
 				      'Your file has been deleted.',
 				      'success'
 				    )
+				    $("#mForm").submit();
 				  }
 				})
-		});
-	//비번 수정
-		$("#updatepass").click(function () {
-			swal.mixin({
-			  input: 'text',
-			  confirmButtonText: 'Next &rarr;',
-			  showCancelButton: true,
-			  progressSteps: ['1', '2', '3']
-			}).queue([
-			  {
-			    title: '수정할 비밀번호 입력하세요',
-			    text: '...'
-			  },
-			  '다시한번 입력하세요',
-			]).then((result) => {
-			  if (result.value) {
-			    swal({
-			      title: 'All done!',
-			      html:
-			        '수정 되었습니다: <pre>' +
-			          JSON.stringify(result.value) +
-			        '</pre>',
-			      confirmButtonText: '성공!'
-			    })
-			  }
-			})
 		});
 	</script>
 </body>

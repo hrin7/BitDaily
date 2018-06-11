@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/signup.css" />
+
 <style>
 
 </style>
@@ -16,14 +17,14 @@
 		<hgroup>
 			<h1>Sign up for your Account</h1>
 		</hgroup>
-		<form name="mForm" action="${pageContext.request.contextPath}/login/join.do" method="POST" onsubmit="return doAction()">
+		<form name="mForm" action="${pageContext.request.contextPath}/login/join.do" method="POST" id="mForm">
 		<p class="input">ID</p>
-		<input class="place" type="text" name="id">
+		<input class="place" type="text" name="id" value="${id}">
 		<a id="idcheck" href="javascript:void(0);">중복확인</a>		
 		<p class="input">Name</p>
-		<input class="place" type="text" name="name">
+		<input class="place" type="text" name="name" >
 		<p class="input">Email</p>
-		<input class="place" type="text" name="email">
+		<input class="place" type="text" name="email" value="${email}">
 		<p class="input">Password</p>
 		<input class="place" type="text" name="pass">
  		<p class="input">Confirm password</p> 
@@ -47,19 +48,12 @@
 		<span class="input1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goal Calorie(kg)</span>
 		<input class="place1" type="text" name="goalCalorie"><br>					
 		<footer>
-			<input class="btn" type="button" value="Sign Up">
+			<input class="btn" type="button" id="signupbtn" value="Sign Up">
 		</footer>
 		</form>
 	</div>
 </div>
 <script>
-
-		$(function () {
-			$(".white").css("transform","translateX(60px)");
-			$(".white").css("width","350px");
-			$(".white").css("height","420px");
-		});
-
 		var f = document.mForm;
 		
 		function isEmpty(obj, msg) {
@@ -73,8 +67,11 @@
 			}
 			return false;
 		}
-
-		function doAction() {
+		$("#signupbtn").click (function () {
+			doAction();
+		})
+		
+		 function doAction() {
 			if(isEmpty(f.id, "아이디를 입력하세요")) {return false;}
 			if(isEmpty(f.name, "이름을 입력하세요")) {return false;}
 			if(isEmpty(f.email, "이메일을 입력하세요")) {return false;}
@@ -94,6 +91,8 @@
 				f.repassword.value = "";
 				return false;
 			}
+			
+			$("#mForm").submit();
 			
 // 			if(f.idDuplication.value != "idCheck") {
 // 				alert("아이디 중복체크를 해주세요");

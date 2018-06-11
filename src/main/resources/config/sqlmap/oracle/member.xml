@@ -76,22 +76,51 @@
     	 where id = #{id} 
     
     </select>
-        <update id="updateMember" parameterType="member">
-        update tb_user
-           set pass = #{pass},
-           set email = #{email},
-           set age = #{age},
-           set user_height = #{userHeight},
-           set user_height = #{goalWeight},
-           set goal_weight = #{currentWeight},
-           set goal_calorie = #{goalCalorie}
-         where id   = #{id}  
-    </update>
-    
     <update id="updateCurrentWeight" parameterType="member">
        update tb_user
           set current_weight = #{currentWeight}
         where user_seq = #{userSeq}
     </update>
     
+    
+    
+<!--     유저 정보 수정 -->
+    <update id="updateMemberAge" parameterType="member">
+        update tb_user
+           set age = #{age}
+         where id = #{id}  
+    </update>
+    <update id="updateMemberGoalWeight" parameterType="member">
+        update tb_user
+           set goal_weight = #{goalWeight}
+         where id = #{id}  
+    </update>
+    <update id="updateMemberCurrentWeight" parameterType="member">
+        update tb_user
+           set current_weight = #{currentWeight}
+         where id = #{id}  
+    </update>
+    <update id="updateMemberHeight" parameterType="member">
+        update tb_user
+           set user_height = #{userHeight}
+         where id = #{id}  
+    </update>
+    
+    <update id="updateMemberPass" parameterType="member">
+        update tb_user
+           set pass = #{pass}
+         where id = #{id}  
+    </update>
+        
+    <update id="updateMemberEmail" parameterType="member">
+        update tb_user
+           set email = #{email}
+         where id = #{id}  
+    </update>
+    
+    
+     <update id="deleteMember" parameterType="string">
+        delete tb_user
+         where id = #{id}  
+    </update>
 </mapper>
