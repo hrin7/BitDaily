@@ -10,4 +10,5 @@ public interface ExerciseMapper {
 	Exercise searchExerciseName(String excerciseName);
 	void insertExercise(Exercise exercise);
 	void deleteExercise(Exercise exercise);
+	void updateExercise(Exercise exercise);
 }

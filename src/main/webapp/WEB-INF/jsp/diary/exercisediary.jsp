@@ -42,14 +42,7 @@
 	    
 	    <div style="height: 100%; margin: 20px 0px 80px;">
 	    	<table id="searchResult">
-<%-- 	    	  <c:forEach var="exe" items="${list}"> --%>
-<!-- 				<tr> -->
-<%-- 					<td><a href="#t" class="exeName">${exe.excerciseName}</a></td> --%>
-<!-- 					<td style="width: 12%; text-align: right;">1분</td> -->
-<%-- 					<td style="width: 12%; text-align: right;" class="exeKcal">${exe.excerciseKcal}kcal</td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr><td colspan="5"><hr></td></tr> -->
-<%-- 	    	  </c:forEach> --%>
+
 			</table>
 	    </div>
 	    

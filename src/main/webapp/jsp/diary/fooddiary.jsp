@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/diary/dailydiary.css" >
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/diary/fooddiary.css" >
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 </head>
 <body>
 

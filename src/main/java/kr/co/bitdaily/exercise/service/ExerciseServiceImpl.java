@@ -60,5 +60,11 @@ public class ExerciseServiceImpl implements ExerciseService {
 		exeMapper.deleteExercise(exercise);
 	}
 
+	@Override
+	public void updateExercise(Exercise exercise) {
+		exeMapper.updateExercise(exercise);
+		
+	}
+
 
 }

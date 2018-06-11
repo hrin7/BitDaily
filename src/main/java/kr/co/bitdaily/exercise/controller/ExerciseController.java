@@ -18,6 +18,8 @@ public class ExerciseController {
 
 	@RequestMapping("/exeDiaryList.do")
 	public List<Exercise> retrieveListExe(Exercise exe) {
+		System.out.println(exe.getExerciseDate());
+		System.out.println(exe.getUserSeq());
 		return exeService.retrieveListExe(exe);
 	}
 	
@@ -40,6 +42,11 @@ public class ExerciseController {
 	@RequestMapping("/exeDelete.do")
 	public List<Exercise> deleteExercise(Exercise exercise) {
 		exeService.deleteExercise(exercise);
+		return exeService.retrieveListExe(exercise);
+	}
+	@RequestMapping("/exeUpdate.do")
+	public List<Exercise> updateExercise(Exercise exercise) {
+		exeService.updateExercise(exercise);
 		return exeService.retrieveListExe(exercise);
 	}
 	

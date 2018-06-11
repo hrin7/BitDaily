@@ -50,6 +50,12 @@
 		 where user_seq = #{userSeq}
 		   and exercise_record_seq = #{exerciseRecordSeq}
 	</delete>
+	<update id="updateExercise" parameterType="exercise">
+		update tb_exercise_record
+		set		exercise_time = #{exerciseTime}
+		 where user_seq = #{userSeq}
+		   and exercise_record_seq = #{exerciseRecordSeq}
+	</update>
 </mapper>
 
 

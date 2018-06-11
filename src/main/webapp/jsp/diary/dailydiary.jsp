@@ -7,9 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
 <link rel="stylesheet" href="<c:url value="/css/diary/commondiary.css" />" >
 <link rel="stylesheet" href="<c:url value="/css/diary/dailydiary.css" />" >
 </head>
@@ -20,7 +18,7 @@
 <span id="curDate"></span>
 <a href="#" id="nextDate"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
 <div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px"> 1200 kcal</div>
-</div><!-- end .date -->
+</div>
 
 <div class="diary">
 	
@@ -62,68 +60,5 @@
 <script src="<c:url value="/js/diary/summernote.js"/> "></script>
 <script src="<c:url value="/js/diary/mini.js"/> "></script>
 <script src="<c:url value="/js/diary/diaryActive.js"/> "></script>
-<script>
-function toggleBtn(flag){
-	if(flag) $("#regist").text("수정")
-	else $("#regist").text("등록")
-}
-
-function setDiary(){
-	console.log("ready 다이어리 실행중");
-	$.ajax({
-		url : "/spring-bitdiary/diary/dailydiary/select.json",
-		data : {
-			userSeq : "1",
-			diaryDate : new Date($("#curDate").text())
-		}
-	}).done(function(data){
-		console.log(data);
-		$("#diaryTitle").val(data.title);
-		console.log($(".note-placeholder").text(""));
-		$(".note-editable p").text(data.content);
-		toggleBtn(data.title);
-	})
-}
-function insertDiary(){
-	$.ajax({
-		url : update(),
-		data : {
-			userSeq : "1",
-			title : $("#diaryTitle").val(),
-			content : $(".note-editable p").text(),
-			diaryDate : new Date()
-		}
-	}).done(function(data){
-		alert("성공");
-		$("#regist").text("수정");
-	})
-}
-function check(){
-	console.log($("#diaryTitle").val());
-	if($("#diaryTitle").val() == ""){
-		alert("제목을 등록하세요.");
-		return false;
-	} 
-	console.log($(".note-editable p").text());
-	if($(".note-editable p").text() == ""){
-		alert("내용을 입력하세요");
-		return false;
-	}
-	return true;
-}
-
-function update(){
-	var path = "/spring-bitdiary/diary/dailydiary/insert.json";
-	if($("#regist").text() == "수정"){
-		path = "/spring-bitdiary/diary/dailydiary/update.json";
-	};
-	return path;
-}
-$("#regist").click(function(){
-	if(check())	insertDiary();
-})
-$(setDiary);
-
-</script>
 </body>
 </html>
