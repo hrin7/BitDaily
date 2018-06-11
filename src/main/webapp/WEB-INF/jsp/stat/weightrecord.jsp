@@ -34,7 +34,7 @@
 <div class="content_box">
 <div id="scale">
 <img src="${pageContext.request.contextPath}/images/icon/thescale.png" width="100px" height="100px"><br>
-<h3>${member.currentWeight}Kg</h3>
+<p id="curWeight"></p>
 
 <div id="animation">
 <div class="runner" >

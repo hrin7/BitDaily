@@ -113,7 +113,10 @@ function setChart(list){
 				console.log(member);
 				var startWeight = member.userWeight;
 				var endWeight = member.goalWeight;
+				
 				var curWeight = member.currentWeight;
+				$("#curWeight").html("<h3>"+curWeight+"kg</h3>");
+				
 				var goal = startWeight-endWeight; //감량해야할 수
 				var cur = startWeight-curWeight; //감량한 수
 				var percentage = ((cur/goal)*100).toFixed(0);
@@ -125,7 +128,7 @@ function setChart(list){
 				var move = length * (percentage/100);
 				var gap = $(".runner").offset().left - 454.138;
 //				console.log(gap);
-//				$(".runner").animate({left: "-="+gap+"px"}, 1000);
+				$(".runner").animate({right: "+="+gap+"px"}, 50);
 				$(".runner").animate({right: "-="+move+"px"}, 800);
 			},
 			error:function(request,status,error){
