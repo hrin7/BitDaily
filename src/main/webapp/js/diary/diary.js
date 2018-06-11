@@ -2,13 +2,17 @@
 
 $(function () {
 	$("#nav-diary").addClass("active");
-	
 	setDate();
-	
-	var tabNo = 1;
-	if (tabNo == 1) {
-		setFood();  // 식단 초기 설정하기
-	} 
+	if (tabNo == 3) {
+		$("body > div.content > div.diary > div.subMenu > ul > li:nth-child(3) > a").addClass("sub_active");
+		setDiary();  // 식단 초기 설정하기
+	}else if(tabNo == 2){
+		$("body > div.content > div.diary > div.subMenu > ul > li:nth-child(2) > a").addClass("sub_active");
+		setExercise();
+	}else {
+		$("body > div.content > div.diary > div.subMenu > ul > li:nth-child(1) > a").addClass("sub_active");
+		setFood();
+	}
 });
 
 //식단 , 운동 , 일기 탭 눌렀을때 이벤트
@@ -575,7 +579,7 @@ $(".mainMenu").on("click",".deleteExercise",function(){
 			success: makeExeList
 		});
 	}else {
-		makeExercise()
+		makeExercise();
 	}
 })
 

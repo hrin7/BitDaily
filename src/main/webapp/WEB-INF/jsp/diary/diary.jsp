@@ -126,7 +126,9 @@
 	      <div class="footMenu"></div>
 	    </form>
   </div>
-  
+ <script>
+ var tabNo = ${param.page};
+ </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/diary/mini.js"></script>

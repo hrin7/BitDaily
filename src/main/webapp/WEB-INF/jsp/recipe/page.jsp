@@ -2,6 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .pagination { margin: 0px 520px; }
+
+nav {
+	margin-left: auto;
+	margin-right: auto;
+}
 ul {
 	list-style:none; float:left; display:inline;
 }

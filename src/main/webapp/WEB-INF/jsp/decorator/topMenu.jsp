@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item" id="nav-diary">
-              <a class="nav-link" href="${pageContext.request.contextPath}/diary/diary.do">다이어리
+              <a class="nav-link" href="${pageContext.request.contextPath}/diary/diary.do?page=1">다이어리
                 <span class="sr-only">(current)</span>
               </a>
             </li>
