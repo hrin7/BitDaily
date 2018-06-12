@@ -479,7 +479,7 @@ function makeList() {
 	$.ajax({
 		url : "/spring-bitdiary/diary/makeList.json",
 		data : { 
-			userSeq : 32,
+			userSeq : userSeq,
 			mealDate : new Date($("#now").text())
 		},
 		success : function(mealList) {

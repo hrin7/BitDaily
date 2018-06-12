@@ -79,6 +79,7 @@
 	  join tb_food f
 	    on m.food_seq = f.food_seq
 	 where m.meal_seq = #{mealSeq}
+	 order by m.meal_detail_seq asc
 	</select>
 	
 	<select id="selectByUserSeq" parameterType="int" resultMap="mealMap">
