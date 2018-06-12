@@ -10,9 +10,17 @@
 	</resultMap>
 
 	<select id="selectActive" parameterType="dates" resultMap="rankMap">
-		select user_seq, count(user_seq) as total
-		from (select * from tb_recipe where recipe_date between #{startDate} and #{endDate} )
-		group by user_seq
+		select a.name as name ,count(user_seq) as total
+		from (
+			select r.user_seq ,u.name
+			from tb_recipe r
+			inner join tb_user u
+			on r.user_seq = u.user_seq
+			where recipe_date 
+			between #{startDate} and #{endDate} 
+			) a
+		group by a.name
+		order by total desc
 	</select>
 
    	<select id="selectExercise" parameterType="dates" resultMap="rankMap">
@@ -29,16 +37,17 @@
    	</select>
    	
    	<select id="selectWeight" parameterType="dates" resultMap="rankMap">
-   		SELECT user_seq, (current_weight - goal_weight) AS total
-		FROM tb_stat_weight
+   		SELECT (select name from tb_user where user_seq = t.user_seq) as name, (current_weight - goal_weight) AS weight
+		FROM tb_stat_weight t
 		WHERE (user_seq, TO_CHAR (weight_date, 'yyyy-mm-dd')) IN
-		( SELECT user_seq,
-		TO_CHAR (MAX (weight_date), 'yyyy-mm-dd') total
-		FROM tb_stat_weight
-		WHERE weight_date BETWEEN #{startDate}
-		AND #{endDate}
-		GROUP BY user_seq)
-		ORDER BY total
+			( 
+				SELECT user_seq,
+				TO_CHAR (MAX (weight_date), 'yyyy-mm-dd') weight
+				FROM tb_stat_weight
+				WHERE weight_date between #{startDate} and #{endDate}
+				GROUP BY user_seq
+			)
+		ORDER BY weight
    	</select>
    	
 </mapper>

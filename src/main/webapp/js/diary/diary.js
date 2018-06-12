@@ -1,5 +1,4 @@
 /* 공용 파트  */
-
 $(function () {
 	$("#nav-diary").addClass("active");
 	setDate();
@@ -526,9 +525,10 @@ $(".mainMenu").on("click", ".searchedExercise",function(){
 	    	$(".footMenu").show();
 
 	        $("#exerciseMinute").keyup(function (e) {
-	        	if(e.keyCode < 48 || 57 < e.keyCode){
-	        		var text = $("#exerciseMinute").val();
-	        		$("#exerciseMinute").val(text.substring(text.length))
+	        	var regex= /^[0-9]*$/;
+	        	var text = $("#exerciseMinute").val();
+	        	if(!regex.test(text)){
+	        		$("#exerciseMinute").val(text.replace(regexp,''))
 	        	}
 	    		// 칼로리 계산
 	    	    var kcal = $(this).val()*result.excerciseKcal
@@ -628,7 +628,6 @@ $(".mainMenu").on("keyup",".changeTime",function(){
 })
 
 /* 운동 파트 끝 */
-
 
 
 

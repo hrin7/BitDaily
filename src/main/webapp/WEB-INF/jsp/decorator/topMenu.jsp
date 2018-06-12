@@ -25,7 +25,7 @@
               <a class="nav-link" href="${pageContext.request.contextPath}/recipe/list.do">레시피</a>
             </li>
             <li class="nav-item">
-              <a href="${pageContext.request.contextPath}/jsp/stat/rank.jsp" style="text-decoration: none">　<img src="${pageContext.request.contextPath}/images/icon/trophy.png" width="31px" height="31px"></a>
+              <a href="${pageContext.request.contextPath}/stat/rank.do" style="text-decoration: none">　<img src="${pageContext.request.contextPath}/images/icon/trophy.png" width="31px" height="31px"></a>
             </li>
             <li class="nav-item">
               <a href="${pageContext.request.contextPath}/user/userInfo.do" style="text-decoration: none">　<img src="${pageContext.request.contextPath}/images/icon/user.png" width="31px" height="31px" onmouseover="this.src='${pageContext.request.contextPath}/images/icon/user2.png'" onmouseout="this.src='${pageContext.request.contextPath}/images/icon/user.png'" ></a>

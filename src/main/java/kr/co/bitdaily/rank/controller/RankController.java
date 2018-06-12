@@ -22,17 +22,19 @@ public class RankController {
 	@Autowired
 	private RankService service;
 	
-	@RequestMapping("/rank.do")
-	public void rankPage() {}
-	
 	@RequestMapping("/rank.json")
 	public @ResponseBody Map<String,List<Rank>> rankStat(Dates date) {
 		System.out.println("들어옴");
 		System.out.println("데이트 : "+ date.getStartDate().toString());
 		System.out.println("데이트 : "+ date.getEndDate().toString());
 		List<Rank> active = service.selectActive(date);
+		for(Rank r : active) {
+			System.out.println("active 랭킹");
+			System.out.println(r.getName());
+		}
 		List<Rank> exercise = service.selectExercise(date);
 		List<Rank> weight = service.selectWeight(date);
+		
 		Map<String , List<Rank>> map = new HashMap<>();
 		map.put("active", active);
 		map.put("exercise", exercise);
