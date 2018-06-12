@@ -165,5 +165,35 @@ public class MealServiceImpl implements MealService {
 		return mealMapper.selectMealDetail(mealSeq);
 	}
 
+	@Override
+	public void deleteMealDetail(int mealDetailSeq) {
+		mealMapper.deleteMealDetail(mealDetailSeq);
+	}
+
+	@Override
+	public MealDetail selectMealByDetailSeq(int mealDetailSeq) {
+		return mealMapper.selectMealByDetailSeq(mealDetailSeq);
+	}
+
+	@Override
+	public Stat selectStatByMealSeq(int mealSeq) {
+		return statMapper.selectStatByMealSeq(mealSeq);
+	}
+
+	@Override
+	public void updateStat(Stat stat) {
+		statMapper.updateStat(stat);
+	}
+
+	@Override
+	public void updateGramDetail(MealDetail detail) {
+		mealMapper.updateGramDetail(detail);
+	}
+
+	@Override
+	public double getKcalByFoodSeq(int foodSeq) {
+		return mealMapper.getFoodKcal(foodSeq);
+	}
+
 
 }

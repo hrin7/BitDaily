@@ -37,6 +37,7 @@ import kr.co.bitdaily.repository.vo.Food;
 import kr.co.bitdaily.repository.vo.Meal;
 import kr.co.bitdaily.repository.vo.MealDetail;
 import kr.co.bitdaily.repository.vo.Member;
+import kr.co.bitdaily.repository.vo.Stat;
 import kr.co.bitdaily.util.DiaryCalendar;
 import kr.co.bitdaily.util.TranslationAPI;
 
@@ -183,17 +184,7 @@ public class MealController {
 		detail.setMealGram(Integer.parseInt(mealGram));
 		detail.setFilePath(filePath);
 		mealService.insertFood(detail, Integer.parseInt(userSeq), mealDate);
-		
-		
-//		MealDetail detail = new MealDetail();
-//		detail.setMealSeq(mealSeq);
-//		detail.setMealType(mealType);
-//		detail.setFoodSeq(foodSeq);
-//		detail.setMealGram(Integer.parseInt(mealGram));
-//		detail.setFilePath(filePath);
-//		Member member = (Member) session.getAttribute("member");
-//		int userSeq = member.getUserSeq();
-//		mealService.insertFood(detail, userSeq);
+
 	}
 	
 	
@@ -203,6 +194,74 @@ public class MealController {
 		System.out.println("서칭 작동중...............");
 		System.out.println("키워드 명 : " + keyword);
 		return mealService.selectFood(keyword);
+	}
+	
+	
+	@RequestMapping("/deleteMeal.json")
+	@ResponseBody
+	public void deleteMeal(@RequestParam int mealDetailSeq, int userSeq, Date mealDate, double kcal) throws IOException {
+		
+		//tb_meal_detail 삭제
+		MealDetail detail = mealService.selectMealByDetailSeq(mealDetailSeq);
+		mealService.deleteMealDetail(mealDetailSeq);
+		
+		String mealType = detail.getMealType();
+		int mealSeq = detail.getMealSeq();
+		
+		Stat oriStat = mealService.selectStatByMealSeq(mealSeq);
+		
+		//tb_stat 수정
+		Stat stat = new Stat();
+		stat.setMealDate(mealDate);
+		stat.setUserSeq(userSeq);
+		
+		switch(mealType) {
+		case "1" : stat.setMorning(oriStat.getMorning()-kcal); break;
+		case "2" : stat.setLunch(oriStat.getLunch()-kcal); break;
+		case "3" : stat.setDiner(oriStat.getDiner()-kcal); break;
+		case "4" : stat.setSnack(oriStat.getSnack()-kcal); break;
+		}
+		
+		mealService.updateStat(stat);
+
+	}
+	
+	@RequestMapping("/updateMeal.json")
+	@ResponseBody
+	public void updateMeal(@RequestParam double mealGram, int mealDetailSeq, int userSeq, Date mealDate, int foodSeq, double kcal) throws IOException {
+		
+		//tb_meal_detail 업데이트
+		MealDetail mealDetail = new MealDetail();
+		mealDetail.setMealGram(mealGram);
+		mealDetail.setMealDetailSeq(mealDetailSeq);
+		mealService.updateGramDetail(mealDetail);
+		
+		//tb_stat 업데이트
+			//새로운 kcal 얻어오기
+			double foodKcal = mealService.getKcalByFoodSeq(foodSeq);
+			double newKcal = foodKcal*mealGram;
+			
+			//기존 kcal 빼기 : -kcal
+		
+		MealDetail detail = mealService.selectMealByDetailSeq(mealDetailSeq);
+		String mealType = detail.getMealType();
+		int mealSeq = detail.getMealSeq();
+		
+		Stat oriStat = mealService.selectStatByMealSeq(mealSeq);
+			
+		Stat stat = new Stat();
+		stat.setMealDate(mealDate);
+		stat.setUserSeq(userSeq);
+		
+		switch(mealType) {
+		case "1" : stat.setMorning(oriStat.getMorning()-kcal+newKcal); break;
+		case "2" : stat.setLunch(oriStat.getLunch()-kcal+newKcal); break;
+		case "3" : stat.setDiner(oriStat.getDiner()-kcal+newKcal); break;
+		case "4" : stat.setSnack(oriStat.getSnack()-kcal+newKcal); break;
+		}
+		
+		mealService.updateStat(stat);
+		
 	}
 	
 	

@@ -17,6 +17,10 @@ public interface MealMapper {
 	void insertMealDetail(MealDetail detail);
 	List<MealDetail> selectMealDetail(int mealSeq);
 	Meal selectByUserSeq(int userSeq);
+	
+	void deleteMealDetail(int mealDetailSeq);
+	MealDetail selectMealByDetailSeq(int mealDetailSeq);
+	void updateGramDetail(MealDetail detail);
 
 
 }

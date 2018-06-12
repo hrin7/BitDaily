@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +13,7 @@ import com.google.cloud.vision.v1.Image;
 import kr.co.bitdaily.repository.vo.Food;
 import kr.co.bitdaily.repository.vo.Meal;
 import kr.co.bitdaily.repository.vo.MealDetail;
+import kr.co.bitdaily.repository.vo.Stat;
 
 public interface MealService {
 
@@ -28,5 +28,17 @@ public interface MealService {
 	String fileUpload(MultipartFile file, HttpServletRequest req) throws IllegalStateException, IOException;
 	
 	Image getImage(String filePath) throws IOException;
+
+	void deleteMealDetail(int mealDetailSeq);
+	
+	MealDetail selectMealByDetailSeq(int mealDetailSeq);
+
+	Stat selectStatByMealSeq(int mealSeq);
+
+	void updateStat(Stat stat);
+
+	void updateGramDetail(MealDetail detail);
+
+	double getKcalByFoodSeq(int foodSeq);
 
 }

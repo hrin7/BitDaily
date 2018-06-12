@@ -492,9 +492,11 @@ function makeList() {
 				}
 				var list = "";
 					list += "<div class='result_area'><div class='result_pic'><img class='result_img' src='/spring-bitdiary/images/"+filePath+"' width='182px' height='182px'>";
+					list += "<input type='hidden' name='detailSeq' id='detailSeq' value="+mealList[i].mealDetailSeq+" />";
+					list += "<input type='hidden' name='listFoodSeq' id='listFoodSeq' value="+mealList[i].food.foodSeq+" />";
 					list += "</div><div class='result_content'><p><strong>" + mealList[i].food.foodName + "</strong></p>";
 					list += "<p><span id='mealGram'>" +mealList[i].mealGram+"</span>g(ml)";
-					list += " ː <span>" +(mealList[i].mealGram * mealList[i].food.foodKcal).toFixed(2)+"<span>kcal</p></div></div>";
+					list += " ː <span id='kcal'>" +(mealList[i].mealGram * mealList[i].food.foodKcal).toFixed(2)+"</span>kcal</p></div></div>";
 				switch (flag) {
 				case "1":
 					$("#morning").append(list);
@@ -513,8 +515,6 @@ function makeList() {
 			}
 			
 			var mealTypeName = ["morning", "lunch", "dinner", "snack"];
-			console.log(mealTypeName.length);
-			console.log(mealTypeName[1]);
 			for(var i = 0; i < mealTypeName.length; i++) {
 				if($("#"+mealTypeName[i]).html()=="") {
 					var zero = "";
@@ -527,39 +527,59 @@ function makeList() {
 	});
 }
 
-//이미지 눌렀을 때 수정,삭제
-$(".mainMenu").on("click", ".result_img", function(){
-	$("#updateModal").modal();
+//식단 수정,삭제 모달 설정
+$(document).on("click", ".result_img", function(){
+	$("#updateModal").modal(); //모달 열기
+	
+	$("#hiddenSeq").val($(this).next().val()); //mealDetailSeq 셋
+
+	$("#foodSeq").val($(this).next().next().val()); //foodSeq 셋
+	
+	$("#hiddenKcal").val($(this).parent().next().children().children("#kcal").text()); //kcal 셋
 });
 
-/*작업중
-//수정
-$(".mainMenu").on("click", "#updateMeal", function(){
+//식단 수정
+$(document).on("click", "#updateMeal", function(){
 	
 	$.ajax({
 		url : "/spring-bitdiary/diary/updateMeal.json",
 		data : { 
-			
+			mealDetailSeq : $(this).next().next().val(),
+			foodSeq : $(this).next().next().next().val(),
+			mealGram : $(this).prev().val(),
+			userSeq : 32,
+			mealDate : new Date($("#now").text()),
+			kcal : $(this).next().next().next().next().val()
 		},
 		success : function(result) {
+			$("#gram").val("");
 			alert("수정이 완료되었습니다.");
+			makeList();
 		}
 	});
+	
 });
 
-//삭제
-$(".mainMenu").on("click", "#deleteMeal", function(){
+//식단 삭제
+$(document).on("click", "#deleteMeal", function(){
+	console.log("삭제");
+	console.log( $(this).next().next().val() );
+	
 	$.ajax({
 		url : "/spring-bitdiary/diary/deleteMeal.json",
 		data : { 
-			
+			mealDetailSeq : $(this).next().val(),
+			userSeq : 32,
+			mealDate : new Date($("#now").text()),
+			kcal : $(this).next().next().next().val()
 		},
 		success : function(result) {
 			alert("정상적으로 삭제되었습니다.");
+			makeList();
 		}
 	});
+	
 });
- */
 
 //음식 추가 버튼 눌렀을때 이벤트 
 $(".mainMenu").on("click", ".addFood", function(){

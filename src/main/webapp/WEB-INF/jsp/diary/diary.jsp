@@ -111,6 +111,9 @@
           <input type="text" name="gram" id="gram" placeholder="섭취량을 수정하거나 식단을 삭제할 수 있습니다." /> 
           　	  <img src="/spring-bitdiary/images/icon/edit.png" id="updateMeal" />
           <img src="/spring-bitdiary/images/icon/trash.png" id="deleteMeal"/>
+          <input type="hidden" name="hiddenSeq" id="hiddenSeq" value="" />
+          <input type="hidden" name="foodSeq" id="foodSeq" value="" />
+          <input type="hidden" name="hiddenKcal" id="hiddenKcal" value="" />
           </div>
         </div>
       </div>
