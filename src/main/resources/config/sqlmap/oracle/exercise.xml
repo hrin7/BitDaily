@@ -57,6 +57,15 @@
 		 where user_seq = #{userSeq}
 		   and exercise_record_seq = #{exerciseRecordSeq}
 	</update>
+	
+	
+	<select id="selecteExeRecByUserAndExe" parameterType="exercise" resultMap="exerciseMap">
+		select *
+		  from tb_exercise_record
+		 where user_seq = #{userSeq}
+		   and exercise_record_seq = #{exerciseRecordSeq}
+		   and to_char(exercise_date, 'yyyy-mm-dd') = to_char(#{exerciseDate}, 'yyyy-mm-dd')
+	</select>
 </mapper>
 
 

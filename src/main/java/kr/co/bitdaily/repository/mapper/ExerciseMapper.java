@@ -11,4 +11,6 @@ public interface ExerciseMapper {
 	void insertExercise(Exercise exercise);
 	void deleteExercise(Exercise exercise);
 	void updateExercise(Exercise exercise);
+	
+	Exercise selecteExeRecByUserAndExe(Exercise exercise);
 }

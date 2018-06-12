@@ -67,9 +67,6 @@
 <script src="<c:url value='/js/diary/mini.js'/>"></script>
 
 <script>
-
-	
-
 function exeUpdate(exerciseRecordSeq) {
 	console.log($(".updateTime"));
 // 	$.ajax({
@@ -89,18 +86,6 @@ $(".mainMenu").on("click",".updateTime",function(){
 	var minute = $(this).parent().prev().prev().children().text();
 	$(this).parent().prev().prev().children().html('<input type="text" width="100px" class="changeMinute" maxlength="4"  value="'+ minute +'">')
 })
-
-
-	
-
-	
-	
-	
-
-	
-
-
-
 
 $(makeExerciseList);
 	

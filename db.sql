@@ -87,7 +87,7 @@ select *
 
 select *
   from tb_exercise_record
- order by exercise_date;
+ order by exercise_date desc;
 
 insert into tb_exercise_record (exercise_record_seq, user_seq, exercise_seq, exercise_time) values (s_exercise_record_seq.nextval, 41, 1, 30);
 insert into tb_exercise_record (exercise_record_seq, user_seq, exercise_seq, exercise_time) values (s_exercise_record_seq.nextval, 41, 2, 40);
@@ -109,8 +109,13 @@ CREATE TABLE tb_stat_exercise (
 
 drop table tb_stat_exercise purge;
 select *
-  from tb_stat_exercise;
-  
+  from tb_stat_exercise
+ order by exercise_date desc;
+ 
+update tb_stat_exercise
+   set exercise_time = '120'
+ where user_seq = '41' and exercise_time = '40';
+ 
 select *
   from tb_stat;
   

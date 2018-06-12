@@ -21,7 +21,7 @@ public interface StatMapper {
 	
 	
 	/* 운동 stat */
-	StatExercise selectStatExeByUserSeq(int userSeq);
+	StatExercise selectStatExeByUserSeq(StatExercise statExe);
 	void insertStatExercise(StatExercise statExe);
 	void updateStatExercise(StatExercise statExe);
 	StatExercise selectStatExeByDate(StatExercise statExe);

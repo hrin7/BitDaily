@@ -401,6 +401,8 @@ $(document).on("click", "#cancelBtn", function() {
 });
 
 $(".mainMenu").on("click",".deleteExercise",function(){
+	var that = $(this);
+//	console.log('운동 시간 출력',that.parent().prev().prev().prev().find("span").text())
 	var flag = $(this).parent().prev().find("a").data("flag");
 	if(flag == "yes"){
 		$.ajax({
@@ -408,6 +410,7 @@ $(".mainMenu").on("click",".deleteExercise",function(){
 			data: {
 				userSeq: "41",
 				exerciseRecordSeq: $(this).data("value"),
+				exerciseTime: that.parent().prev().prev().prev().find("span").text(),
 				exerciseDate : new Date($("#now").text())
 			},
 			success: makeExeList
@@ -439,6 +442,8 @@ $(".mainMenu").on("click",".updateTime",function(){
 		$(this).data("flag","no");
 	}else {
 		var exerciseTime = that.parent().prev().prev().find('input').val();
+		console.log('운동 시간 출력',that.parent().prev().prev().find("span").text())
+		console.log('수정된 운동 시간 출력',that.parent().prev().prev().find('input').val())
 		$.ajax({
 			url: "/spring-bitdiary/diary/exeUpdate.do",
 			data: {
