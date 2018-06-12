@@ -7,10 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+ input#searchId { 
+ 	background-color: white; 
+ 	font-weight: bold; 
+ 	color: black; 
+ 	border-radius: 3px;
+ }
+  input#searchpass {
+   	background-color: white; 
+ 	font-weight: bold; 
+ 	color: black; 
+ 	border-radius: 3px;
+  } 
+</style>
 <link rel="stylesheet" href="/spring-bitdiary/sweetalertFile/sweetalert2.css" />
 <script src="${pageContext.request.contextPath}/sweetalert/jquery-3.2.1.js"></script>
 <script src="${pageContext.request.contextPath}/sweetalertFile/sweetalert2.all.min.js"></script>
  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/login.css" />
 </head>
   <%
@@ -31,8 +47,6 @@
         <source src="${pageContext.request.contextPath}/images/askyfullofstarsmp4.mp4">
      </video>
   </figure>
-      
-      
   <div class="form_wrapper">
   <div class="form_container">
     <div class="title_container">
@@ -41,7 +55,9 @@
     <div class="row clearfix">
       <div class="col_half">
         <div class="social_btn fb"><a href="<%=apiURL%>"><span><i class="fa fa-facebook" aria-hidden="true"></i></span>Sign in with Naver</a></div>
-        <div class="social_btn tw"><a href="#"><span><i class="fa fa-twitter" aria-hidden="true"></i></span>Sign in with KaKaoTalk</a></div>
+        <div class="social_btn ka" id="kakao-login-btnn"></div>
+<div id="kakao-logged-group"></div>
+<div id="kakao-profile"></div>
         <div class="row clearfix create_account">
           <div><a href="${pageContext.request.contextPath}/login/signupform.do">&nbsp;Create an Account</a></div>
         </div>
@@ -56,29 +72,47 @@
           </div>
           <input class="button" type="submit" value="로그인"/>
         </form>
-        
           <div class="row clearfix bottom_row">
             <div class="col_half searchPass"><input class="searchPass" id="searchpass" value="Forgot Password?" type="button" ></div>
             <div class="col_half searchPass"><input class="searchId" id="searchId" value="Forgot ID?" type="button" ></div>
           </div>
-          
-          
-          
-          
+	    <form name="kakaoForm" id="kakaoForm" method="post" action="${pageContext.request.contextPath}/login/kakaoForm.do">
+			<input type="hidden" name="id" id="kakaoId" />
+			<input type="hidden" name="email"  id="kakaoEmail"/>
+		</form>
       </div>
     </div>
   </div>
 </div>
-
 	<script>
+	function kakao(res) {
+		var kakaoForm = $("#kakaoForm");
+		$("#kakaoId").val(res.id);
+		$("#kakaoEmail").val(res.kaccount_email);
+		kakaoForm.submit();
+		
+	}
+    Kakao.init('def95f052dafcbb2b09f55bcd2f9387e');  //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
+    Kakao.Auth.createLoginButton({
+	   container: '#kakao-login-btnn',
+	   success: function(authObj) {
+	     Kakao.API.request({
+	       url: '/v1/user/me',
+     	   success: function(res) {
+             kakao(res); 
+           }
+         })
+       },
+       fail: function(error) {
+         alert(JSON.stringify(error));
+       }
+     });
 	
 	
 	//로그인 실패시 alert창 뜸.
 	if ("${msg}") { 
-// 		alert("${msg}"); 
 		swal("${msg}");
 	} 
-	
 	
 	
 	//비번 찾기
@@ -153,8 +187,6 @@
 				swal('이름과 이메일의 정보가 일치 하지 않습니다.!')
 			});
 		}
-
-
 	</script>
 </body>
 </html>

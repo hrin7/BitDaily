@@ -40,6 +40,38 @@ public class LoginController {
 	public String joinForm() { 
 		return "login/loginForm";
 	} 
+	@RequestMapping("/kakaoForm.do") 
+	public String kakaoForm(Member member, Model model) throws Exception { 
+		System.out.println("kakaoForm 들어옴");
+		Member rmember = loginService.retrieveMemberInfo(member.getId());
+		if(rmember != null) {
+			return "redirect:/main/main.do";
+		}
+		System.out.println(member.getId());
+		model.addAttribute("id", member.getId());
+		model.addAttribute("email", member.getEmail());
+		return "login/signupform";
+	} 
+	
+	
+	
+//카카오톡	
+	@RequestMapping("/kakao.json") 
+	public @ResponseBody Member kakao(Member member, Model model) throws Exception { 
+//		List<Member> list = loginService.retrieveMember();
+		Member rmember = loginService.retrieveMemberInfo(member.getId());
+		
+		System.out.println("kakao 들어옴");
+		System.out.println(member.getName());
+		System.out.println(member.getId());
+		System.out.println(member.getEmail());
+		
+		return rmember;
+	} 
+	
+	
+	
+	
 	
 	@RequestMapping("/fogetId.json") 
 	@ResponseBody
@@ -213,14 +245,6 @@ public class LoginController {
 	        			return "redirect:/main/main.do";
 	        		}
 	        	}
-//	        	if(s.equals("name")) {
-//	        		String name = map.get(s);
-//	        		
-//	        		System.out.println("---" +  name + "---");
-//	        		
-//	        		name = URLDecoder.decode(name, "utf-8");
-//	        		System.out.println("이름 : " + name);
-//	        	}
 	        	System.out.println("키 : " + s + " 밸류 : " + map.get(s));
 	        	model.addAttribute(s, map.get(s));
 	        }
@@ -229,12 +253,12 @@ public class LoginController {
 	
 	
 }	
-
-
-
-
-
-
-
-
+//	        	if(s.equals("name")) {
+//	        		String name = map.get(s);
+//	        		
+//	        		System.out.println("---" +  name + "---");
+//	        		
+//	        		name = URLDecoder.decode(name, "utf-8");
+//	        		System.out.println("이름 : " + name);
+//	        	}
 //		HttpSession session = request.getSession();

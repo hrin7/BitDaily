@@ -42,7 +42,13 @@
 	  order by meal_date      
 	</select>
 	
-	
+<!-- 	mini 식사 pie차트-->
+	<select id="selectStatByDateUser" parameterType="stat" resultMap="statMap">
+	select *
+	  from tb_stat
+	 where user_seq = #{userSeq}
+	   and to_char(meal_date, 'yyyy-mm-dd') = to_char(#{mealDate}, 'yyyy-mm-dd')
+	</select>
 	
 	
 <!-- 	minipart -->
