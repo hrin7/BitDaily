@@ -1,3 +1,4 @@
+
 .food_record {
 	width: 90%;
 }
@@ -153,4 +154,44 @@ input[id^=result] {
 	margin: 10px 10px;
 	width: 30%;
 	overflow: hidden;
+}
+
+
+#visionImage {
+display: inline-block;
+}
+#visionText {
+padding: 5px;
+padding-right: 30px;
+text-align: left;
+float: right;
+}
+.dropform {
+    min-height: 150px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background: white;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.modal-body {
+height: 300px;
+padding-top: 30px;
+}
+.dropzone {
+height: 235px;
+}
+#zero {
+	margin: 30px;
+	text-align: center;
+}
+.modal-meal-body {
+	height: 100px;
+}
+#modal-but {
+	margin: 30px auto;
+}
+#gram {
+width: 340px;
+	border: 1px solid black;
 }
