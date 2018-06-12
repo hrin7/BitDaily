@@ -45,8 +45,8 @@
 		<input class="place1" type="text" name="currentWeight"><br><br>
 		<span class="input1">Goal Weight(kg)&nbsp;&nbsp;&nbsp;&nbsp;</span>
 		<input class="place1" type="text" name="goalWeight">
-		<span class="input1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goal Calorie(kg)</span>
-		<input class="place1" type="text" name="goalCalorie"><br>					
+<!-- 		<span class="input1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goal Calorie(kg)</span> -->
+<!-- 		<input class="place1" type="text" name="goalCalorie"><br>					 -->
 		<footer>
 			<input class="btn" type="button" id="signupbtn" value="Sign Up">
 		</footer>
@@ -67,6 +67,8 @@
 			}
 			return false;
 		}
+		
+		
 		$("#signupbtn").click (function () {
 			doAction();
 		})
@@ -81,7 +83,7 @@
 			if(isEmpty(f.userHeight, "사용자의 키를 입력하세요")) {return false;}
 			if(isEmpty(f.userWeight, "몸무게를 입력하세요")) {return false;}
 			if(isEmpty(f.goalWeight, "목표 몸무게를 입력하세요")) {return false;}
-			if(isEmpty(f.goalCalorie, "목표 칼로리를 입력하세요")) {return false;}
+// 			if(isEmpty(f.goalCalorie, "목표 칼로리를 입력하세요")) {return false;}
 			
 			
 			if(f.pass.value != f.conformpass.value) {

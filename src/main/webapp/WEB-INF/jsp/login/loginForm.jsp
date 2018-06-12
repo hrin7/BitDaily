@@ -58,7 +58,7 @@
         </form>
         
           <div class="row clearfix bottom_row">
-            <div class="col_half searchPass"><input class="searchPass" id="searchPass" value="Forgot Password?" type="button" ></div>
+            <div class="col_half searchPass"><input class="searchPass" id="searchpass" value="Forgot Password?" type="button" ></div>
             <div class="col_half searchPass"><input class="searchId" id="searchId" value="Forgot ID?" type="button" ></div>
           </div>
           
@@ -75,35 +75,47 @@
 	
 	//로그인 실패시 alert창 뜸.
 	if ("${msg}") { 
-		alert("${msg}"); 
+// 		alert("${msg}"); 
+		swal("${msg}");
 	} 
 	
-	//비번찾기
-		$("#searchPass").click(function () {
-			swal.mixin({
-			  input: 'text',
-			  confirmButtonText: 'Next &rarr;',
-			  showCancelButton: true,
-			  progressSteps: ['1', '2', '3']
-			}).queue([
-			  {
-			    title: 'ID를 입력하세요',
-			    text: '...'
-			  },
-			  '이메일을 입력하세요',
-			]).then((result) => {
-			  if (result.value) {
-			    swal({
-			      title: '비밀번호는..',
-			      html:
-			        '비밀번호 수정 권장: <pre>' +
-			          JSON.stringify(result.value) +
-			        '</pre>',
-			      confirmButtonText: '성공!'
-			    })
-			  }
-			})
+	
+	
+	//비번 찾기
+	var findpass;
+	$("#searchpass").click(function () {
+		swal.mixin({
+		  input: 'text',
+		  confirmButtonText: '전송',
+		  showCancelButton: true,
+		  progressSteps: ['1', '2']
+		}).queue([
+		  {
+		    title: 'ID를 입력하세요',
+		    text: '...'
+		  },
+		  '이메일을 입력하세요',
+		]).then(function(result){
+			findId = result;
+			fnFindId(findId);
+		
+		})
+	});
+	function fnFindId(data) {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/login/fogetPass.json",
+			type: "POST",
+			data : {
+				"id" : data.value[0],
+				"email": data.value[1]
+			},
+		}).done(function (val) {
+			swal("회원의 비밀번호는 "+val.pass + "입니다");
+		}).fail(function () {
+			swal('이름과 이메일의 정보가 일치 하지 않습니다.!')
 		});
+	}
+
 	
 	
 		//ID 찾기
