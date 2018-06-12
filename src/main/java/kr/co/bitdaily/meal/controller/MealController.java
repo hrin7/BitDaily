@@ -212,15 +212,34 @@ public class MealController {
 		
 		//tb_stat 수정
 		Stat stat = new Stat();
+		stat.setMealSeq(mealSeq);
 		stat.setMealDate(mealDate);
 		stat.setUserSeq(userSeq);
 		
+		
 		switch(mealType) {
-		case "1" : stat.setMorning(oriStat.getMorning()-kcal); break;
-		case "2" : stat.setLunch(oriStat.getLunch()-kcal); break;
-		case "3" : stat.setDiner(oriStat.getDiner()-kcal); break;
-		case "4" : stat.setSnack(oriStat.getSnack()-kcal); break;
+		case "1" : stat.setMorning(oriStat.getMorning()-kcal); 
+				   stat.setLunch(oriStat.getLunch());
+				   stat.setDiner(oriStat.getDiner());
+				   stat.setSnack(oriStat.getSnack());
+				   break;
+		case "2" : stat.setLunch(oriStat.getLunch()-kcal); 
+				   stat.setMorning(oriStat.getMorning());
+				   stat.setDiner(oriStat.getDiner());
+				   stat.setSnack(oriStat.getSnack());
+				   break;
+		case "3" : stat.setDiner(oriStat.getDiner()-kcal);
+				   stat.setMorning(oriStat.getMorning());
+				   stat.setLunch(oriStat.getLunch());
+				   stat.setSnack(oriStat.getSnack());
+				   break;
+		case "4" : stat.setSnack(oriStat.getSnack()-kcal);
+				   stat.setMorning(oriStat.getMorning());
+				   stat.setLunch(oriStat.getLunch());
+				   stat.setDiner(oriStat.getDiner());
+				   break;
 		}
+		
 		
 		mealService.updateStat(stat);
 
@@ -245,21 +264,40 @@ public class MealController {
 		
 		MealDetail detail = mealService.selectMealByDetailSeq(mealDetailSeq);
 		String mealType = detail.getMealType();
+
 		int mealSeq = detail.getMealSeq();
 		
 		Stat oriStat = mealService.selectStatByMealSeq(mealSeq);
 			
 		Stat stat = new Stat();
+		stat.setMealSeq(mealSeq);
 		stat.setMealDate(mealDate);
 		stat.setUserSeq(userSeq);
 		
 		switch(mealType) {
-		case "1" : stat.setMorning(oriStat.getMorning()-kcal+newKcal); break;
-		case "2" : stat.setLunch(oriStat.getLunch()-kcal+newKcal); break;
-		case "3" : stat.setDiner(oriStat.getDiner()-kcal+newKcal); break;
-		case "4" : stat.setSnack(oriStat.getSnack()-kcal+newKcal); break;
+		case "1" : stat.setMorning(oriStat.getMorning()-kcal+newKcal);
+				   stat.setLunch(oriStat.getLunch());
+				   stat.setDiner(oriStat.getDiner());
+				   stat.setSnack(oriStat.getSnack());
+				   break;
+		case "2" : stat.setLunch(oriStat.getLunch()-kcal+newKcal);
+				   stat.setMorning(oriStat.getMorning());
+				   stat.setDiner(oriStat.getDiner());
+				   stat.setSnack(oriStat.getSnack());
+				   break;
+		case "3" : stat.setDiner(oriStat.getDiner()-kcal+newKcal);
+				   stat.setMorning(oriStat.getMorning());
+				   stat.setLunch(oriStat.getLunch());
+				   stat.setSnack(oriStat.getSnack());
+				   break;
+		case "4" : stat.setSnack(oriStat.getSnack()-kcal+newKcal);
+				   stat.setMorning(oriStat.getMorning());
+				   stat.setLunch(oriStat.getLunch());
+				   stat.setDiner(oriStat.getDiner());
+				   break;
 		}
 		
+
 		mealService.updateStat(stat);
 		
 	}

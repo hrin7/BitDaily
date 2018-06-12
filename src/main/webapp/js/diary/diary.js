@@ -474,10 +474,12 @@ $(".mainMenu").on("keyup",".changeTime",function(){
 
 //식단 리스트 출력
 function makeList() {
+	$(".searchBox").hide();
+	$(".addFoodBox").show();
 	$.ajax({
 		url : "/spring-bitdiary/diary/makeList.json",
 		data : { 
-			userSeq : "32",
+			userSeq : 32,
 			mealDate : new Date($("#now").text())
 		},
 		success : function(mealList) {
@@ -485,7 +487,6 @@ function makeList() {
 			$("#lunch").empty();
 			$("#dinner").empty();
 			$("#snack").empty();
-			
 			for(var i = 0; i < mealList.length; i++) {
 				var flag = mealList[i].mealType;
 				//List출력
@@ -552,13 +553,14 @@ $(document).on("click", "#updateMeal", function(){
 			mealDetailSeq : $(this).next().next().val(),
 			foodSeq : $(this).next().next().next().val(),
 			mealGram : $(this).prev().val(),
-			userSeq : 32,
+			userSeq : userSeq,
 			mealDate : new Date($("#now").text()),
 			kcal : $(this).next().next().next().next().val()
 		},
 		success : function(result) {
 			$("#gram").val("");
 			alert("수정이 완료되었습니다.");
+			$("#updateModal").modal("hide");
 			makeList();
 		}
 	});
@@ -574,12 +576,13 @@ $(document).on("click", "#deleteMeal", function(){
 		url : "/spring-bitdiary/diary/deleteMeal.json",
 		data : { 
 			mealDetailSeq : $(this).next().val(),
-			userSeq : 32,
+			userSeq : userSeq,
 			mealDate : new Date($("#now").text()),
 			kcal : $(this).next().next().next().val()
 		},
 		success : function(result) {
 			alert("정상적으로 삭제되었습니다.");
+			$("#updateModal").modal("hide");
 			makeList();
 		}
 	});
@@ -645,7 +648,7 @@ $(".mainMenu").on("click", ".insert", function(){
 		url : "/spring-bitdiary/diary/insertFood.json",
 		data : { 
 			mealDate : new Date($("#now").text()),
-			userSeq : 32,
+			userSeq : userSeq,
 			mealType : $(this).prev().prev().val(),
 			filePath : $(this).prev().prev().prev().val(),
 			foodSeq : $(this).parent().prev().children().find("input:checked").val(),
@@ -658,6 +661,7 @@ $(".mainMenu").on("click", ".insert", function(){
 			that.parent().parent().hide();
 			that.parent().parent().next().show();
 			alert("등록되었습니다.");
+			$(".searchFood").val("");
 			makeList();
 		}
 	});
@@ -687,10 +691,4 @@ $(".mainMenu").on("click", ".insert", function(){
 		$("#form").show();
   });
   /* 식단 파트 끝*/
-
-
-  
-  
-  
-  
   

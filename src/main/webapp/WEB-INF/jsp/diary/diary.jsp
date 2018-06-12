@@ -252,7 +252,8 @@
   </div>
  <script>
  var tabNo = ${param.page};
-
+ var userSeq = ${member.userSeq};
+ console.log(userSeq);
  //dropzone 설정 및 visionAPI AJAX
 	  Dropzone.options.myAwesomeDropzone = {
 	          paramName: "file",
