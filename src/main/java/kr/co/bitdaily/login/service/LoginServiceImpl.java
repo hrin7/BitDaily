@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.bitdaily.repository.mapper.MemberMapper;
-import kr.co.bitdaily.repository.mapper.StatMapper;
 import kr.co.bitdaily.repository.vo.Member;
 
 
@@ -15,6 +14,10 @@ import kr.co.bitdaily.repository.vo.Member;
 public class LoginServiceImpl implements LoginService{
 	@Autowired
 	private MemberMapper mapper;
+	
+	public Member selectMemberByName(Member member) throws Exception {
+		return mapper.selectName(member);
+	}
 	
 	
 	public List<Member> retrieveMember() throws Exception {

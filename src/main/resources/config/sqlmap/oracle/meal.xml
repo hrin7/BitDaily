@@ -52,6 +52,12 @@
 	values (#{mealSeq}, s_meal_detail_no.nextval, #{mealType}, #{foodSeq}, #{mealGram}, #{filePath})
 	</insert>
 	
+	<update id="updateGramDetail" parameterType="mealDetail">
+	update tb_meal_detail
+	   set meal_gram = #{mealGram}
+	 where meal_detail_seq = #{mealDetailSeq}
+	</update>
+	
 	<!-- 
 	<select id="selectMealDetail" parameterType="int" resultMap="detailMealMap">
 	select *
@@ -62,6 +68,7 @@
 	
 	<select id="selectMealDetail" parameterType="int" resultMap="detailMealMap">
     select m.meal_seq,
+		   m.meal_detail_seq,
 		   m.food_seq,
 		   m.meal_type,
 		   m.meal_gram,
@@ -72,6 +79,7 @@
 	  join tb_food f
 	    on m.food_seq = f.food_seq
 	 where m.meal_seq = #{mealSeq}
+	 order by m.meal_detail_seq asc
 	</select>
 	
 	<select id="selectByUserSeq" parameterType="int" resultMap="mealMap">
@@ -79,4 +87,17 @@
 		  from tb_meal
 		 where  user_seq = #{userSeq}
 	</select>
+	
+	<delete id="deleteMealDetail" parameterType="int">
+	delete 
+	  from tb_meal_detail
+	 where meal_detail_seq = #{mealDetailSeq}
+	</delete>
+	
+	<select id="selectMealByDetailSeq" parameterType="int" resultMap="detailMealMap">
+	select *
+	  from tb_meal_detail
+	 where meal_detail_seq = #{mealDetailSeq}
+	</select>
+	
 </mapper>

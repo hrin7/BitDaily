@@ -32,6 +32,17 @@
 	 where meal_seq = #{mealSeq}
 	</select>
 	
+	<select id="selectStatByUserSeqAndDate" parameterType="stat" resultMap="statMap">
+	select *
+	  from tb_stat
+	 where user_seq = #{userSeq}
+	   and to_char(meal_date, 'yyyy-mm-dd') 
+	       between to_char(#{startDate}, 'yyyy-mm-dd') 
+	       and to_char(#{endDate}, 'yyyy-mm-dd')
+	  order by meal_date      
+	</select>
+	
+	
 	
 	
 <!-- 	minipart -->
@@ -62,12 +73,14 @@
 		update tb_stat_exercise
 		   set exercise_time = #{exerciseTime}
 		 where user_seq = #{userSeq}
+		   and to_char(exercise_date, 'yyyy-mm-dd') = to_char(#{exerciseDate}, 'yyyy-mm-dd')
 	</update>
 	
-	<select id="selectStatExeByUserSeq" parameterType="int" resultMap="statExeMap">
+	<select id="selectStatExeByUserSeq" parameterType="statExercise" resultMap="statExeMap">
 		select *
 		  from tb_stat_exercise
 		 where user_seq = #{userSeq}
+		   and to_char(exercise_date, 'yyyy-mm-dd') = to_char(#{exerciseDate}, 'yyyy-mm-dd')
 	</select>
 	
 	<select id="selectStatExeByDate" parameterType="statExercise" resultMap="statExeMap">

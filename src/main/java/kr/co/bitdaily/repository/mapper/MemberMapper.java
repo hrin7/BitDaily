@@ -6,6 +6,9 @@ import java.util.List;
 import kr.co.bitdaily.repository.vo.Member;
 
 public interface MemberMapper {
+	
+	public Member selectName(Member member) throws Exception;
+	
 	public Member selectMemberById(String id) throws Exception;
 	
 	public void insertMember(Member member) throws Exception;

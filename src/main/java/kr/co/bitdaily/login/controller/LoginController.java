@@ -14,12 +14,16 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.io.ResolverUtil.IsA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.protobuf.Empty;
 
 import kr.co.bitdaily.login.service.LoginService;
 import kr.co.bitdaily.repository.vo.Member;
@@ -37,11 +41,24 @@ public class LoginController {
 		return "login/loginForm";
 	} 
 	
-	
-	
-	
-	
-	
+	@RequestMapping("/fogetId.json") 
+	@ResponseBody
+	public Member fogetId(Member member) throws Exception { 
+		Member dbmember = loginService.selectMemberByName(member);
+		if(dbmember.getEmail().equals(member.getEmail())){
+			return dbmember;
+		}
+		return member;
+	} 
+	@RequestMapping("/fogetPass.json") 
+	@ResponseBody
+	public Member fogetPass(Member member) throws Exception { 
+		Member loginmember = loginService.retrieveMemberInfo(member.getId());
+		if(loginmember.getEmail().equals(member.getEmail())){
+			return loginmember;
+		}
+		return member;
+	} 
 	
 	
 	//아이디 체크
@@ -60,16 +77,17 @@ public class LoginController {
 	//로그인 된 후..
 	@RequestMapping("/login.do")
 	public String login(Member member, HttpSession session,  RedirectAttributes attr) throws Exception{
-		Member loginmember = loginService.retrieveMemberInfo(member.getId());
 		
-		if(member.getPass().equals(loginmember.getPass())) {
-			System.out.println("로그인 성공");
-			session.setAttribute("member", loginmember);
-			return "redirect:/main/main.do"; //로그인 후 이동 페이지
-		}else {
-			attr.addFlashAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다");
-			return "redirect:loginForm.do";
+		List<Member> list = loginService.retrieveMember();
+		for (Member rmember : list) {
+			if(rmember.getId().equals(member.getId()) && rmember.getPass().equals(member.getPass())) {
+				Member loginmember = loginService.retrieveMemberInfo(member.getId());
+				session.setAttribute("member", loginmember);
+				return "redirect:/main/main.do";
+			}
 		}
+		attr.addFlashAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다");
+		return "redirect:loginForm.do";
 	}
 	//로그 아웃
 	@RequestMapping("/logout.do")
@@ -78,18 +96,24 @@ public class LoginController {
 		return "redirect:loginForm.do";
 	}
 	
-	
+	//가입
 	@RequestMapping("/signupform.do")
 	public String signupform() {
 		return "login/signupform";
 	}
-	
+	//가입
 	@RequestMapping("/join.do")
 	public String join(Member member, RedirectAttributes attr, HttpSession session) throws Exception{
+			int userlWe = member.getUserWeight();
+			int goalWe = member.getGoalWeight();
+			int goalCal = userlWe - goalWe;
+			
+			member.setGoalCalorie(goalCal);
+			
 			loginService.insertMemberInfo(member);
+			
 			System.out.println("가입 성공");
 			return "redirect:loginForm.do"; //가입 후 로그인 페이지
-		
 	}
 	
 	

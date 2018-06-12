@@ -90,12 +90,13 @@ function setChart(list){
 	});
 	
 	
-	$(document).on("click", ".but", function() {
+	$(document).on("click", "#registWeight", function() {
 		$.ajax({
 			type : "POST",
 			url : "/spring-bitdiary/stat/weightupdate.json",
 			data : {
-				weight : $("#weightToday").val()
+				weight : $("#weightToday").val(),
+				weightDate : new Date()
 			},
 			success : function(result) {
 				alert("체중업데이트가 완료되었습니다.");
@@ -104,7 +105,8 @@ function setChart(list){
 				makeWeightList();
 			},
 			error:function(request,status,error){
-		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("오늘은 이미 등록되었습니다.");
+//		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		       }
 		});
 	});

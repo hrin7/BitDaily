@@ -11,8 +11,8 @@
 	</resultMap>
 
 	<insert id="insertWeight" parameterType="weight">
-	insert into tb_stat_weight (weight_seq, user_seq, current_weight, goal_weight)
-	values (s_stat_weight_no.nextval, #{userSeq}, #{currentWeight}, #{goalWeight})
+	insert into tb_stat_weight (weight_seq, user_seq, current_weight, goal_weight, weight_date)
+	values (s_stat_weight_no.nextval, #{userSeq}, #{currentWeight}, #{goalWeight}, #{weightDate})
 	</insert>
 	
 	<select id="selectWeight" parameterType="int" resultMap="weightMap">

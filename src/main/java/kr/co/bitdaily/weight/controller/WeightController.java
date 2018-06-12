@@ -1,6 +1,8 @@
 package kr.co.bitdaily.weight.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -33,7 +35,7 @@ public class WeightController {
 	
 	@RequestMapping("/weightupdate.json")
 	@ResponseBody
-	public void weightUpdate(@RequestParam String weight, HttpSession session) {
+	public void weightUpdate(@RequestParam String weight, Date weightDate, HttpSession session) throws ParseException {
 
 		Member member = (Member) session.getAttribute("member");
 		int userSeq = member.getUserSeq();
@@ -41,12 +43,16 @@ public class WeightController {
 		//tb_user의 current_weight업데이트하기
 		//memberMapper:updateCurrentWeight
 		member.setCurrentWeight(Integer.parseInt(weight));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String d = sdf.format(weightDate);
+		Date date = sdf.parse(d);
 		
 		//tb_stat_weight에 insert하기
 		Weight w = new Weight();
 		w.setUserSeq(userSeq);
 		w.setGoalWeight(goalWeight);
 		w.setCurrentWeight(Integer.parseInt(weight));
+		w.setWeightDate(date);
 		weightService.insertWeight(w, member);
 		
 	}
