@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 4d7b67d77df845ff26cdd5d6c5d792ff938dbba0
 /* 공용 파트  */
 $(function () {
 	$("#nav-diary").addClass("active");
@@ -542,9 +538,6 @@ $(document).on("click", ".result_img", function(){
 	$("#updateModal").modal(); //모달 열기
 	
 	$("#hiddenSeq").val($(this).next().val()); //mealDetailSeq 셋
-
-<<<<<<< HEAD
-=======
 	$("#foodSeq").val($(this).next().next().val()); //foodSeq 셋
 	
 	$("#hiddenKcal").val($(this).parent().next().children().children("#kcal").text()); //kcal 셋
@@ -697,5 +690,3 @@ $(".mainMenu").on("click", ".insert", function(){
 		$("#form").show();
   });
   /* 식단 파트 끝*/
-  
->>>>>>> 4d7b67d77df845ff26cdd5d6c5d792ff938dbba0
