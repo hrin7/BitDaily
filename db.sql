@@ -114,6 +114,14 @@ select *
 select *
   from tb_stat;
   
+ALTER TABLE tb_stat MODIFY(meal_date date default sysdate);
+
+select *
+  from tb_stat
+ where user_seq = '1'
+   and to_char(meal_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd');
+
+
 select *
   from tb_meal
  order by meal_date desc;
@@ -137,3 +145,11 @@ SELECT a.name, sum(exercise_time) As total
   	   ) a
  group by a.name
  order by total desc;
+ 
+ select *
+  from tb_stat
+ where user_seq = '41'
+   and to_char(meal_date, 'yyyy-mm-dd') 
+       between to_char(sysdate-14, 'yyyy-mm-dd') 
+       and to_char(sysdate, 'yyyy-mm-dd')
+  order by meal_date;

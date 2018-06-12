@@ -2,6 +2,8 @@ package kr.co.bitdaily.repository.mapper;
 
 
 
+import java.util.List;
+
 import kr.co.bitdaily.repository.vo.Stat;
 import kr.co.bitdaily.repository.vo.StatExercise;
 
@@ -12,6 +14,8 @@ public interface StatMapper {
 	void updateStat(Stat stat);
 	
 	Stat selectStatByMealSeq(int mealSeq);
+	
+	List<Stat> selectStatByUserSeqAndDate(Stat stat);
 	
 	Stat selectByUserSeq(int userSeq);
 	

@@ -32,6 +32,17 @@
 	 where meal_seq = #{mealSeq}
 	</select>
 	
+	<select id="selectStatByUserSeqAndDate" parameterType="stat" resultMap="statMap">
+	select *
+	  from tb_stat
+	 where user_seq = #{userSeq}
+	   and to_char(meal_date, 'yyyy-mm-dd') 
+	       between to_char(#{startDate}, 'yyyy-mm-dd') 
+	       and to_char(#{endDate}, 'yyyy-mm-dd')
+	  order by meal_date      
+	</select>
+	
+	
 	
 	
 <!-- 	minipart -->

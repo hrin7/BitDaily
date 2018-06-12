@@ -24,7 +24,15 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> searchRecipeByTitle(String title) {
-		return mapper.searchRecipeByTitle(title);
+		int commentCount = 0;
+		List<Recipe> recipes = mapper.searchRecipeByTitle(title);
+		for (Recipe r : recipes) {
+			List<RecipeFile> fileList = mapper.selectRecipeFileByNo(r.getRecipeSeq());
+			r.setFileList(fileList);
+			commentCount = mapper.selectRecipeCommentCount(r.getRecipeSeq());
+			r.setCommentCount(commentCount);
+		}
+		return recipes;
 	}
 
 	@Override
