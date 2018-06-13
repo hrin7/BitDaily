@@ -114,7 +114,7 @@ select *
  
 update tb_stat_exercise
    set exercise_time = '120'
- where user_seq = '41' and exercise_time = '40';
+ where user_seq = '41' and exercise_time = '100';
  
 select *
   from tb_stat;

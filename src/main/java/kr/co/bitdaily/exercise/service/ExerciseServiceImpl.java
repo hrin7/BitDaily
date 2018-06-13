@@ -97,7 +97,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 	public void updateExercise(Exercise exercise) {
 		// 운동 vo가 들어온다.
 		// 유저시퀀스, 날짜, 운동시퀀스을 받아서 tb_exercise_record 테이블 select 해서 해당하는 운동의 시간을 얻어온다.
-		Exercise exe = exeMapper.selecteExeRecByUserAndExe(exercise);
+		Exercise exe = exeMapper.selecteExeRecByUserAndExe2(exercise);
 		// tb_stat_exercise 테이블을 update 작동시키는데 set에 select해온 시간을  빼고 파라마터로 받은 운동 vo에 있는 시간 값을 더 한다.
 		// 원래 운동시간
 		int oriExeTime = exe.getExerciseTime();
