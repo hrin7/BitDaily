@@ -31,6 +31,7 @@ public class UserController {
 	@RequestMapping("/updateEmail.json") 
 	public @ResponseBody boolean updateEmail(Member member) throws Exception {
 		System.out.println("updateEmail들어옴");
+		System.out.println("업데이트 이메일 " + member.getEmail());
 		userService.registMemberEmail(member);
 		return false;
 	}

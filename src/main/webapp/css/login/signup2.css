@@ -32,7 +32,7 @@
 	outline: none;
 }
 
-.inputDetail:focus ,.innerBox2 input:hover ,#userEmail:hover ,#userEmailDetail:hover ,#userEmailDomain:hover {
+.inputDetail:focus ,.innerBox2 input:focus ,#userEmail:focus ,#userEmailDetail:focus ,#userEmailDomain:focus {
 	border: 1px solid  #d50c0c;
 }
 
