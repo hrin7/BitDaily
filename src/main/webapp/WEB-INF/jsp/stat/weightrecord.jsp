@@ -44,10 +44,6 @@
 <p>${member.userWeight}Kg_________________________________________________${member.goalWeight}kg</p>
 </div>
 
-<script>
-
-</script>
-
 </div>
 <div id="weight_statistics">
 <div class="graphBox">

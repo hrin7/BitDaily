@@ -102,6 +102,7 @@ function setChart(list){
 				alert("체중업데이트가 완료되었습니다.");
 				$(".but").html("　 <a href='#' id='weight'><img src='/spring-bitdiary/images/icon/plus.png' width='20px' height='20px'> 오늘체중기록</a>");
 				$("#sideList").html("");
+				$("#lineCanvas").html("");
 				makeWeightList();
 			},
 			error:function(request,status,error){
@@ -128,6 +129,9 @@ function setChart(list){
 				var percentage = ((cur/goal)*100).toFixed(0);
 				if(percentage > 100) {
 					percentage = 100;
+				}
+				if(percentage < 0) {
+					percentage = 0;
 				}
 				$("#percentage").text("　"+percentage+"%");
 				var length = 380;
@@ -195,6 +199,7 @@ function setChart(list){
 			success : function() {
 				alert("수정이 완료되었습니다.")
 				$("#sideList").html("");
+				$("#lineCanvas").html("");
 				makeWeightList();
 			},
 			error:function(request,status,error){
