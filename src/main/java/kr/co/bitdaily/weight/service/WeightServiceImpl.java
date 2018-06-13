@@ -36,6 +36,17 @@ public class WeightServiceImpl implements WeightService {
 	public List<Weight> selectWeight(int userSeq) {
 		return mapper.selectWeight(userSeq);
 	}
+
+	@Override
+	public void updateToday(Weight w, Member member) {
+		mapper.updateTodayWeight(w);
+		try {
+			memberMapper.updateCurrentWeight(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 

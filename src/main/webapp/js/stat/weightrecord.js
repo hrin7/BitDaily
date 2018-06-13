@@ -86,7 +86,7 @@ function setChart(list){
 	});
 	
 	$(document).on("click", "#cancletWeight", function() {
-		$(".but").html('　 <a href="#" id="weight"><img src="/spring-bitdiary/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a>');
+		$(".but").html('　<a href="#" id="weight"><img src="/spring-bitdiary/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a>');
 	});
 	
 	
@@ -105,7 +105,7 @@ function setChart(list){
 				makeWeightList();
 			},
 			error:function(request,status,error){
-				alert("오늘은 이미 등록되었습니다.");
+				alert("오늘은 이미 등록되었습니다. 수정버튼을 이용하세요.");
 //		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		       }
 		});
@@ -153,11 +153,17 @@ function setChart(list){
 				var list = "";
 				for(var i = 0; i < weightList.length; i++) {
 					list+= "<hr>";
+					if(i == 0) {
+						list += "　　";
+					}
 					var date =  new Date(weightList[i].weightDate);
-					list+= date.getFullYear() + "."
+					list+= "<span>"+date.getFullYear() + "."
 					+ (date.getMonth() + 1) + "."
 					+ date.getDate()
-					+ "　" + weightList[i].currentWeight + "kg";
+					+ "　" + weightList[i].currentWeight + "kg</span>";
+					if(i == 0) {
+						list += "  <img id='updateCurrent' src='/spring-bitdiary/images/icon/editweight.png'>";
+					}
 				}
 				$("#sideList").append(list);
 				setChart(weightList);
@@ -171,3 +177,30 @@ function setChart(list){
 	};
 	
 	makeWeightList();
+	
+	$(document).on("click", "#updateCurrent", function() {
+		$(this).prev().text("");
+		$(this).prev().html("<input type='text' name='updateTodayWeight' id='updateTodayWeight'>");
+		$(this).attr("id", "updateToday");
+		
+	});
+	$(document).on("click", "#updateToday", function() {
+		$.ajax({
+			type : "POST",
+			url : "/spring-bitdiary/stat/updateTodayWeight.json",
+			data : {
+				weight : $("#updateTodayWeight").val(),
+				weightDate : new Date()
+			},
+			success : function() {
+				alert("수정이 완료되었습니다.")
+				$("#sideList").html("");
+				makeWeightList();
+			},
+			error:function(request,status,error){
+				console.log("에러");
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	});
+	
