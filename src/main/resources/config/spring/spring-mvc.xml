@@ -57,5 +57,6 @@
 	<mvc:view-controller path="/diary/exercise.do" view-name="diary/exercisediary" />
 	<mvc:view-controller path="/diary/diary.do" view-name="diary/diary" />
 	<mvc:view-controller path="/stat/rank.do" view-name="stat/rank" />
+	<mvc:view-controller path="/stat/weeklyReport.do" view-name="stat/report" />
 
 </beans>

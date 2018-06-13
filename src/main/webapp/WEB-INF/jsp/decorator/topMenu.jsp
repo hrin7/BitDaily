@@ -16,10 +16,10 @@
               </a>
             </li>
             <li class="nav-item" id="nav-report">
-              <a class="nav-link" href="${pageContext.request.contextPath}/jsp/stat/report.jsp">리포트</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/stat/weeklyReport.do">리포트</a>
             </li>
             <li class="nav-item" id="nav-weight">
-              <a class="nav-link" href="${pageContext.request.contextPath}/jsp/stat/weightrecord.jsp">체중기록</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/stat/weightrecord.do">체중기록</a>
             </li>
             <li class="nav-item" id="nav-recipe">
               <a class="nav-link" href="${pageContext.request.contextPath}/recipe/list.do">레시피</a>
