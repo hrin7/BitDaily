@@ -19,3 +19,16 @@ from tb_diary;
 select *
 from tb_diary
 where to_char( diary_date, 'yyyymmdd' ) = to_char( sysdate, 'yyyymmdd')
+
+select *
+from tb_diary;
+
+
+select *
+	  from tb_stat
+	  
+	  select *
+	  from tb_stat
+	  
+select *
+from tb_stat_exercise	  

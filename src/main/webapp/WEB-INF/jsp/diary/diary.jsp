@@ -247,110 +247,14 @@
   </div>
  
 <!--  mini통계 필요한 스크립 -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
- <%-- <script src="<c:url value='/js/diary/mini.js'/>"></script> --%>
- <script src="<c:url value='/js/diary/exercisediary.js'/>"></script>
-   
-   
-  <script>
-  
-  //여기서 부터 미니 통계 파트
- //writeStatis (위 첫번째꺼)입니다.
- 	function kal (data) {
- 		var html= "";
- 		data.dailyKal
- 		html += '<p> 1 일 필요 열량 :'+ data.dailyKal + 'kcal </p>';
- 		html += '<p> 하루 섭취 열량 :'+ data.dailyMeal + 'kcal </p>';  
- 		html += '<p> 운동(소모한)열량 :'+ data.dailyExcer + 'kcal </p>';
- 		html += '<p> 남은 열량:'+ data.reCalories + 'kcal </p>';
- 		if(data.reCalories <= 0){
- 			html += '<p> 더 드시면 곤란해요..ㅠ ^ ㅠ </p>';	
- 		}
- 		
- 		$("#writeMiniStatis").html(html);
- 	}
- 	
- 	function KalUserSeq() {
- 		console.log("실행중.........");
- 		var id = "${sessionScope.member.id}";
-// 		console.log(id);
- 		$.ajax({
- 			url: "${pageContext.request.contextPath}/mini/mini.json",
- 			data: {"id" : "${sessionScope.member.id}"},
- 			dataType: "json",
- 			success: function (data) {
- 				console.log("성공");
- 				kal(data);
- 				console.log(data);
- 			},
- 			error : function(data){
- 				console.log('에러',data);
- 			}
- 		});
- 	}
- 	
- 	KalUserSeq();
-
- 	var img = new Image();
-
- 	var ctx = document.getElementById("pieCanvas").getContext('2d');
- 	var fillPattern = ctx.createPattern(img, 'repeat');
- 	
- 	
- 	function dou() {
- 		var userSeq = "${sessionScope.member.userSeq}";
- 		console.log(userSeq);
- 		$.ajax({
- 			url: "${pageContext.request.contextPath}/mini/minidou.json",
- 			data: {"userSeq" : "${sessionScope.member.userSeq}"},
- 			dataType: "json",
- 			success: function (data) {
- 				console.log(data);
- 				var data = {
- 					    datasets: [{
- 					        data: [data.morning, data.lunch, data.dinner, data.snack],
- 						    backgroundColor: [
- 						    	 'rgba(255, 99, 132)',
- 					             'rgba(255, 159, 64)',
- 					             'rgba(54, 162, 235)',
- 					             'rgba(255, 205, 86)'
- 						    ]
- 					    }],
- 					    // These labels appear in the legend and in the tooltips when hovering different arcs
- 					    labels: [
- 					        '아침',
- 					        '점심',
- 					        '저녁',
- 					        '간식'
- 					    ]
- 					};
- 				var img = new Image();
-
- 				var ctx = document.getElementById("pieCanvas").getContext('2d');
- 				var fillPattern = ctx.createPattern(img, 'repeat');
- 				var myPieChart = new Chart(ctx,{
- 				    type: 'doughnut',
- 				    data: data,
- 				    options: {
- 						rotation : 1 * Math.PI,
- 						'animation.animateScale' : true,
- 				    }
- 				});
- 			},
- 	
- 			
- 		});
- 	}
- 	
- 	dou();
- 
-// 여기까지 mini 통계 끝 -----------------------------------------------------------------------
- 	
- 	
- 	
+<script>
  var tabNo = ${param.page};
  var userSeq = ${member.userSeq};
- console.log(userSeq);
+ var id = "${member.id}";
+ 
+ console.log("userSeq",userSeq);
+ console.log("id",id);
+ console.log("tabNo",tabNo);
  //dropzone 설정 및 visionAPI AJAX
 	  Dropzone.options.myAwesomeDropzone = {
 	          paramName: "file",

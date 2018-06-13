@@ -12,7 +12,7 @@ var summernote = $('#summernote').summernote({
         height: 300,
         minHeight: 300,
         maxHeight: 300, 
-        width : 810
+        width : 715
       });
 
 $(summernote);

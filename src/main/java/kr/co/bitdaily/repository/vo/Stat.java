@@ -68,6 +68,12 @@ public class Stat {
 	public void setSnack(double snack) {
 		this.snack = snack;
 	}
+	@Override
+	public String toString() {
+		return "Stat [mealSeq=" + mealSeq + ", userSeq=" + userSeq + ", morning=" + morning + ", lunch=" + lunch
+				+ ", diner=" + diner + ", snack=" + snack + ", mealDate=" + mealDate + ", startDate=" + startDate
+				+ ", endDate=" + endDate + "]";
+	}
 	
 
 	

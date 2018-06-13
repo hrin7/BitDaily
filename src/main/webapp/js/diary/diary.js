@@ -12,6 +12,8 @@ $(function () {
 		$("body > div.content > div.diary > div.subMenu > ul > li:nth-child(1) > a").addClass("sub_active");
 		setFood();
 	}
+	KalUserSeq();
+	dou();
 });
 
 //식단 , 운동 , 일기 탭 눌렀을때 이벤트
@@ -179,14 +181,14 @@ function makeDiary(){
 	$.ajax({
 		url : "/spring-bitdiary/diary/dailydiary/select.json",
 		data : {
-			userSeq : "1",
+			userSeq : userSeq,
 			diaryDate : new Date($("#now").text())
 		}
 	}).done(function(data){
 		console.log(data);
 		$("#diaryTitle").val(data.title);
 		console.log($(".note-placeholder").text(""));
-		$(".note-editable").text(data.content);
+		$(".note-editable").first().text(data.content);
 		toggleBtn(data.title);
 		makeDisabled();
 	})
@@ -196,13 +198,12 @@ function insertDiary(){
 	$.ajax({
 		url : diaryPath(),
 		data : {
-			userSeq : "1",
+			userSeq : userSeq,
 			title : $("#diaryTitle").val(),
-			content : $(".note-editable").text(),
+			content : $(".note-editable").first().text(),
 			diaryDate : new Date()
 		}
 	}).done(function(data){
-		alert("성공");
 		$("#regist").text("수정");
 	})
 }
@@ -231,6 +232,8 @@ function diaryPath(){
 }
 
 $(".mainMenu").on("click", "#regist",function(){
+	console.log('쿼리 날리기전 값', $(".note-editable").first().text());
+	console.log('유저 시퀀스',userSeq);
 	if(check())	insertDiary();
 })
 
@@ -265,7 +268,7 @@ function makeExercise() {
 	$.ajax({
 		url: "/spring-bitdiary/diary/exeDiaryList.do",
 		data:  { 
-			userSeq : "41",
+			userSeq : userSeq,
 			exerciseDate : new Date($("#now").text())
 		},
 		dataType: "json",
@@ -380,9 +383,10 @@ $(".mainMenu").on("click", "#insertBtn" ,function(e){
 		return;
 	}
 	$.ajax({
+		type : "POST",
 		url: "/spring-bitdiary/diary/exeInsert.do",
 		data: {
-			userSeq: "41",
+			userSeq: userSeq,
 			exerciseSeq: $("#rExerciseSeq").val(),
 			exerciseTime: $("#exerciseMinute").val(),
 			exerciseDate : new Date($("#now").text())

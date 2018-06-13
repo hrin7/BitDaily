@@ -14,6 +14,7 @@
 	    select *
 		from tb_diary
 		where to_char( diary_date, 'yyyymmdd' ) = to_char( #{diaryDate}, 'yyyymmdd')
+		and user_seq = #{userSeq}
     </select>
     	
    <insert id="insertDiary" parameterType="diary">

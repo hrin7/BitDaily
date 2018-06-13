@@ -87,6 +87,13 @@ public class Member {
 	public void setCurrentWeight(int currentWeight) {
 		this.currentWeight = currentWeight;
 	}
+	@Override
+	public String toString() {
+		return "Member [userSeq=" + userSeq + ", id=" + id + ", name=" + name + ", pass=" + pass + ", email=" + email
+				+ ", age=" + age + ", userHeight=" + userHeight + ", userWeight=" + userWeight + ", gender=" + gender
+				+ ", goalWeight=" + goalWeight + ", goalCalorie=" + goalCalorie + ", currentWeight=" + currentWeight
+				+ "]";
+	}
 	
 	
 	

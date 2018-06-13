@@ -31,7 +31,7 @@ public class Mini {
 		String id = member.getId();
 		//아이디에 해당한 유저 정보
 		Member userinfo = miniservice.selectUsersSeq(id);
-		
+		System.out.println("멤버 몸무게" + userinfo);
 		
 		//목표 칼로리
 		int goalweight = userinfo.getGoalWeight();
@@ -43,12 +43,15 @@ public class Mini {
 		statMeal1.setMealDate(new Date());
 		statMeal1.setUserSeq(userinfo.getUserSeq());
 		Stat statMeal= miniservice.selectUserDatePie(statMeal1);
+		System.out.println(" ministat statMeal이 널인지" + statMeal);
 		//하루 먹은 식단 :
 		int dailyMeal = 0;
-		dailyMeal = (int) statMeal.getMorning();
-		dailyMeal += (int) statMeal.getLunch();
-		dailyMeal += (int) statMeal.getDiner();
-		dailyMeal += (int) statMeal.getSnack();
+		if(statMeal != null) {
+			dailyMeal = (int) statMeal.getMorning();
+			dailyMeal += (int) statMeal.getLunch();
+			dailyMeal += (int) statMeal.getDiner();
+			dailyMeal += (int) statMeal.getSnack();
+		}
 		//남은 열량 칼로리
 		int reCalories= dailyKal - dailyMeal + 100;
 		
@@ -58,7 +61,10 @@ public class Mini {
 		statExercise.setExerciseDate(new Date());
 		statExercise.setUserSeq(userSeq);
 		StatExercise statExercise1= miniservice.selectUserExcerForMini(statExercise);
-		int dailyExcer = statExercise1.getExerciseTime();
+		int dailyExcer = 0;
+		if(statExercise1 != null) {
+			dailyExcer = statExercise1.getExerciseTime();
+		}
 		
 		Map<String,Integer> result = new HashMap<>(); 
 		result.put("dailyKal", dailyKal); 
@@ -82,24 +88,29 @@ public class Mini {
 		statMeal1.setUserSeq(userSeq);
 		
 		Stat statMeal= miniservice.selectUserDatePie(statMeal1);
-		System.out.println(statMeal.getLunch());
-//		System.out.println(statMeal.getMorning());
-//		System.out.println(statMeal.getLunch());
-//		System.out.println(statMeal.getDiner());
-//		System.out.println(statMeal.getSnack());
+		double morning =  0;
+		double lunch = 0;
+		double dinner = 0;
+		double snack = 0;
+		if(statMeal != null) {
+			morning =  statMeal.getMorning();
+			lunch = statMeal.getLunch();
+			dinner = statMeal.getDiner();
+			snack = statMeal.getSnack();
+		}
 		
-		
-		double morning =  statMeal.getMorning();
-		double lunch = statMeal.getLunch();
-		double dinner = statMeal.getDiner();
-		double snack = statMeal.getSnack();
 		
 		int sum = (int) (morning + lunch + dinner + snack);
-		
-		int pmoring = (int) ((morning / sum) * 100);
-		int plunch = (int) ((lunch / sum) * 100);
-		int pdinner = (int) ((dinner / sum) * 100);
-		int psnack = (int) ((snack / sum) * 100);
+		int pmoring = 0;
+		int plunch = 0;
+		int pdinner = 0;
+		int psnack = 0;
+		if(sum > 0) {
+			pmoring = (int) ((morning / sum) * 100);
+			plunch = (int) ((lunch / sum) * 100);
+			pdinner = (int) ((dinner / sum) * 100);
+			psnack = (int) ((snack / sum) * 100);
+		}
 		
 		Map<String,Integer> result = new HashMap<>(); 
 		result.put("morning", pmoring); 
