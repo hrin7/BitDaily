@@ -23,5 +23,12 @@
 	          order by weight_date desc )
 	 where rownum <![CDATA[<]]> 8
 	</select>
+	
+	<update id="updateTodayWeight" parameterType="weight">
+	update tb_stat_weight
+	   set current_weight = #{currentWeight}
+	 where user_seq = #{userSeq}
+	   and weight_date = #{weightDate}
+	</update>
 
 </mapper>

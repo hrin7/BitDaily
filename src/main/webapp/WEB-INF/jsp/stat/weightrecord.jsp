@@ -44,10 +44,6 @@
 <p>${member.userWeight}Kg_________________________________________________${member.goalWeight}kg</p>
 </div>
 
-<script>
-
-</script>
-
 </div>
 <div id="weight_statistics">
 <div class="graphBox">
@@ -58,7 +54,7 @@
 
 <div id="side">
 <h2><img src="${pageContext.request.contextPath}/images/icon/ruler.png" width="50px" height="50px"> 체중기록</h2><hr>
-	<div class="but">　 <a href="#" id="weight"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a></div>
+	<div class="but">　<a href="#" id="weight"><img src="${pageContext.request.contextPath}/images/icon/plus.png" width="20px" height="20px"> 오늘체중기록</a></div>
 	<div id="sideList">
 	</div>
 </div>

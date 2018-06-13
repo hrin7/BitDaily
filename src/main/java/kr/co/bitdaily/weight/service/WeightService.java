@@ -11,4 +11,6 @@ public interface WeightService {
 	
 	public List<Weight> selectWeight(int userSeq);
 
+	public void updateToday(Weight w, Member member);
+
 }

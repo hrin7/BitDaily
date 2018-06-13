@@ -57,6 +57,33 @@ public class WeightController {
 		
 	}
 	
+	
+	@RequestMapping("/updateTodayWeight.json")
+	@ResponseBody
+	public void updateToday(@RequestParam String weight, Date weightDate, HttpSession session) throws ParseException {
+		
+		System.out.println("updateTodayWeight.json접근");
+		Member member = (Member) session.getAttribute("member");
+		int userSeq = member.getUserSeq();
+		
+		member.setCurrentWeight(Integer.parseInt(weight));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String d = sdf.format(weightDate);
+		Date date = sdf.parse(d);
+		
+		Weight w = new Weight();
+		w.setUserSeq(userSeq);
+		w.setCurrentWeight(Integer.parseInt(weight));
+		w.setWeightDate(date);
+		
+		weightService.updateToday(w, member);
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/weightList.json")
 	@ResponseBody
 	public List<Weight> selectWeight(HttpSession session) {

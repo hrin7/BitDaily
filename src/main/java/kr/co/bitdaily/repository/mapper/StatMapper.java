@@ -15,6 +15,10 @@ public interface StatMapper {
 	
 	Stat selectStatByMealSeq(int mealSeq);
 	
+	//pie
+	Stat selectStatByDateUser(Stat stat);
+	
+	
 	List<Stat> selectStatByUserSeqAndDate(Stat stat);
 	
 	Stat selectByUserSeq(int userSeq);
@@ -25,4 +29,5 @@ public interface StatMapper {
 	void insertStatExercise(StatExercise statExe);
 	void updateStatExercise(StatExercise statExe);
 	StatExercise selectStatExeByDate(StatExercise statExe);
+	StatExercise selectStatExeByDateUser(StatExercise statExe);
 }

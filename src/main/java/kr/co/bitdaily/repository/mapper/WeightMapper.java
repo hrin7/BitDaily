@@ -9,5 +9,7 @@ public interface WeightMapper {
 	public void insertWeight(Weight weight);
 	
 	List<Weight> selectWeight(int userSeq);
+	
+	void updateTodayWeight(Weight weight);
 
 }
