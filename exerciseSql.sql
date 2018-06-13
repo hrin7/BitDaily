@@ -26,3 +26,9 @@ set		exercise_time = #{exerciseTime}
 where user_seq = 41
 and exercise_record_seq = #{exerciseRecordSeq}
 
+select *
+from tb_stat_exercise;
+
+select *
+		  from tb_stat_exercise
+		  where to_char(exercise_date, 'yyyy-mm-dd') = to_char("2018-06-", 'yyyy-mm-dd')
