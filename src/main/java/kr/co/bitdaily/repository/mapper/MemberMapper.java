@@ -9,6 +9,8 @@ public interface MemberMapper {
 	
 	public Member selectName(Member member) throws Exception;
 	
+	public Member selectUserForLogin(Member member) throws Exception;
+	
 	public Member selectMemberById(String id) throws Exception;
 	
 	public void insertMember(Member member) throws Exception;
