@@ -136,7 +136,7 @@ function setChart(list){
 				$("#percentage").text("　"+percentage+"%");
 				var length = 380;
 				var move = length * (percentage/100);
-				var gap = $(".runner").offset().left - 454.138;
+				var gap = $(".runner").offset().left - 370;
 //				console.log(gap);
 				$(".runner").animate({right: "+="+gap+"px"}, 50);
 				$(".runner").animate({right: "-="+move+"px"}, 800);
@@ -183,6 +183,7 @@ function setChart(list){
 	makeWeightList();
 	
 	$(document).on("click", "#updateCurrent", function() {
+		console.log("a");
 		$(this).prev().text("");
 		$(this).prev().html("<input type='text' name='updateTodayWeight' id='updateTodayWeight'>");
 		$(this).attr("id", "updateToday");

@@ -413,7 +413,7 @@ $(".mainMenu").on("click",".deleteExercise",function(){
 		$.ajax({
 			url: "/spring-bitdiary/diary/exeDelete.do",
 			data: {
-				userSeq: "41",
+				userSeq: userSeq,
 				exerciseRecordSeq: $(this).data("value"),
 				exerciseTime: that.parent().prev().prev().prev().find("span").text(),
 				excerciseKcal: that.parent().prev().prev().find("span").text(),
@@ -454,7 +454,7 @@ $(".mainMenu").on("click",".updateTime",function(){
 		$.ajax({
 			url: "/spring-bitdiary/diary/exeUpdate.do",
 			data: {
-				userSeq: "41",
+				userSeq: userSeq,
 				exerciseTime: exerciseTime,
 				excerciseKcal: excerciseKcal,
 				exerciseRecordSeq : exerciseRecordSeq,
@@ -510,7 +510,7 @@ function makeList() {
 					list += "<input type='hidden' name='listFoodSeq' id='listFoodSeq' value="+mealList[i].food.foodSeq+" />";
 					list += "</div><div class='result_content'><p><strong>" + mealList[i].food.foodName + "</strong></p>";
 					list += "<p><span id='mealGram'>" +mealList[i].mealGram+"</span>g(ml)";
-					list += " ː <span id='kcal'>" +(mealList[i].mealGram * mealList[i].food.foodKcal).toFixed(2)+"</span>kcal</p></div></div>";
+					list += "ː<span id='kcal'>" +(mealList[i].mealGram * mealList[i].food.foodKcal).toFixed(2)+"</span>kcal</p></div></div>";
 				switch (flag) {
 				case "1":
 					$("#morning").append(list);
