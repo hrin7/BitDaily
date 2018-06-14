@@ -1,5 +1,60 @@
 select *
   from tab;
+
+CREATE TABLE tb_exercise (
+    excercise_seq     NUMBER          PRIMARY KEY, 
+    excercise_name    VARCHAR2(200)    NOT NULL, 
+    excercise_kcal    NUMBER          NOT NULL
+);
+
+CREATE TABLE tb_excercise_record (
+    user_seq          NUMBER    NOT NULL, 
+    excercise_seq     NUMBER    NOT NULL, 
+    excercise_time    NUMBER    NOT NULL, 
+    excercise_date    DATE      NOT NULL
+);
+
+CREATE SEQUENCE s_exercise_seq;
+
+drop table tb_exercise purge;
+drop SEQUENCE s_exercise_seq;
+
+insert into tb_exercise values (s_exercise_seq.nextval, '걷기', 4.6);
+insert into tb_exercise values (s_exercise_seq.nextval, '물속걷기', 5);
+insert into tb_exercise values (s_exercise_seq.nextval, '빠르게걷기', 6.3);
+insert into tb_exercise values (s_exercise_seq.nextval, '제자리걷기', 2);
+insert into tb_exercise values (s_exercise_seq.nextval, '계단오르기' || '('||'걷기'||')', 7);
+insert into tb_exercise values (s_exercise_seq.nextval, '달리기', 13.5);
+insert into tb_exercise values (s_exercise_seq.nextval, '수영', 9);
+insert into tb_exercise values (s_exercise_seq.nextval, '아령 운동', 7);
+insert into tb_exercise values (s_exercise_seq.nextval, '짐볼 운동', 5);
+insert into tb_exercise values (s_exercise_seq.nextval, '스쿼트' || '('||'다리 근력운동'||')', 7);
+insert into tb_exercise values (s_exercise_seq.nextval, '턱걸이' || '('||'팔 근력운동'||')', 8);
+insert into tb_exercise values (s_exercise_seq.nextval, '런지' || '('||'다리 근력운동'||')', 7);
+insert into tb_exercise values (s_exercise_seq.nextval, '크런치' || '('||'복부 근력운동'||')', 8);
+insert into tb_exercise values (s_exercise_seq.nextval, '힙업' || '('||'엉덩이 근력운동'||')', 8);
+insert into tb_exercise values (s_exercise_seq.nextval, '덤벨프레스' || '('||'가슴 근력운동'||')', 8);
+insert into tb_exercise values (s_exercise_seq.nextval, '팔굽혀펴기' || '('||'가슴 근력운동'||')', 8);
+insert into tb_exercise values (s_exercise_seq.nextval, '에어로빅', 6.1);
+insert into tb_exercise values (s_exercise_seq.nextval, '자전거타기', 6.3);
+insert into tb_exercise values (s_exercise_seq.nextval, '스피닝', 7);
+insert into tb_exercise values (s_exercise_seq.nextval, '춤추기', 4.5);
+insert into tb_exercise values (s_exercise_seq.nextval, '테니스', 6.5);
+insert into tb_exercise values (s_exercise_seq.nextval, '축구', 8.1);
+insert into tb_exercise values (s_exercise_seq.nextval, '골프', 3.8);
+insert into tb_exercise values (s_exercise_seq.nextval, '농구', 5.9);
+insert into tb_exercise values (s_exercise_seq.nextval, '집청소하기' || '('||'생활운동'||')', 6.3);
+insert into tb_exercise values (s_exercise_seq.nextval, '세차하기' || '('||'생활운동'||')', 4.5);
+insert into tb_exercise values (s_exercise_seq.nextval, '산책하기' || '('||'생활운동'||')', 3.4);
+
+select *
+  from tb_exercise
+ order by excercise_seq;
+ 
+select *
+  from tb_exercise
+ where excercise_name like '%운동%';  
+  
   
 CREATE TABLE tb_recipe (
     user_seq       NUMBER(3)       NOT NULL, 
