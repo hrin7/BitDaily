@@ -66,7 +66,7 @@ function setChart(list){
 		            {
 		                ticks: {
 		                    beginAtZero: false,
-		                    stepSize: 0.5
+		                    stepSize: 1
 		                }
 		            }
 		        ]

@@ -21,7 +21,7 @@
 	<a href="#1" id="preDate" ><img src="${pageContext.request.contextPath}/images/icon/before.png" width="30px" height="30px"></a>
 	<span id="now"></span>
 	<a href="#1" id="nextDate"><img src="${pageContext.request.contextPath}/images/icon/next.png" width="30px" height="30px"></a>
-	<div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px">${member.goalCalorie}kcal</div>
+	<div class="calorie">목표칼로리 <img src="${pageContext.request.contextPath}/images/icon/fork.png" width="35px" height="35px"><span id="dailyKcal"></span>kcal</div>
 </div><!-- end .date -->
 
 
@@ -248,6 +248,13 @@
  
 <!--  mini통계 필요한 스크립 -->
 <script>
+
+var goalweight = "${member.goalWeight}";
+var dailyKcal = (goalweight * 31 ) - 500;
+console.log("칼로리"+dailyKcal);
+$("#dailyKcal").text(dailyKcal);
+
+
  var tabNo = ${param.page};
  var userSeq = ${member.userSeq};
  var id = "${member.id}";

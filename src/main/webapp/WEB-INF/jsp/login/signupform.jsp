@@ -18,7 +18,7 @@
 				<div id="inputId">
 					<div class="innerBox">
 						<label for="userId" class="labels">아이디</label>
-						<input type="text" name="id" id="userId" data-flag="no" class="inputDetail" maxlength="15">
+						<input type="text" name="id" id="userId" data-flag="no" class="inputDetail" maxlength="15" value="${id}">
 						<p class="innerText">영문/숫자를 조합하여 입력</p>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 				<div id="inputName">
 					<div class="innerBox">
 						<label for="userName" class="labels">이름</label>
-						<input type="text" name="name" id="userName" data-flag="no" class="inputDetail" maxlength="16">
+						<input type="text" name="name" id="userName" data-flag="no" class="inputDetail" maxlength="16" value="${name}">
 						<p class="innerText"></p>
 					</div>
 				</div>
