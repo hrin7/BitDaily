@@ -19,46 +19,33 @@ CREATE TABLE tb_user(
 );
 --user정보 insert
 insert into tb_user (user_seq, id, name, pass, email, age, user_height, user_weight, gender, goal_weight, goal_calorie, current_weight)
-	values (s_user_no.nextval,'id1', 'hong','id1', 'asd@na.com', 38, 180, 78, 'M', 68, 6, 77 );
+	values (s_user_no.nextval,'id5', 'hong','id1', 'asd@na.com', 38, 180, 78, 'M', 68, 6, 77 );
 insert into tb_user (user_seq, id, name, pass, email, age, user_height, user_weight, gender, goal_weight, goal_calorie, current_weight)
 	values (s_user_no.nextval,'song', 'song', 'song', 'zzz@zz.com', 35, 182, 88, 'M', 80, 8, 88 );
 
-insert into tb_stat (
-	meal_seq, user_seq, morning, lunch, diner, snack
-	) values (200, 26, 200, 500, 1000, 10
-	);
 	
-select *
-  from tb_stat;
-	
-	
-select *
-  from tb_meal;
-  
-insert into tb_meal (
-	meal_seq, user_seq, meal_date
-	) values (200, 26,'18/06/8'
-	);	
-  
+insert into tb_user (user_seq, id, name, pass, email, age, user_height, user_weight, gender, goal_weight, goal_calorie, current_weight)
+	values (s_user_no.nextval,'110197468', 'song', 'song', 'zzz@zz.com', 35, 182, 88, 'M', 80, 8, 88 );
+
 --유저 정보
 select *
   from tb_user;
-	
+
+--stat 정보
+select *
+  from tb_stat;
+  
+  
+  
+  
+--stat exercise 정보  
+select *
+  from tb_stat_exercise;
+  
 --유저 시퀀시 삭제	
 drop sequence s_user_no;
 -- 유저 테이블 삭제
 drop table tb_user purge;
--- 유저 정보 삭제
-delete tb_user;
-
-
-
-
-
-
-
-
-
 
 
 
