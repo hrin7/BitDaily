@@ -16,7 +16,7 @@
 		<a href="#" id="next"><img src="<c:url value="/images/icon/next.png" />" width="30px" height="30px"></a>
 	</div>
 	<div id="activeRank">
-		<h4>주간 활동</h4>
+		<h4>주간 게시판 활동</h4>
 		<ul>
 			<li class="lines first"><p class="box rankdeco firstcolor">1</p><p class="box namedeco">홍길동</p></li>
 			<li class="lines second"><p class="box rankdeco secondcolor">2</p><p class="box namedeco">홍길동</p></li>

@@ -68,7 +68,7 @@
             <input type="text" name="id" placeholder="ID" />
           </div>
           <div class="input_field"><span><i class="fa fa-lock" aria-hidden="true"></i></span>
-            <input type="text" name="pass" placeholder="Password" />
+            <input type="password" name="pass" placeholder="Password" />
           </div>
           <input class="button" type="submit" value="로그인"/>
         </form>

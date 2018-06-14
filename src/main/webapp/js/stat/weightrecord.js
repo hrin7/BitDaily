@@ -136,7 +136,7 @@ function setChart(list){
 				$("#percentage").text("　"+percentage+"%");
 				var length = 380;
 				var move = length * (percentage/100);
-				var gap = $(".runner").offset().left - 370;
+				var gap = $(".runner").offset().left - 454.138;
 //				console.log(gap);
 				$(".runner").animate({right: "+="+gap+"px"}, 50);
 				$(".runner").animate({right: "-="+move+"px"}, 800);
