@@ -130,12 +130,12 @@
 		  },
 		  '이메일을 입력하세요',
 		]).then(function(result){
-			findId = result;
-			fnFindId(findId);
+			findpass = result;
+			fnFindPass(findpass);
 		
 		})
 	});
-	function fnFindId(data) {
+	function fnFindPass(data) {
 		$.ajax({
 			url : "${pageContext.request.contextPath}/login/fogetPass.json",
 			type: "POST",

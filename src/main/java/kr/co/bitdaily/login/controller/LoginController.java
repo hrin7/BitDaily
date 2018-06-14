@@ -68,21 +68,25 @@ public class LoginController {
 	
 	
 	
-	
+	// ID찾기
 	@RequestMapping("/fogetId.json") 
 	@ResponseBody
 	public Member fogetId(Member member) throws Exception { 
-		Member dbmember = loginService.selectMemberByName(member.getId());
+		Member dbmember = loginService.selectMemberByName(member);
 		if(dbmember.getEmail().equals(member.getEmail())){
 			return dbmember;
 		}
 		return member;
 	} 
+	//비번찾기
 	@RequestMapping("/fogetPass.json") 
 	@ResponseBody
 	public Member fogetPass(Member member) throws Exception { 
+		System.out.println("forgetPAss" + member.getId());
+		
 		Member loginmember = loginService.retrieveMemberInfo(member.getId());
-		if(loginmember.getEmail().equals(member.getEmail())){
+//		if(loginmember.getEmail().equals(member.getEmail())){
+			if(loginmember != null){
 			return loginmember;
 		}
 		return member;
@@ -105,11 +109,11 @@ public class LoginController {
 	//로그인 된 후..
 	@RequestMapping("/login.do")
 	public String login(Member member, HttpSession session,  RedirectAttributes attr) throws Exception{
-		
 		List<Member> list = loginService.retrieveMember();
 		for (Member rmember : list) {
 			if(rmember.getId().equals(member.getId()) && rmember.getPass().equals(member.getPass())) {
 				Member loginmember = loginService.retrieveMemberInfo(member.getId());
+				
 				session.setAttribute("member", loginmember);
 				return "redirect:/main/main.do";
 			}

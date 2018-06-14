@@ -18,22 +18,25 @@
         <result column = "current_weight" property = "currentWeight" />
     </resultMap>
    
+ <!--    // -->
+	<select id="selectUserForLogin" parameterType="member" resultMap="memberMap">
+        select *
+          from tb_user 
+         where id = #{id}
+           and email = #{email}
+    </select>  
 <!--    //비번 찾기 -->
 	<select id="selectName" parameterType="member" resultMap="memberMap">
         select *
           from tb_user 
          where name = #{name}
+           and email = #{email}
     </select>
     <select id="selectMember" resultType="member">
         select id,
                name,
                pass
           from tb_user 
-    </select>
-    <select id="selectMemberId" parameterType="string" resultType="string">
-        select id
-          from tb_user 
-         where id = #{id} 
     </select>
     <select id="selectMemberById" parameterType="string" resultMap="memberMap">
     	select *

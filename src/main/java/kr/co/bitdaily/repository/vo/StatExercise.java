@@ -47,4 +47,12 @@ public class StatExercise {
 		this.exerciseDate = exerciseDate;
 	}
 
+	@Override
+	public String toString() {
+		return "StatExercise [userSeq=" + userSeq + ", exerciseTime=" + exerciseTime + ", exerciseDate=" + exerciseDate
+				+ ", excerciseKcal=" + excerciseKcal + "]";
+	}
+	
+	
+	
 }
