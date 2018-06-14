@@ -73,6 +73,7 @@ public class LoginController {
 	@ResponseBody
 	public Member fogetId(Member member) throws Exception { 
 		Member dbmember = loginService.selectMemberByName(member);
+		System.out.println("디비 멤버 : " + dbmember);
 		if(dbmember.getEmail().equals(member.getEmail())){
 			return dbmember;
 		}
@@ -111,7 +112,7 @@ public class LoginController {
 	public String login(Member member, HttpSession session,  RedirectAttributes attr) throws Exception{
 		List<Member> list = loginService.retrieveMember();
 		for (Member rmember : list) {
-			if(rmember.getId().equals(member.getId()) && rmember.getPass().equals(member.getPass())) {
+			if(rmember != null && rmember.getId().equals(member.getId()) && rmember.getPass().equals(member.getPass())) {
 				Member loginmember = loginService.retrieveMemberInfo(member.getId());
 				
 				session.setAttribute("member", loginmember);
