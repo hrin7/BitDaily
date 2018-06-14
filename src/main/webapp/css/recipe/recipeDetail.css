@@ -27,3 +27,13 @@ textarea {
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
 }
+.btn {
+	border: 1px solid #062859;
+	border-radius: 8px;
+	width: 45px; height: 25px;
+	color: #062859;
+	font-size: 13px;
+}
+.btn:hover { cursor: pointer; }
+.btn:focus { outline: none; }
+.btn:active { background-color: rgb(6,40,89,0.2) }

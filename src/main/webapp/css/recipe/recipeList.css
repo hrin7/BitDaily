@@ -45,7 +45,7 @@ input#search-bar:focus::-webkit-input-placeholder {
 }
 #outer { width: 100%; text-align: center; margin: 0 auto; }
 .img { 
-	height: 270px; 
+	height: 300px; 
 	transition: all 0.3s;
 }
 .img:hover {

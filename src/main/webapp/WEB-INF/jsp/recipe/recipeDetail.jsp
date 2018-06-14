@@ -43,10 +43,10 @@
 			</form>
 			<div style="text-align: right;">
 				<c:if test="${sessionScope.member.userSeq eq recipe.userSeq}">
-					<button onclick="location.href='updateForm.do?recipeSeq=${recipe.recipeSeq}'">수정</button>
-					<button onclick="location.href='delete.do?recipeSeq=${recipe.recipeSeq}'">삭제</button>
+					<button class="btn" onclick="location.href='updateForm.do?recipeSeq=${recipe.recipeSeq}'">수정</button>
+					<button class="btn" onclick="location.href='delete.do?recipeSeq=${recipe.recipeSeq}'">삭제</button>
 				</c:if>
-				<button onclick="location.href='${pageContext.request.contextPath}/recipe/list.do'">목록</button>
+				<button class="btn" onclick="location.href='${pageContext.request.contextPath}/recipe/list.do'">목록</button>
 			</div>
 		</div>
 	</div>
@@ -67,8 +67,8 @@
 			html += '<div class="comment_box" id="comment'+comment.commentSeq+'">';
 			html += '  <h5><span id="commentName">'+comment.name+'</span>';
 			if (${sessionScope.member.userSeq} == comment.userSeq) {
-			html += '    <button onclick="commentUpdateForm('+comment.commentSeq+');">수정</button>'
-			html += '    <button onclick="commentDelete('+comment.commentSeq+');">삭제</button></h5>';
+			html += '    <button class="btn" onclick="commentUpdateForm('+comment.commentSeq+');">수정</button>'
+			html += '    <button class="btn" onclick="commentDelete('+comment.commentSeq+');">삭제</button></h5>';
 			}
 			html += '  <div id="commentTextDiv">'+comment.commentText+'</div>';
 			html += '  <br>';
@@ -140,8 +140,8 @@
 		var html = '';
 		html += '<div id="modComment'+ commentSeq +'">';
 		html += '  <h5>' + $("#comment"+commentSeq+"> h5 > #commentName").text();
-		html += '  <button onclick="commentUpdate('+ commentSeq +');">수정</button>';
-		html += '  <button onclick="commentCancel('+ commentSeq +');">취소</button></h5>';
+		html += '  <button class="btn" onclick="commentUpdate('+ commentSeq +');">수정</button>';
+		html += '  <button class="btn" onclick="commentCancel('+ commentSeq +');">취소</button></h5>';
 		html += '<textarea name="commentText" id="commentText'+ commentSeq +'">';
 		html += $("#comment"+commentSeq+"> #commentTextDiv").text();
 		html += '</textarea>';
