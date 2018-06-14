@@ -443,6 +443,7 @@ $(".mainMenu").on("click",".updateTime",function(){
 				var exerciseTime = that.parent().prev().prev().children().text();
 				var exerciseRecordSeq = that.data("value");
 				that.parent().prev().prev().children().html('<input type="text" class="changeTime" maxlength="4" data-kcal="' + kcal +'" value="'+ exerciseTime+'">')
+				that.parent().next().children().html('<img src="/spring-bitdiary/images/icon/cancel.png"/>')
 			}
 		})
 		$(this).data("flag","no");

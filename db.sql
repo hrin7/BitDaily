@@ -107,21 +107,22 @@ CREATE TABLE tb_stat_exercise (
     exercise_date    DATE      default sysdate
 );
 
-ALTER TABLE tb_stat_exercise ADD(excercise_kcal number);
-ALTER TABLE tb_stat_exercise DROP COLUMN exercise_kcal;
+ALTER TABLE tb_stat_exercise ADD(excercise_kcal number default 0);
+ALTER TABLE tb_stat_exercise DROP COLUMN excercise_kcal;
 
 drop table tb_stat_exercise purge;
+
 select *
   from tb_stat_exercise
  order by exercise_date desc;
  
 update tb_stat_exercise
-   set exercise_time = '120'
- where user_seq = '41' and exercise_time = '100';
+   set excercise_kcal = '0'
+ where user_seq = '96' and exercise_time = '0';
  
 delete
   from tb_stat_exercise
- where user_seq = '41' and exercise_time = '10';
+ where user_seq = '41' and exercise_time = '145';
  
 select *
   from tb_stat;
