@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.bitdaily.mini.service.MiniService;
-import kr.co.bitdaily.repository.vo.Meal;
 import kr.co.bitdaily.repository.vo.Member;
 import kr.co.bitdaily.repository.vo.Stat;
 import kr.co.bitdaily.repository.vo.StatExercise;
@@ -33,7 +32,7 @@ public class Mini {
 		Member userinfo = miniservice.selectUsersSeq(id);
 		System.out.println("멤버 몸무게" + userinfo);
 		
-		//목표 칼로리
+		//목표 몸무게
 		int goalweight = userinfo.getGoalWeight();
 		//하루 필요열량 Kal:
 		int dailyKal = (goalweight * 31 ) - 500;
@@ -61,15 +60,16 @@ public class Mini {
 		statExercise.setExerciseDate(new Date());
 		statExercise.setUserSeq(userSeq);
 		StatExercise statExercise1= miniservice.selectUserExcerForMini(statExercise);
-		int dailyExcer = 0;
+		//금일 총 운동 칼로리
+		int dailyToalKal = 0;
 		if(statExercise1 != null) {
-			dailyExcer = statExercise1.getExerciseTime();
+			dailyToalKal = statExercise1.getExcerciseKcal();
 		}
 		
 		Map<String,Integer> result = new HashMap<>(); 
 		result.put("dailyKal", dailyKal); 
 		result.put("dailyMeal", dailyMeal); 
-		result.put("dailyExcer", dailyExcer);
+		result.put("dailyExcer", dailyToalKal);
 		result.put("reCalories", reCalories);
 		
 		return result; 
