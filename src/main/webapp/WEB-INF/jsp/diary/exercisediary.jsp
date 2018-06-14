@@ -141,14 +141,18 @@
 		$("#footMenuTable").hide();
 	});
 	
+	
+	
 	$("#insertForm").submit(function (e) {
 		e.preventDefault();
+		alert($("#kcalSpan").html());
 		$.ajax({
 			url: "<c:url value='/diary/exeInsert.do'/>",
 			data: {
 				userSeq: "${sessionScope.member.userSeq}",
 				exerciseSeq: $("#rExerciseSeq").val(),
 				exerciseTime: $("#exeHour").val(),
+				excerciseKcal: $("#kcalSpan").text(),
 				exerciseDate : new Date()
 			},
 			dataType: "json",

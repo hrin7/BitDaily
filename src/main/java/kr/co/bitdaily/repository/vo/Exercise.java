@@ -88,4 +88,11 @@ public class Exercise {
 		this.exerciseDate = exerciseDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Exercise [userSeq=" + userSeq + ", exerciseTime=" + exerciseTime + ", exerciseDate=" + exerciseDate
+				+ ", excerciseSeq=" + excerciseSeq + ", exerciseSeq=" + exerciseSeq + ", exerciseRecordSeq="
+				+ exerciseRecordSeq + ", excerciseName=" + excerciseName + ", excerciseKcal=" + excerciseKcal + "]";
+	}
+	
 }

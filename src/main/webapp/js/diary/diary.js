@@ -389,6 +389,7 @@ $(".mainMenu").on("click", "#insertBtn" ,function(e){
 			userSeq: userSeq,
 			exerciseSeq: $("#rExerciseSeq").val(),
 			exerciseTime: $("#exerciseMinute").val(),
+			excerciseKcal: $("#kcalSpan").text(),
 			exerciseDate : new Date($("#now").text())
 		},
 		dataType: "json",
@@ -415,6 +416,7 @@ $(".mainMenu").on("click",".deleteExercise",function(){
 				userSeq: "41",
 				exerciseRecordSeq: $(this).data("value"),
 				exerciseTime: that.parent().prev().prev().prev().find("span").text(),
+				excerciseKcal: that.parent().prev().prev().find("span").text(),
 				exerciseDate : new Date($("#now").text())
 			},
 			success: makeExeList
@@ -446,6 +448,7 @@ $(".mainMenu").on("click",".updateTime",function(){
 		$(this).data("flag","no");
 	}else {
 		var exerciseTime = that.parent().prev().prev().find('input').val();
+		var excerciseKcal = that.parent().prev().find('span').text();
 		console.log('운동 시간 출력',that.parent().prev().prev().find("span").text())
 		console.log('수정된 운동 시간 출력',that.parent().prev().prev().find('input').val())
 		$.ajax({
@@ -453,6 +456,7 @@ $(".mainMenu").on("click",".updateTime",function(){
 			data: {
 				userSeq: "41",
 				exerciseTime: exerciseTime,
+				excerciseKcal: excerciseKcal,
 				exerciseRecordSeq : exerciseRecordSeq,
 				exerciseDate : new Date($("#now").text())
 			},

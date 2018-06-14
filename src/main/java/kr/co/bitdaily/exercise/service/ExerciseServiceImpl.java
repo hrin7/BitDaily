@@ -41,6 +41,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 		Exercise exe = exeMapper.selecteExeRecByUserAndExe(exercise);
 		// 등록할 운동시간
 		int updateExeTime = exercise.getExerciseTime();
+		int updateExeKcal = exercise.getExcerciseKcal();
 		// 없으면 insert문 작동 , 있으면 업데이트 
 		if (exe == null) {
 			exeMapper.insertExercise(exercise);
@@ -56,18 +57,21 @@ public class ExerciseServiceImpl implements ExerciseService {
 		//통계테이블등록
 		int userSeq = exercise.getUserSeq();
 		int exeTime = exercise.getExerciseTime();
+		int exeKcal = exercise.getExcerciseKcal();
 		Date exeDate = exercise.getExerciseDate();
 		
 		StatExercise newStat = new StatExercise();
 		newStat.setUserSeq(userSeq);
 		newStat.setExerciseTime(exeTime);
 		newStat.setExerciseDate(exeDate);
+		newStat.setExcerciseKcal(exeKcal);
 		
 		StatExercise statExe = statMapper.selectStatExeByUserSeq(newStat);
 		
 		if(statExe == null) {
 			statMapper.insertStatExercise(newStat);
 		} else {
+			newStat.setExcerciseKcal(statExe.getExcerciseKcal() + updateExeKcal);
 			newStat.setExerciseTime(statExe.getExerciseTime() + updateExeTime);
 			statMapper.updateStatExercise(newStat);
 		}
@@ -80,16 +84,19 @@ public class ExerciseServiceImpl implements ExerciseService {
 		// 통계데이터 삭제
 		int userSeq = exercise.getUserSeq();
 		int exeTime = exercise.getExerciseTime();
+		int exeKcal = exercise.getExcerciseKcal();
 		Date exeDate = exercise.getExerciseDate();
 		
 		StatExercise newStat = new StatExercise();
 		newStat.setUserSeq(userSeq);
 		newStat.setExerciseTime(exeTime);
 		newStat.setExerciseDate(exeDate);
+		newStat.setExcerciseKcal(exeKcal);
 		
 		StatExercise statExe = statMapper.selectStatExeByUserSeq(newStat);
 		
 		newStat.setExerciseTime(statExe.getExerciseTime() - exeTime);
+		newStat.setExcerciseKcal(statExe.getExcerciseKcal() - exeKcal);
 		statMapper.updateStatExercise(newStat);
 	}
 
@@ -100,23 +107,30 @@ public class ExerciseServiceImpl implements ExerciseService {
 		Exercise exe = exeMapper.selecteExeRecByUserAndExe2(exercise);
 		// tb_stat_exercise 테이블을 update 작동시키는데 set에 select해온 시간을  빼고 파라마터로 받은 운동 vo에 있는 시간 값을 더 한다.
 		// 원래 운동시간
+		System.out.println("업데이트 운동" + exe);
 		int oriExeTime = exe.getExerciseTime();
+		int oriExeKcal = exercise.getExcerciseKcal();
 		System.out.println("원래운동시간"+oriExeTime);
+		System.out.println("원래칼로리"+oriExeKcal);
 		
 		//통계테이블 업데이트
 		int userSeq = exercise.getUserSeq();
 		int exeTime = exercise.getExerciseTime(); // 받아온 운동시간
+		int exeKcal = exercise.getExcerciseKcal();
 		Date exeDate = exercise.getExerciseDate();
 		System.out.println("jsp에서 받아온 운동시간"+exeTime);
+		System.out.println("jsp에서 받아온 칼로리"+exeTime);
 		
 		StatExercise newStat = new StatExercise();
 		newStat.setUserSeq(userSeq);
 		newStat.setExerciseTime(exeTime);  // 새로운 객체에 받아온 운동시간을 set해준다.
 		newStat.setExerciseDate(exeDate);
+		newStat.setExcerciseKcal(exeKcal);
 		
 		StatExercise statExe = statMapper.selectStatExeByUserSeq(newStat);
 		
 		newStat.setExerciseTime(statExe.getExerciseTime() - oriExeTime + exeTime);
+		newStat.setExcerciseKcal(statExe.getExcerciseKcal() - oriExeKcal + exeKcal);
 		statMapper.updateStatExercise(newStat);
 		
 		exeMapper.updateExercise(exercise);

@@ -11,6 +11,17 @@ public class StatExercise {
 
     // 금일 운동 날짜 
     private Date exerciseDate;
+    
+    // 금일 운동 총 칼로리
+    private Integer excerciseKcal;
+
+	public Integer getExcerciseKcal() {
+		return excerciseKcal;
+	}
+
+	public void setExcerciseKcal(Integer excerciseKcal) {
+		this.excerciseKcal = excerciseKcal;
+	}
 
 	public Integer getUserSeq() {
 		return userSeq;

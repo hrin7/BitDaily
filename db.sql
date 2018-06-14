@@ -107,6 +107,9 @@ CREATE TABLE tb_stat_exercise (
     exercise_date    DATE      default sysdate
 );
 
+ALTER TABLE tb_stat_exercise ADD(excercise_kcal number);
+ALTER TABLE tb_stat_exercise DROP COLUMN exercise_kcal;
+
 drop table tb_stat_exercise purge;
 select *
   from tb_stat_exercise
@@ -115,6 +118,10 @@ select *
 update tb_stat_exercise
    set exercise_time = '120'
  where user_seq = '41' and exercise_time = '100';
+ 
+delete
+  from tb_stat_exercise
+ where user_seq = '41' and exercise_time = '10';
  
 select *
   from tb_stat;
@@ -158,3 +165,6 @@ SELECT a.name, sum(exercise_time) As total
        between to_char(sysdate-14, 'yyyy-mm-dd') 
        and to_char(sysdate, 'yyyy-mm-dd')
   order by meal_date;
+
+  
+select * from tb_stat_exercise

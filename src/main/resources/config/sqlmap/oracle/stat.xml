@@ -64,20 +64,22 @@
 	<resultMap id="statExeMap" type="statExercise">
 		<result column="user_seq" property="userSeq"/>
 		<result column="exercise_time" property="exerciseTime"/>
+		<result column="excercise_kcal" property="excerciseKcal"/>
 		<result column="exercise_date" property="exerciseDate"/>
 	</resultMap>
 
 	<insert id="insertStatExercise" parameterType="statExercise">
 		insert into tb_stat_exercise (
-			user_seq, exercise_time
+			user_seq, exercise_time, excercise_kcal
 		) values (
-			#{userSeq}, #{exerciseTime}
+			#{userSeq}, #{exerciseTime}, #{excerciseKcal}
 		)
 	</insert>
 	
 	<update id="updateStatExercise" parameterType="statExercise">
 		update tb_stat_exercise
-		   set exercise_time = #{exerciseTime}
+		   set exercise_time = #{exerciseTime},
+		       excercise_kcal = #{excerciseKcal}
 		 where user_seq = #{userSeq}
 		   and to_char(exercise_date, 'yyyy-mm-dd') = to_char(#{exerciseDate}, 'yyyy-mm-dd')
 	</update>

@@ -35,6 +35,7 @@ public class ExerciseController {
 	
 	@RequestMapping("/exeInsert.do")
 	public List<Exercise> insertExercise(Exercise exercise) {
+		System.out.println(exercise);
 		exeService.insertExercise(exercise);
 		return exeService.retrieveListExe(exercise);
 	}
