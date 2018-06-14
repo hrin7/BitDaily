@@ -15,8 +15,8 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	private MemberMapper mapper;
 	
-	public Member selectMemberByName(Member member) throws Exception {
-		return mapper.selectName(member);
+	public Member selectMemberByName(String id) throws Exception {
+		return mapper.selectMemberById(id);
 	}
 	
 	

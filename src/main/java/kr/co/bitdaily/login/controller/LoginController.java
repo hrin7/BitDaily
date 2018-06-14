@@ -72,7 +72,7 @@ public class LoginController {
 	@RequestMapping("/fogetId.json") 
 	@ResponseBody
 	public Member fogetId(Member member) throws Exception { 
-		Member dbmember = loginService.selectMemberByName(member);
+		Member dbmember = loginService.selectMemberByName(member.getId());
 		if(dbmember.getEmail().equals(member.getEmail())){
 			return dbmember;
 		}
